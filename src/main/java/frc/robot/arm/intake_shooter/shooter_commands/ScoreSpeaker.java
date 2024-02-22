@@ -2,14 +2,13 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.lights;
+package frc.robot.arm.intake_shooter.shooter_commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 
-public class SetLightsColor extends Command {
-  /** Creates a new ScoreAmp. */
-
-  public SetLightsColor() {
+public class ScoreSpeaker extends Command {
+  /** Creates a new ScoreSpeaker. */
+  public ScoreSpeaker() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -19,9 +18,7 @@ public class SetLightsColor extends Command {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    Lights.solidColor(ColorIndex.red); //SET THE LIGHTS TO RED
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override

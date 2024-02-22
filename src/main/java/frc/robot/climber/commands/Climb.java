@@ -1,4 +1,4 @@
-package frc.robot.climber;
+package frc.robot.climber.commands;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;

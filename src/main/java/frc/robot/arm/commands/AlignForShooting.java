@@ -4,7 +4,7 @@
 
 // JUST AS A NOTE, THE ARM RESTS AT ABOUT 0.422 ABS ENCODER READING
 
-package frc.robot.arm;
+package frc.robot.arm.commands;
 
 import com.revrobotics.AbsoluteEncoder;
 
@@ -14,6 +14,7 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.arm.Arm;
 import frc.robot.drivetrain.DriveSubsystem;
 
 public class AlignForShooting extends Command {
