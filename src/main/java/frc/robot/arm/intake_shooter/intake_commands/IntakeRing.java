@@ -105,5 +105,3 @@ public class IntakeRing extends Command {
     return false;
   }
 }
-
-
