@@ -66,8 +66,18 @@ public class AlignForShooting extends Command {
     initialHeading = driveSubsystem.getHeading();
   }
 
+  double knownDistance;
+  double knownTA;
+  double distance;
+  double targetAngle;
+  double targetAngleDegrees;
+  double currentTA;
+  double saveAngle;
+  double shooterOffsetDegrees;
+
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   public static double armEncoderReading =  (armEncoder.getPosition() - 0.42638435959816) * -1;
   public static double gearRatio = (double) drivenGearTeeth / driveGearTeeth;
@@ -79,36 +89,51 @@ public class AlignForShooting extends Command {
   @Override
   public void execute() {
 
-    double tX = tx.getDouble(0.0); 
-    double tY = ty.getDouble(0.0); 
-    double tA = ta.getDouble(0.0); 
+    tX = tx.getDouble(0.0); 
+    tY = ty.getDouble(0.0); 
+    tA = ta.getDouble(0.0); 
+    tV = tv.getDouble(0.0);
 
-    double armEncoderReading =  (armEncoder.getPosition() - 0.42638435959816) * -1;
+    armEncoderReading =  (armEncoder.getPosition() - 0.42638435959816) * -1;
 
-    double knownDistance = 12.0;  // known distance in feet
-    double knownTA = 0.160;  // known tA value at the known distance
-    double currentTA = tA;  // current tA value
+    //BASICALLY SAVES THE LAST TARGET ANGLE VALUE BEFORE 0
+    if (targetAngleDegrees != 0) { //IF THE ARM HAS AN ANGLE IT WANTS TO REACH
+      saveAngle = targetAngleDegrees; //SAVE THAT VALUE
+    }
 
-    double distance = calculateDistance(currentTA, knownTA, knownDistance);
 
-    double targetAngle = Math.atan(distance/70);
+    if (tX >= 0) { //IF WE HAVE A TARGET (IF IT IS OFFSET AT ALL)
 
-    SmartDashboard.putNumber("so silly", distance);
-    SmartDashboard.putNumber("so sillyer", targetAngle);
+      knownDistance = 10.0;  //KNOWN DISTANCE (FEET)
+      knownTA = 0.160;  //KNOWN TA AT KNOWN DISTANCE
+      currentTA = tA;  //CURRENT TA
+  
+      distance = calculateDistance(currentTA, knownTA, knownDistance);
+  
+      shooterOffsetDegrees = 33.1;
+      targetAngle = Math.atan((3+1/3) / distance);
+      double adjustedArmAngle = targetAngle + Math.toRadians(shooterOffsetDegrees);
+      targetAngleDegrees = Math.toDegrees(adjustedArmAngle);
+
+    } else if (tX == 0) { //IF WE DONT HAVE A TARGET (IF THERE'S NO OFFSET (CANT SEE IT))
+
+      targetAngleDegrees = saveAngle; //SET THE CURRENT TARGET ANGLE TO WHATEVER THE LAST TARGET ANGLE WAS
+
+    }
+
+
+    SmartDashboard.putNumber("distance", distance);
+    SmartDashboard.putNumber("target angle", targetAngleDegrees);
 
     //ENCODER TRANSLATING
-    double gearRatio = (double) drivenGearTeeth / driveGearTeeth;
-    int encoderCyclesPerArmRevolution = (int) (cyclesPerRotation * gearRatio);
-    double degreesPerEncoderCycle = 360.0 / encoderCyclesPerArmRevolution; // Corrected line
-    double degrees = armEncoderReading * encoderCyclesPerArmRevolution * degreesPerEncoderCycle;
-    SmartDashboard.putNumber("idk man", degrees);
-
-    //CODE FOR HOLDING THE ARM IN PLACE
-    SmartDashboard.putNumber("arm angle", armEncoderReading);
-    // double armSetpoint = targetAngle;
+    gearRatio = (double) drivenGearTeeth / driveGearTeeth;
+    encoderCyclesPerArmRevolution = (int) (cyclesPerRotation * gearRatio);
+    degreesPerEncoderCycle = 360.0 / encoderCyclesPerArmRevolution; // Corrected line
+    degrees = armEncoderReading * encoderCyclesPerArmRevolution * degreesPerEncoderCycle;
+    SmartDashboard.putNumber("arm angle degrees", degrees);
 
     //PID LOOPS
-    // double turnValue = armMovePID.calculate(degrees, armSetpoint);
+    // double turnValue = armMovePID.calculate(degrees, targetAngleDegrees);
     double armValue = armAlignPID.calculate(tY, 2);
     double turnValue1 = turningPID.calculate(tX, 0);
 
@@ -116,11 +141,6 @@ public class AlignForShooting extends Command {
     PIDMoveArm(armValue);
     //ALIGN THE DRIVETRAIN TO THE APRILTAG
     driveSubsystem.drive(0, 0, turnValue1, false, true);
-
-
-      // //MOVE THE ARM TO THE RIGHT POSITION
-      // Arm.leftArm.set(turnValue * 5);
-      // Arm.rightArm.set(-turnValue * 5);
 
 
   }
@@ -147,6 +167,64 @@ public class AlignForShooting extends Command {
 
     return distance;
 }
+
+
+
+
+                                              //METHODS FOR ESTIMATING ARM ANGLE//
+//-----------------------------------------------------------------------------------------------------//
+ //IF WE KNOW THE BEST FOR WHEN WE'RE CLOSE AND THE BEST FOR WHEN WE'RE FAR AWAY, THEN WE KNOW THE IN-BETWEEN
+public static double mapLinearDistance(double distance) {
+  //CONSTANTS for the two points
+  double x1 = 0.0; //DISTANCE = 0
+  double y1 = 0.0; //ARM ANGLE = 0 degrees
+
+  double x2 = 10.0; // distance = 10
+  double y2 = 90.0; // arm angle = 90 degrees
+
+  // Linear interpolation formula
+  double armAngle = y1 + ((distance - x1) / (x2 - x1)) * (y2 - y1);
+
+  return armAngle;
+}
+
+
+public static double mapDistanceToVerticalOffset(double distance) { //CALCULATE VERTICAL OFFSET BY USING DISTANCE
+  //CONSTANTS FOR THE TWO POINTS
+  double x1 = 0.0;  // DISTANCE = 0
+  double y1 = 20.0; // WORKING VERTICAL OFFSET AT 0
+
+  double x2 = 10.0; // DISTANCE = 10
+  double y2 = 5.0;  // WORKING VERTICAL OFFSET AT 10
+
+  // Linear interpolation formula for vertical offset
+  double verticalOffset = y1 + ((distance - x1) / (x2 - x1)) * (y2 - y1);
+
+  return verticalOffset;
+}
+
+public static double estimateVerticalOffset(double currentDistance, double knownDistance, double knownOffset) {
+  // Calculate the ratio of current and known distances
+  double distanceRatio = currentDistance / knownDistance;
+
+  // Estimate the vertical offset based on the ratio
+  double estimatedOffset = knownOffset * distanceRatio;
+
+  return estimatedOffset;
+
+}
+
+public static double averageVerticalOffset(double currentDistance, double knownDistance, double knownOffset) {
+
+  double avgOffset = (estimateVerticalOffset(currentDistance, knownDistance, knownOffset) + mapDistanceToVerticalOffset(currentDistance)) / 2;
+  return avgOffset;
+
+}
+
+ //--------------------------------------------------------------------------------------------------//
+
+
+
 
   // Returns true when the command should end.
   @Override
