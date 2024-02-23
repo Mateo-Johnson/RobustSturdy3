@@ -4,17 +4,11 @@
 
 package frc.robot.arm.intake_shooter.intake_commands;
 
-import com.revrobotics.CANSparkMax;
-
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.utils.Constants.DriveConstants;
+import frc.robot.arm.intake_shooter.Intake_shooter;
 
 public class PurgeRing extends Command {
   /** Creates a new Purge. */
-  public static final CANSparkMax rightIntake = DriveConstants.rightIntake;
-  public static final CANSparkMax wrongIntake= DriveConstants.leftIntake;
-  public static final CANSparkMax rightOuttake = DriveConstants.rightOuttake;
-  public static final CANSparkMax wrongOuttake = DriveConstants.leftOuttake;
   public PurgeRing() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -26,21 +20,14 @@ public class PurgeRing extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    runIntakeAndOuttake(-0.8);
+    Intake_shooter.runIntakeAndOuttake(-0.8);
   }
 
-    //FUNCTIONS FOR SIMPLICITY
-    public void runIntakeAndOuttake(double speed) {
-      rightIntake.set(speed);
-      wrongIntake.set(-speed);
-      rightOuttake.set(speed);
-      wrongOuttake.set(-speed);
-    }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    runIntakeAndOuttake(0);
+    Intake_shooter.runIntakeAndOuttake(0);
   }
 
   // Returns true when the command should end.

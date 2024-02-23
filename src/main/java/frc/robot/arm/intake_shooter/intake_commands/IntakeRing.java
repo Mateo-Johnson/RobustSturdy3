@@ -4,9 +4,8 @@
 
 package frc.robot.arm.intake_shooter.intake_commands;
 
-import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.utils.Constants.DriveConstants;
+import frc.robot.arm.intake_shooter.Intake_shooter;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
@@ -30,9 +29,6 @@ public class IntakeRing extends Command {
   public IntakeRing() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
-  //INTAKE
-  public static final CANSparkMax intake1 = DriveConstants.rightIntake;
-  public static final CANSparkMax intake2 = DriveConstants.leftIntake;
 
 
   // Called when the command is initially scheduled.
@@ -60,7 +56,7 @@ public class IntakeRing extends Command {
 
     } else if (match.color == RedTarget) {
       colorString = "red";
-      stopIntake();
+      Intake_shooter.stopWheels();
       ringInIntake(true); //FLAG TO MARK WHEN THERE IS A RING IN INTAKE - 
 
     } else if (match.color == GreenTarget) {
@@ -69,17 +65,17 @@ public class IntakeRing extends Command {
 
     } else if (match.color == YellowTarget) {
       colorString = "yellow";
-      runIntake(0.4);
+      Intake_shooter.runIntake(0.4);
       ringInIntake(false); //FLAG TO MARK WHEN THERE ISN'T A RING IN INTAKE 
 
     } else if (match.color == OrangeTarget){
       colorString = "orange";
-      stopIntake();
+      Intake_shooter.stopWheels();
       ringInIntake(true); //FLAG TO MARK WHEN THERE IS A RING IN INTAKE - 
 
     } else {
       colorString = "we can't tell";
-      runIntake(0.4);
+      Intake_shooter.runIntake(0.4);
       ringInIntake(false); //FLAG TO MARK WHEN THERE ISN'T A RING IN INTAKE
     }
 
@@ -94,22 +90,10 @@ public class IntakeRing extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    stopIntake();
+    Intake_shooter.stopWheels();
     hasRing = false;
   }
 
-
-
-  //FUNCTIONS FOR SIMPLICITY
-  public void runIntake(double speed) {
-    intake1.set(speed);
-    intake2.set(-speed);
-  }
-
-  public void stopIntake(){
-    intake1.set(0);
-    intake2.set(0);
-  }
 
   public void ringInIntake(boolean trueslashfalse) {
     hasRing = trueslashfalse;

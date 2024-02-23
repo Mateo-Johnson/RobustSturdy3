@@ -28,7 +28,7 @@ public class MoveArm extends Command {
     final int drivenGearTeeth = 60;
     final int driveGearTeeth = 15;
 
-     AbsoluteEncoder armEncoder = Arm.armEncoder;
+    AbsoluteEncoder armEncoder = Arm.armEncoder;
     double armEncoderReading =  (armEncoder.getPosition() - 0.42638435959816) * -1;
     double gearRatio = (double) drivenGearTeeth / driveGearTeeth;
     int encoderCyclesPerArmRevolution = (int) (cyclesPerRotation * gearRatio);
