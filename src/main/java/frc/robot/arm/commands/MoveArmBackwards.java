@@ -4,6 +4,8 @@
 
 package frc.robot.arm.commands;
 
+import com.revrobotics.AbsoluteEncoder;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.arm.Arm;
 
@@ -20,10 +22,24 @@ public class MoveArmBackwards extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (AlignForShooting.degrees >= 0) {
-
-    Arm.rotateVector(0.3);
     
+    final int cyclesPerRotation = 2048;
+    final int drivenGearTeeth = 60;
+    final int driveGearTeeth = 15;
+
+    AbsoluteEncoder armEncoder = Arm.armEncoder;
+    double armEncoderReading =  (armEncoder.getPosition() - 0.42638435959816) * -1;
+    double gearRatio = (double) drivenGearTeeth / driveGearTeeth;
+    int encoderCyclesPerArmRevolution = (int) (cyclesPerRotation * gearRatio);
+    double degreesPerEncoderCycle = 360.0 / encoderCyclesPerArmRevolution; // Corrected line
+    double degrees = armEncoderReading * encoderCyclesPerArmRevolution * degreesPerEncoderCycle;
+
+    if (degrees >= 2) {
+      Arm.rotateVector(0.3);
+    } else if (degrees <= 30) {
+      Arm.rotateVector(0.1);
+    } else if (degrees <= 2) {
+      Arm.rotateVector(0);
     }
   }
 
