@@ -6,13 +6,13 @@
 package frc.robot.utils;
 
 
+import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ColorSensorV3;
 import com.revrobotics.SparkAbsoluteEncoder.Type;
-
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
@@ -20,6 +20,7 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.SerialPort;
 
 
 /**
@@ -147,8 +148,9 @@ public final class Constants {
     public static final AbsoluteEncoder armEncoder = rightArm.getAbsoluteEncoder(Type.kDutyCycle);
 
     //THE I2C PORT FOR THE COLOR SENSOR
-    public static final I2C.Port I2CPort = I2C.Port.kOnboard;
-    public static final ColorSensorV3 colorSensor = new ColorSensorV3(I2CPort);
+    public static final AHRS I2CPort = new AHRS(SerialPort.Port.kMXP);
+    public static final I2C.Port i2cPort = I2C.Port.kMXP;
+    public static final ColorSensorV3 colorSensor = new ColorSensorV3(i2cPort);
 
     
 
