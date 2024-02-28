@@ -82,7 +82,7 @@ public class RobotContainer {
     primaryDriver.rightTrigger().whileTrue(new IntakeRing());
     primaryDriver.leftTrigger().whileTrue(new ShootRingIndiscriminately());
     primaryDriver.leftBumper().whileTrue(new PurgeRing());
-    
+    primaryDriver.x().whileTrue(new Climb());    
 
 }
     

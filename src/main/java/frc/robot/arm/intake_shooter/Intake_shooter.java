@@ -13,8 +13,7 @@ public class Intake_shooter {
     public static final CANSparkMax rightOuttake = DriveConstants.rightOuttake;
     public static final CANSparkMax wrongOuttake = DriveConstants.leftOuttake;
     private static RelativeEncoder shooterEncoder = rightOuttake.getEncoder();
-    private static RelativeEncoder shooterEncoder2 = wrongOuttake.getEncoder();
-    static double avgVelocity = (shooterEncoder.getVelocity() + shooterEncoder2.getVelocity()) / 2;
+
   
     public static void runIntake(double speed) {
         intake1.set(speed);
@@ -28,7 +27,7 @@ public class Intake_shooter {
       }
     public static void runOuttake() {
         SmartDashboard.putNumber("silly", shooterEncoder.getVelocity());
-    if (avgVelocity >= 18) { //IF THE MOTORS ARE SPINNING FAST ENOUGH 
+    if (shooterEncoder.getVelocity() >= 1) { //IF THE MOTORS ARE SPINNING FAST ENOUGH 
       rightOuttake.set(5); //SET UP OUTTAKE MOTOR 1 FOR SHOOTING, RIGHT RUNS TOP, LEFT RUNS BOTTOM
       wrongOuttake.set(3.76665); //SET UP OUTTAKE MOTOR 2 FOR SHOOTING
 
@@ -36,7 +35,7 @@ public class Intake_shooter {
       wrongOuttake.set(-0.5); //USE INTAKE MOTOR 2 TO FEED INTO OUTTAKE
       //ADD A METHOD MAKE THE BOTTOM LIGHTS GREEN TO SHOW THAT ITS READY TO SHOOT
  
-    } else if (avgVelocity <= 18) { //IF THE MOTORS ARE NOT AT THE RIGHT SPEED
+    } else if (shooterEncoder.getVelocity() <= 1) { //IF THE MOTORS ARE NOT AT THE RIGHT SPEED
       rightOuttake.set(5); //MAKE OUTTAKE MOTOR 1 GO TO RIGHT SPEED
       wrongOuttake.set(3.76665); //MAKE OUTTAKE MOTOR 1 GO TO RIGHT SPEED
       //ADD A METHOD MAKE THE BOTTOM LIGHTS RED TO SHOW THAT ITS NOT READY TO SHOOT

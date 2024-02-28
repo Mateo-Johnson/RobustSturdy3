@@ -9,13 +9,9 @@ import frc.robot.utils.Constants.DriveConstants;
 
 public class Climb extends Command {
   /** Creates a new IntakeRing. */
-  Solenoid rightSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, DriveConstants.rightSolenoidChannelID);
-  Solenoid wrongSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, DriveConstants.wrongSolenoidChannelID);
-  Compressor compressor = DriveConstants.compressor;
 
-  double compressorCurrent = DriveConstants.compressorCurrent; //CURRENT CURRENT DRAW (see what i did there)
-  boolean compressorOn = DriveConstants.compressorOn; //IS THE COMPRESSOR ON
-  boolean compressorPressure = DriveConstants.compressorPressure; //RETURNS TRUE WHEN THE COMPRESSOR IS FULL
+  Solenoid writeSolenoid;
+  Solenoid wrongSolenoid;
 
   public Climb() {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -27,28 +23,23 @@ public class Climb extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-
+    Solenoid writeSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, 2);
+    Solenoid wrongSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, 3);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (compressorOn == true && compressorPressure == true) { //IF THE COMPRESSOR IS ON AND THE TANK IS FULL
-      rightSolenoid.set(true);
-      wrongSolenoid.set(true);
-      compressor.disable();
-    } else { //IN ANY OTHER SITUATION
-      rightSolenoid.set(false);
+      writeSolenoid.set(false);
       wrongSolenoid.set(false);
-    }
-
+      
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    rightSolenoid.set(false);
-    wrongSolenoid.set(false);
+    writeSolenoid.set(true);
+    wrongSolenoid.set(true);
   }
 
   // Returns true when the command should end.

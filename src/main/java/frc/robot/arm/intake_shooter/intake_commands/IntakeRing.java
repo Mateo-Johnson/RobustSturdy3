@@ -6,6 +6,7 @@ package frc.robot.arm.intake_shooter.intake_commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.arm.intake_shooter.Intake_shooter;
+import frc.robot.drivetrain.DriveSubsystem;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
@@ -16,15 +17,14 @@ import com.revrobotics.ColorMatch;
 
 public class IntakeRing extends Command {
   /** Creates a new silly. */
-  private final I2C.Port i2cPort = I2C.Port.kOnboard;
-  private final ColorSensorV3 colorSensor = new ColorSensorV3(i2cPort);
+  private final ColorSensorV3 colorSensor = DriveSubsystem.colorSensor;
   private final ColorMatch colorMatcher = new ColorMatch();
   private final Color BlueTarget = new Color(0.143, 0.427, 0.429); //CREATES A COLOR
   private final Color GreenTarget = new Color(0.197, 0.561, 0.240); //CREATES A COLOR
   private final Color RedTarget = new Color(0.561, 0.232, 0.114); //CREATES A COLOR
   private final Color YellowTarget = new Color(0.361, 0.524, 0.113); //CREATES A COLOR
   private final Color OrangeTarget = new Color(0.453, 0.405, 0.141); //CREATES A COLOR
-  public static boolean hasRing;
+  public boolean hasRing;
 
   public IntakeRing() {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -61,7 +61,7 @@ public class IntakeRing extends Command {
 
     } else if (match.color == GreenTarget) {
       colorString = "green";
-      ringInIntake(false); //FLAG TO MARK WHEN THERE ISN'T A RING IN INTAKE
+      ringInIntake (false); //FLAG TO MARK WHEN THERE ISN'T A RING IN INTAKE
 
     } else if (match.color == YellowTarget) {
       colorString = "yellow";
@@ -102,6 +102,6 @@ public class IntakeRing extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return hasRing;
   }
-}
+} 

@@ -134,8 +134,6 @@ public final class Constants {
     public static final int leftArmMotorCanId = 35;
     public static final int rightArmMotorCanId = 36;
 
-    public static final int rightSolenoidChannelID = 0;
-    public static final int wrongSolenoidChannelID = 1;
 
     public static CANSparkMax rightIntake = new CANSparkMax(DriveConstants.rightIntakeCanId, MotorType.kBrushless);    
     public static CANSparkMax leftIntake = new CANSparkMax(DriveConstants.leftIntakeCanId, MotorType.kBrushless); 
@@ -147,10 +145,6 @@ public final class Constants {
 
     public static final AbsoluteEncoder armEncoder = rightArm.getAbsoluteEncoder(Type.kDutyCycle);
 
-    //THE I2C PORT FOR THE COLOR SENSOR
-    public static final AHRS I2CPort = new AHRS(SerialPort.Port.kMXP);
-    public static final I2C.Port i2cPort = I2C.Port.kMXP;
-    public static final ColorSensorV3 colorSensor = new ColorSensorV3(i2cPort);
 
     
 
