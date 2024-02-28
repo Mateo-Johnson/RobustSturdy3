@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.arm.Arm;
 import frc.robot.drivetrain.DriveSubsystem;
 
-public class AlignForShooting extends Command {
+public class AlignForAmp extends Command {
   /** Creates a new MoveArm. */
   public static double initialHeading;
   private final DriveSubsystem driveSubsystem;
@@ -43,7 +43,7 @@ public class AlignForShooting extends Command {
   PIDController armMovePID = new PIDController(aMP, aMI, aMD);
 
   NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight"); 
-  NetworkTableEntry tx = table.getEntry("tx");//THE X OFFSET OF THE TARGET IN THE CAMERA VIEW
+  NetworkTableEntry tx = table.getEntry("tx"); //THE X OFFSET OF THE TARGET IN THE CAMERA VIEW
   NetworkTableEntry ty = table.getEntry("ty"); //THE Y OFFSET OF THE TARGET IN THE CAMERA VIEW
   NetworkTableEntry ta = table.getEntry("ta"); //THE AREA THAT THE TARGET TAKES UP ON THE SCREEN
   NetworkTableEntry tv = table.getEntry("tv"); //GET WHETHER THE LIMELIGHT HAS A TARGET OR NOT (1 OR 0)
@@ -60,7 +60,7 @@ public class AlignForShooting extends Command {
   private static final int driveGearTeeth = 15;
 
 
-  public AlignForShooting(DriveSubsystem driveSubsystem) {
+  public AlignForAmp(DriveSubsystem driveSubsystem) {
     this.driveSubsystem = driveSubsystem;
     addRequirements(driveSubsystem);
     initialHeading = driveSubsystem.getHeading();
@@ -110,7 +110,7 @@ public class AlignForShooting extends Command {
   
       distance = calculateDistance(currentTA, knownTA, knownDistance);
   
-      shooterOffsetDegrees = 33.1;
+      shooterOffsetDegrees = 90;
       targetAngle = Math.atan((3+1/3) / distance);
       double adjustedArmAngle = targetAngle + Math.toRadians(shooterOffsetDegrees);
       targetAngleDegrees = Math.toDegrees(adjustedArmAngle);
