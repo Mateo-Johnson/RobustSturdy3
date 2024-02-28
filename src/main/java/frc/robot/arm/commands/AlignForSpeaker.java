@@ -8,14 +8,17 @@ package frc.robot.arm.commands;
 
 import com.revrobotics.AbsoluteEncoder;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.RobotContainer;
 import frc.robot.arm.Arm;
 import frc.robot.drivetrain.DriveSubsystem;
+import frc.robot.utils.Constants.ControllerConstants;
 
 public class AlignForSpeaker extends Command {
   /** Creates a new MoveArm. */
@@ -134,13 +137,16 @@ public class AlignForSpeaker extends Command {
 
     //PID LOOPS
     // double turnValue = armMovePID.calculate(degrees, targetAngleDegrees);
-    double armValue = armAlignPID.calculate(tY, 2);
+    double armValue = armAlignPID.calculate(tY, -1);
     double turnValue1 = turningPID.calculate(tX, 0);
 
     //MOVE THE ARM TO THE SPECIFIC VALUE ABOVE THE APRILTAG
     PIDMoveArm(armValue);
     //ALIGN THE DRIVETRAIN TO THE APRILTAG
-    driveSubsystem.drive(0, 0, turnValue1, false, true);
+    driveSubsystem.drive(
+      -MathUtil.applyDeadband(RobotContainer.primaryDriver.getLeftY(), ControllerConstants.driveDeadzone),
+    -MathUtil.applyDeadband(RobotContainer.primaryDriver.getLeftX(), ControllerConstants.driveDeadzone), 
+    turnValue1, false, true);
 
 
   }
