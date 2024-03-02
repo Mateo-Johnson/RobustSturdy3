@@ -20,7 +20,7 @@ import frc.robot.arm.Arm;
 import frc.robot.drivetrain.DriveSubsystem;
 import frc.robot.utils.Constants.ControllerConstants;
 
-public class AlignForShooting extends Command {
+public class AlignForSpeaker extends Command {
   /** Creates a new MoveArm. */
   public static double initialHeading;
   private final DriveSubsystem driveSubsystem;
@@ -63,7 +63,7 @@ public class AlignForShooting extends Command {
   private static final int driveGearTeeth = 15;
 
 
-  public AlignForShooting(DriveSubsystem driveSubsystem) {
+  public AlignForSpeaker(DriveSubsystem driveSubsystem) {
     this.driveSubsystem = driveSubsystem;
     addRequirements(driveSubsystem);
     initialHeading = driveSubsystem.getHeading();
