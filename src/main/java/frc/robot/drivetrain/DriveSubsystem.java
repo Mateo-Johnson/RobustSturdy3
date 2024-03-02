@@ -155,10 +155,13 @@ public class DriveSubsystem extends SubsystemBase {
   public static double fL = frontLeft.getRawTurnEncoder();
   public static double bR = rearLeft.getRawTurnEncoder();
   public static double bL = rearRight.getRawTurnEncoder();
+  public static double x;
+  public static Pose2d lmao;
 
   
   @Override
   public void periodic() {
+
     swerveDrivePoseEstimator.update(getHeadingPose2d, getModulePositions()); //THIS ONE UPDATES THE ESTIMATED POSE OF SWERVE
 
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
@@ -182,6 +185,9 @@ public class DriveSubsystem extends SubsystemBase {
 
     //INSTRUCTIONS - PHYSICALLY TURN ALL OF THE WHEELS SO THAT THEY FACE FORWARD. THEN IN THE CONSTANT FILE SET ALL CHASSIS ANGULAR OFFSETS TO WHATEVER VALUE THE RESPECTIVE MODULE IS READING
 
+    SmartDashboard.putNumber("Ian Nash", swerveDrivePoseEstimator.getEstimatedPosition().getX());
+    x = swerveDrivePoseEstimator.getEstimatedPosition().getX();
+    lmao = swerveDrivePoseEstimator.getEstimatedPosition();
     SmartDashboard.putNumber("Front Left Module Angle:", frontLeft.getRawTurnEncoder());
     SmartDashboard.putNumber("Front Right Module Angle:", frontRight.getRawTurnEncoder());
     SmartDashboard.putNumber("Back Left Module Angle:", rearLeft.getRawTurnEncoder());

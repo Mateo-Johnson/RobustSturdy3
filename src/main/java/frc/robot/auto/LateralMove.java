@@ -25,11 +25,11 @@ public class LateralMove extends Command {
     // Use addRequirements() here to declare subsystem dependencies.
     this.driveSubsystem = driveSubsystem;
     addRequirements(driveSubsystem);
-    currentPosition = driveSubsystem.swerveDrivePoseEstimator.getEstimatedPosition();
+    currentPosition = DriveSubsystem.lmao;
   }
 
-  double dP = 0.0;
-  double dI = 0.0;
+  double dP = 0.8;
+  double dI = 0.07056835;
   double dD = 0.0;
   PIDController lateralPID = new PIDController(dP, dI, dD);
 
@@ -37,19 +37,19 @@ public class LateralMove extends Command {
   @Override
   public void initialize() {
     currentPosition = driveSubsystem.swerveDrivePoseEstimator.getEstimatedPosition();
-    originalPos = currentPosition;
+    originalPosX = DriveSubsystem.x;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    currentPosition = driveSubsystem.swerveDrivePoseEstimator.getEstimatedPosition(); //GET THE ESTIMATED POSITION FROM THE POSE ESTIMATOR
-    currentPositionX = driveSubsystem.swerveDrivePoseEstimator.getEstimatedPosition().getX(); //GET THE X COMPONENT OF THAT POSITION
-    SmartDashboard.putNumber("currentPosX", currentPositionX); //PUT THE CURRENT X POSITION ON SMARTDASHBOARD
-    SmartDashboard.putNumber("currentPosX", originalPosX); //PUT THE CURRENT X POSITION ON SMARTDASHBOARD
-    double moveValue = lateralPID.calculate(currentPositionX, (originalPosX) + 5); //CALCULATE PID CONSTANTS TO MAKE THE CURRENT POSITION = ORIGINAL POS X
+    currentPosition = DriveSubsystem.lmao;
+    currentPositionX = DriveSubsystem.x;
+    SmartDashboard.putNumber("orange", currentPositionX); //PUT THE CURRENT X POSITION ON SMARTDASHBOARD
+    SmartDashboard.putNumber("alcohol", originalPosX); //PUT THE CURRENT X POSITION ON SMARTDASHBOARD
+    double moveValue = lateralPID.calculate(currentPositionX, (originalPosX) + 0.5); //CALCULATE PID CONSTANTS TO MAKE THE CURRENT POSITION = ORIGINAL POS X
     SmartDashboard.putNumber("TurnValue", moveValue);
-    driveSubsystem.drive(moveValue, moveValue, 0, false, true);
+    driveSubsystem.drive(moveValue, 0, 0, false, true);
   }
 
   // Called once the command ends or is interrupted.

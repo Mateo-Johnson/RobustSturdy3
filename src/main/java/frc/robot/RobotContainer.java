@@ -19,7 +19,7 @@ import frc.robot.arm.intake_shooter.intake_commands.PurgeRing;
 import frc.robot.arm.intake_shooter.shooter_commands.ScoreAmp;
 import frc.robot.arm.intake_shooter.shooter_commands.ScoreSpeaker;
 import frc.robot.arm.intake_shooter.shooter_commands.ShootRingIndiscriminately;
-import frc.robot.climber.commands.Climb;
+import frc.robot.auto.LateralMove;
 import frc.robot.drivetrain.DriveSubsystem;
 import frc.robot.lights.commands.SetLightsColor;
 import frc.robot.utils.Constants.ControllerConstants;
@@ -44,7 +44,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("PurgeRing", new PurgeRing());
     NamedCommands.registerCommand("ScoreAmp", new ScoreAmp());
     NamedCommands.registerCommand("ScoreSpeaker", new ScoreSpeaker());
-    NamedCommands.registerCommand("Climb", new Climb());
+    // NamedCommands.registerCommand("Climb", new Climb());
     NamedCommands.registerCommand("SetLightsColor", new SetLightsColor());
 
     configureButtonBindings(); //CONFIGURE BINDINGS
@@ -82,7 +82,7 @@ public class RobotContainer {
     primaryDriver.rightTrigger().whileTrue(new IntakeRing());
     primaryDriver.leftTrigger().whileTrue(new ShootRingIndiscriminately());
     primaryDriver.leftBumper().whileTrue(new PurgeRing());
-    primaryDriver.x().whileTrue(new Climb());    
+    primaryDriver.x().whileTrue(new LateralMove(drivetrain));    
 
 }
     
