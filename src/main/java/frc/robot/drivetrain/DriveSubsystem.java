@@ -33,6 +33,7 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.arm.Arm;
 import frc.robot.utils.SwerveUtils;
+import frc.robot.vision.Vision;
 import frc.robot.utils.Constants.DriveConstants;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -41,7 +42,7 @@ public class DriveSubsystem extends SubsystemBase {
   //CREATE SWERVE MODULES
 
   public final SwerveDrivePoseEstimator swerveDrivePoseEstimator;
-  public Rotation2d getHeadingPose2d = Rotation2d.fromDegrees(getHeading());
+  public Rotation2d getHeadingPose2d;
 
   //THIS IS THE FRONT LEFT MODULE
   private final static SwerveModule frontLeft = new SwerveModule(
@@ -121,7 +122,7 @@ public class DriveSubsystem extends SubsystemBase {
       getHeadingPose2d, 
       getModulePositions(), 
       new Pose2d(new Translation2d(0, 0), 
-      Rotation2d.fromDegrees(0))); // x,y,heading in radians; Vision measurement std dev, higher=less weight
+      Rotation2d.fromDegrees(0))); 
 
       // Configure AutoBuilder last
     AutoBuilder.configureHolonomic(
@@ -129,10 +130,10 @@ public class DriveSubsystem extends SubsystemBase {
             this::resetOdometry, // Method to reset odometry (will be called if your auto has a starting pose)
             () -> DriveConstants.DriveKinematics.toChassisSpeeds(
               frontLeft.getState(), frontRight.getState(), rearLeft.getState(), rearRight.getState()),
-            (speeds) -> drive(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond, speeds.omegaRadiansPerSecond, false, false),
+            (speeds) -> drive(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond, speeds.omegaRadiansPerSecond, true, false),
             new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your Constants class
-                    new PIDConstants(5.0, 5.0, 0.0), // Translation PID constants
-                    new PIDConstants(5.0, 0.0, 0.0), // Rotation PID constants
+                    new PIDConstants(0.8, 0.070568344, 0.0), // Translation PID constants
+                    new PIDConstants(0.01145, 0.0000176, 0.00098), // Rotation PID constants
                     4.5, // Max module speed, in m/s
                     0.4, // Drive base radius in meters. Distance from robot center to furthest module.
                     new ReplanningConfig() // Default path replanning config. See the API for the options here
@@ -161,6 +162,11 @@ public class DriveSubsystem extends SubsystemBase {
   
   @Override
   public void periodic() {
+
+    getHeadingPose2d = Rotation2d.fromDegrees(getHeading());
+
+    double lmfaoooooo = Vision.tX;
+    SmartDashboard.putNumber("blood alcohol content", lmfaoooooo);
 
     swerveDrivePoseEstimator.update(getHeadingPose2d, getModulePositions()); //THIS ONE UPDATES THE ESTIMATED POSE OF SWERVE
 
@@ -207,7 +213,10 @@ public class DriveSubsystem extends SubsystemBase {
    */
   public Pose2d getPose() {
     return odometry.getPoseMeters();
+    // return swerveDrivePoseEstimator.getEstimatedPosition();
   }
+
+
 
 
   /**

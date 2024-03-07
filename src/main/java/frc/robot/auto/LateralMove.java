@@ -29,8 +29,9 @@ public class LateralMove extends Command {
   }
 
   double dP = 0.8;
-  double dI = 0.07056835;
+  double dI = 0.070568344;
   double dD = 0.0;
+  
   PIDController lateralPID = new PIDController(dP, dI, dD);
 
   // Called when the command is initially scheduled.
@@ -47,7 +48,7 @@ public class LateralMove extends Command {
     currentPositionX = DriveSubsystem.x;
     SmartDashboard.putNumber("orange", currentPositionX); //PUT THE CURRENT X POSITION ON SMARTDASHBOARD
     SmartDashboard.putNumber("alcohol", originalPosX); //PUT THE CURRENT X POSITION ON SMARTDASHBOARD
-    double moveValue = lateralPID.calculate(currentPositionX, (originalPosX) + 0.5); //CALCULATE PID CONSTANTS TO MAKE THE CURRENT POSITION = ORIGINAL POS X
+    double moveValue = lateralPID.calculate(currentPositionX, (originalPosX) + 1); //CALCULATE PID CONSTANTS TO MAKE THE CURRENT POSITION = ORIGINAL POS X
     SmartDashboard.putNumber("TurnValue", moveValue);
     driveSubsystem.drive(moveValue, 0, 0, false, true);
   }

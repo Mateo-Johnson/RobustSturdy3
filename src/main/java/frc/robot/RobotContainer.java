@@ -20,6 +20,7 @@ import frc.robot.arm.intake_shooter.shooter_commands.ScoreAmp;
 import frc.robot.arm.intake_shooter.shooter_commands.ScoreSpeaker;
 import frc.robot.arm.intake_shooter.shooter_commands.ShootRingIndiscriminately;
 import frc.robot.auto.LateralMove;
+import frc.robot.auto.two_silly;
 import frc.robot.drivetrain.DriveSubsystem;
 import frc.robot.lights.commands.SetLightsColor;
 import frc.robot.utils.Constants.ControllerConstants;
@@ -80,10 +81,10 @@ public class RobotContainer {
     primaryDriver.y().whileTrue(new AlignForAmp(drivetrain));
     primaryDriver.b().whileTrue(new MoveArmBackwards());
     primaryDriver.rightTrigger().whileTrue(new IntakeRing());
-    primaryDriver.rightBumper().whileTrue(new Climb());
+    // primaryDriver.rightBumper().whileTrue(new Climb());
     primaryDriver.leftTrigger().whileTrue(new ShootRingIndiscriminately());
     primaryDriver.leftBumper().whileTrue(new PurgeRing());
-    primaryDriver.x().whileTrue(new LateralMove(drivetrain));    
+    //primaryDriver.x().whileTrue(new two_silly(drivetrain));    
 
 }
     
