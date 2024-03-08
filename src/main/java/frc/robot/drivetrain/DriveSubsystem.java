@@ -13,6 +13,7 @@ import com.pathplanner.lib.util.ReplanningConfig;
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.ColorSensorV3;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -369,8 +370,15 @@ public class DriveSubsystem extends SubsystemBase {
    * @return THE ROBOT HEADING (-180 to 180)
    */
   public double getHeading() {
-    return Rotation2d.fromDegrees(gyro.getAngle()).getDegrees();
+    // return Rotation2d.fromDegrees(gyro.getAngle()).getDegrees();
+      double rawAngle = Rotation2d.fromDegrees(gyro.getAngle()).getRadians();
+      
+      // Use angleModulus to wrap the angle between -180 and 180 degrees
+      double wrappedAngle = Math.toDegrees(MathUtil.angleModulus(Math.toRadians(rawAngle)));
+  
+      return wrappedAngle;
   }
+
 
 
   /**

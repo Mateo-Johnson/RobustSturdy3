@@ -196,17 +196,17 @@ public final class Constants {
     public static final double turningEncoderPositionPIDMaxInput = turningEncoderPositionFactor; //RADIANS
 
 
-    public static final double drivingP = 0.01;
-    public static final double drivingI = 0;
-    public static final double drivingD = 0;
+    public static final double drivingP = 0.8;
+    public static final double drivingI = 0.070568344;
+    public static final double drivingD = 0.0;
     public static final double drivingFF = 1 / driveWheelFreeSpeedRps;
     public static final double drivingMinOutput = -1;
     public static final double drivingMaxOutput = 1;
 
 
-    public static final double turningP = 1;
-    public static final double turningI = 0;
-    public static final double turningD = 0;
+    public static final double turningP = 0.01145;
+    public static final double turningI = 0.0000176;
+    public static final double turningD = 0.00098;
     public static final double turningFF = 0;
     public static final double turningMinOutput = -1;
     public static final double turningMaxOutput = 1;
@@ -223,7 +223,7 @@ public final class Constants {
   public static final class ControllerConstants {
     public static final int driverControllerPort = 0; //PRIMARY DRIVER PORT
     public static final int secondaryControllerPort = 1; //SECONDARY DRIVER PORT
-    public static final double driveDeadzone = 0.2; //DEADZONE OF JOYSTICKS
+    public static final double driveDeadzone = 0.3; //DEADZONE OF JOYSTICKS
   }
 
   
