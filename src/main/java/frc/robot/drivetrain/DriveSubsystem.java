@@ -75,7 +75,7 @@ public class DriveSubsystem extends SubsystemBase {
 
   //GYRO THIS IS WHERE THE GYRO GOES (CURRENTLY THIS IS SAYING THAT IT IS A NAVX MOUNTED TO THE TOP PART OF THE RIO)
   public static final AHRS gyro = new AHRS(SPI.Port.kMXP);
-  public static final I2C.Port i2cPort = I2C.Port.kOnboard;
+  public static final I2C.Port i2cPort = I2C.Port.kMXP;
   public static final ColorSensorV3 colorSensor = new ColorSensorV3(i2cPort);
 
 
