@@ -65,16 +65,14 @@ public class two_silly extends Command {
   public void execute() {
 
     double tX = tx.getDouble(0.0); //SET tx = tX AND SET THE DEFAULT VALUE TO 0
-    double tY = ty.getDouble(0.0); //SET ty = tY AND SET THE DEFAULT VALUE TO 0
     double tA = ta.getDouble(0.0); //SET ta = tA AND SET THE DEFAULT VALUE TO 0
-    double tV = tv.getDouble(0.0); //SET tv = tV AND SET THE DEFAULT VALUE TO 0
 
-    SmartDashboard.putNumber("orange", tX); //PUT THE CURRENT X POSITION ON SMARTDASHBOARD
-    SmartDashboard.putNumber("alcohol", tA); //PUT THE CURRENT X POSITION ON SMARTDASHBOARD
+    SmartDashboard.putNumber("tX", tX); //PUT THE CURRENT X POSITION ON SMARTDASHBOARD
+    SmartDashboard.putNumber("tA", tA); //PUT THE CURRENT X POSITION ON SMARTDASHBOARD
     double moveValue = lateralPID.calculate(tX, -4); //CALCULATE PID CONSTANTS TO MAKE THE CURRENT POSITION = ORIGINAL POS X
-    double moveValue2 = lateralPID.calculate(tA, 1); //CALCULATE PID CONSTANTS TO MAKE THE CURRENT POSITION = ORIGINAL POS X
-    SmartDashboard.putNumber("TurnValue", moveValue);
-    driveSubsystem.drive(-moveValue2, -moveValue, 0, false, true);
+    // double moveValue2 = lateralPID.calculate(tA, 1); //CALCULATE PID CONSTANTS TO MAKE THE CURRENT POSITION = ORIGINAL POS X
+    SmartDashboard.putNumber("moveValue", moveValue);
+    driveSubsystem.drive(0, -moveValue, 0, false, true);
     // double armValue = armAlignPID.calculate(tY, 8);
     // PIDMoveArm(armValue);
   }

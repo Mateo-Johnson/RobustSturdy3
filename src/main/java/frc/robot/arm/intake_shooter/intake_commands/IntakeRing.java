@@ -7,7 +7,6 @@ package frc.robot.arm.intake_shooter.intake_commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.arm.intake_shooter.Intake_shooter;
 import frc.robot.drivetrain.DriveSubsystem;
-import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import com.revrobotics.ColorSensorV3;

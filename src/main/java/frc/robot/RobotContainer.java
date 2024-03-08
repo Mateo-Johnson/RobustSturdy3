@@ -19,8 +19,6 @@ import frc.robot.arm.intake_shooter.intake_commands.PurgeRing;
 import frc.robot.arm.intake_shooter.shooter_commands.ScoreAmp;
 import frc.robot.arm.intake_shooter.shooter_commands.ScoreSpeaker;
 import frc.robot.arm.intake_shooter.shooter_commands.ShootRingIndiscriminately;
-import frc.robot.auto.LateralMove;
-import frc.robot.auto.two_silly;
 import frc.robot.drivetrain.DriveSubsystem;
 import frc.robot.lights.commands.SetLightsColor;
 import frc.robot.utils.Constants.ControllerConstants;
