@@ -19,6 +19,7 @@ import frc.robot.RobotContainer;
 import frc.robot.arm.Arm;
 import frc.robot.drivetrain.DriveSubsystem;
 import frc.robot.utils.Constants.ControllerConstants;
+import frc.robot.vision.Vision;
 
 public class AlignForSpeaker extends Command {
   /** Creates a new MoveArm. */
@@ -46,15 +47,11 @@ public class AlignForSpeaker extends Command {
   PIDController armMovePID = new PIDController(aMP, aMI, aMD);
 
   NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight"); 
-  NetworkTableEntry tx = table.getEntry("tx");//THE X OFFSET OF THE TARGET IN THE CAMERA VIEW
-  NetworkTableEntry ty = table.getEntry("ty"); //THE Y OFFSET OF THE TARGET IN THE CAMERA VIEW
-  NetworkTableEntry ta = table.getEntry("ta"); //THE AREA THAT THE TARGET TAKES UP ON THE SCREEN
-  NetworkTableEntry tv = table.getEntry("tv"); //GET WHETHER THE LIMELIGHT HAS A TARGET OR NOT (1 OR 0)
+  double tX = Vision.tX;
+  double tY = Vision.tY;
+  double tA = Vision.tA;
+  boolean tV = Vision.tV;
 
-  double tX = tx.getDouble(0.0); //SET tx = tX AND SET THE DEFAULT VALUE TO 0
-  double tY = ty.getDouble(0.0); //SET ty = tY AND SET THE DEFAULT VALUE TO 0
-  double tA = ta.getDouble(0.0); //SET ta = tA AND SET THE DEFAULT VALUE TO 0
-  double tV = tv.getDouble(0.0); //SET tv = tV AND SET THE DEFAULT VALUE TO 0
 
   static AbsoluteEncoder armEncoder = Arm.armEncoder;
 
@@ -92,10 +89,10 @@ public class AlignForSpeaker extends Command {
   @Override
   public void execute() {
 
-    tX = tx.getDouble(0.0); 
-    tY = ty.getDouble(0.0); 
-    tA = ta.getDouble(0.0); 
-    tV = tv.getDouble(0.0);
+    tX = tX;
+    tY = tY;
+    tA = tA;
+    tV = tV;
 
     armEncoderReading =  (armEncoder.getPosition() - 0.42638435959816) * -1;
 
