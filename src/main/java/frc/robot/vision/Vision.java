@@ -55,7 +55,7 @@ public static double pipelineLatency = LimelightLib.getLatency_Pipeline(limeligh
 
 
   /**
-   * DRIVE ROBOT USING JOYSTICK INPUT
+   * CALCULATE THE DISTANCE FROM THE NEAREST APRILTAG
    *
    * @param ty        THE CURRENT TY VALUE (USE A SUPPLIER)
    * @param armAngle  THE CURRENT ARM ANGLE VALUE (USE A SUPPLIER)
@@ -75,13 +75,21 @@ public double calculateDistance(double ty, double armAngle, double targetID) {
   double verticalComponent = armLength * Math.cos(angleInRadians); //CALCULATE VERTICAL COMPONENT OF TRIANGLE
   double limelightLensHeightInches = verticalComponent + pivotOffset + limelightCenter; //FIND THE HEIGHT OF THE LIMELIGHT LENS FROM THE FLOOR
 
-  if (targetID == 3 || targetID == 4 || targetID == 7 || targetID == 8) {
+  if (targetID == 3 || targetID == 4 || targetID == 7 || targetID == 8) { //THE SPEAKER APRILTAGS
     
     goalHeightInches = 12; //PLACEHOLDER VALUE
 
-  } else if (targetID == 5 || targetID == 6) {
+  } else if (targetID == 5 || targetID == 6) { //THE AMP APRILTAGS
 
     goalHeightInches = 12; //PLACEHOLDER VALUE
+
+  } else if(targetID == 1 || targetID == 2 || targetID == 9 || targetID == 10){ //THE HUMAN PLAYER STATION APRILTAGS
+
+    goalHeightInches = 12; //PLACEHOLDER VALUE
+
+  } else if (targetID == 11 || targetID == 12 || targetID == 13 || targetID == 14 || targetID == 15 || targetID ==16) { //THE STAGE APRILTAGS
+
+    goalHeightInches = 12;
 
   } else {
 
