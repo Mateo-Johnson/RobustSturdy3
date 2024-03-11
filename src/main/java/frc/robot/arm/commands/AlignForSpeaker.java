@@ -151,8 +151,8 @@ public class AlignForSpeaker extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Arm.leftArm.set(0);
-    Arm.rightArm.set(0);
+    Arm.leftArm.stopMotor();
+    Arm.rightArm.stopMotor();
   }
 
   //FUNCTION FOR MOVING THE ARM
