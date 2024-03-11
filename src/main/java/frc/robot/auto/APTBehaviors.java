@@ -29,6 +29,7 @@ public class APTBehaviors extends Command {
   boolean tV;
   double distance;
   double targetAngle;
+  double deadzone;
 
   static AbsoluteEncoder armEncoder = Arm.armEncoder; 
   private static final int cyclesPerRotation = 2048; //HOW MANY CYCLES PER ROTATION PER ROTATION OF THE ENCODER
@@ -104,7 +105,7 @@ public class APTBehaviors extends Command {
             //CODE FOR FAR HP-STATION
             distance = Vision.calculateDistance(tY, armDegrees, targetID, "hp-station");
 
-            if (tX >= -3 || tX <= 3) {
+            if (tX >= -deadzone || tX <= deadzone) {
 
               lPID = lateralPID.calculate(tX, 5);
               hPID = lateralPID.calculate(distance, 6);
@@ -117,10 +118,10 @@ public class APTBehaviors extends Command {
             //CODE FOR BLUE AMP
             distance = Vision.calculateDistance(tY, armDegrees, targetID, "amp");
 
-            if (tX <= -3 && tX >= 3) {
+            if (tX <= -deadzone && tX >= deadzone) {
               amPID = armMovePID.calculate(armDegrees, 90);
               driveSubsystem.drive(0.1, 0, 0, false, true);
-            } else if (tX >= -3 || tX <= 3) {
+            } else if (tX >= -deadzone || tX <= deadzone) {
               amPID = armMovePID.calculate(armDegrees, 12); //PLACEHOLDER VALUE
               Arm.rotateVector(amPID);
               lPID = lateralPID.calculate(tX, 0);
@@ -156,7 +157,7 @@ public class APTBehaviors extends Command {
             //BLUE STAGE 
             distance = Vision.calculateDistance(tY, armDegrees, targetID, "amp");
 
-            if (tX <= -3 && tX >= 3) {
+            if (tX <= -deadzone && tX >= deadzone) {
               new Climb();
               driveSubsystem.drive(0.1, 0, 0, false, true);
             } else if (tX >= -3 || tX <= 3) {
@@ -172,7 +173,7 @@ public class APTBehaviors extends Command {
             //BLUE STAGE
             distance = Vision.calculateDistance(tY, armDegrees, targetID, "amp");
 
-            if (tX <= -3 && tX >= 3) {
+            if (tX <= -deadzone && tX >= deadzone) {
               new Climb();
               driveSubsystem.drive(0.1, 0, 0, false, true);
             } else if (tX >= -3 || tX <= 3) {
@@ -188,10 +189,10 @@ public class APTBehaviors extends Command {
             //BLUE STAGE
             distance = Vision.calculateDistance(tY, armDegrees, targetID, "amp");
 
-            if (tX <= -3 && tX >= 3) {
+            if (tX <= -deadzone && tX >= deadzone) {
               new Climb();
               driveSubsystem.drive(0.1, 0, 0, false, true);
-            } else if (tX >= -3 || tX <= 3) {
+            } else if (tX >= -deadzone || tX <= deadzone) {
               amPID = armMovePID.calculate(armDegrees, 12); //PLACEHOLDER VALUE
               Arm.rotateVector(amPID);
               lPID = lateralPID.calculate(tX, 0);
@@ -235,10 +236,10 @@ public class APTBehaviors extends Command {
             //CODE FOR RED AMP
             distance = Vision.calculateDistance(tY, armDegrees, targetID, "amp");
 
-            if (tX <= -3 && tX >= 3) {
+            if (tX <= -deadzone && tX >= deadzone) {
               amPID = armMovePID.calculate(armDegrees, 90);
               driveSubsystem.drive(0.1, 0, 0, false, true);
-            } else if (tX >= -3 || tX <= 3) {
+            } else if (tX >= -deadzone || tX <= deadzone) {
               amPID = armMovePID.calculate(armDegrees, 12); //PLACEHOLDER VALUE
               Arm.rotateVector(amPID);
               lPID = lateralPID.calculate(tX, 0);
@@ -263,7 +264,7 @@ public class APTBehaviors extends Command {
             //CODE FOR CLOSE HP-STATION
             distance = Vision.calculateDistance(tY, armDegrees, targetID, "hp-station");
 
-            if (tX >= -3 || tX <= 3) {
+            if (tX >= -deadzone || tX <= deadzone) {
 
               lPID = lateralPID.calculate(tX, -5);
               hPID = lateralPID.calculate(distance, 6);
@@ -276,10 +277,10 @@ public class APTBehaviors extends Command {
             //RED STAGE
             distance = Vision.calculateDistance(tY, armDegrees, targetID, "amp");
 
-            if (tX <= -3 && tX >= 3) {
+            if (tX <= -deadzone && tX >= deadzone) {
               new Climb();
               driveSubsystem.drive(0.1, 0, 0, false, true);
-            } else if (tX >= -3 || tX <= 3) {
+            } else if (tX >= -deadzone || tX <= deadzone) {
               amPID = armMovePID.calculate(armDegrees, 12); //PLACEHOLDER VALUE
               Arm.rotateVector(amPID);
               lPID = lateralPID.calculate(tX, 0);
@@ -292,10 +293,10 @@ public class APTBehaviors extends Command {
             //RED STAGE
             distance = Vision.calculateDistance(tY, armDegrees, targetID, "amp");
 
-            if (tX <= -3 && tX >= 3) {
+            if (tX <= -deadzone && tX >= deadzone) {
               new Climb();
               driveSubsystem.drive(0.1, 0, 0, false, true);
-            } else if (tX >= -3 || tX <= 3) {
+            } else if (tX >= -deadzone || tX <= deadzone) {
               amPID = armMovePID.calculate(armDegrees, 12); //PLACEHOLDER VALUE
               Arm.rotateVector(amPID);
               lPID = lateralPID.calculate(tX, 0);
@@ -308,10 +309,10 @@ public class APTBehaviors extends Command {
             //RED STAGE
             distance = Vision.calculateDistance(tY, armDegrees, targetID, "amp");
 
-            if (tX <= -3 && tX >= 3) {
+            if (tX <= -deadzone && tX >= deadzone) {
               new Climb();
               driveSubsystem.drive(0.1, 0, 0, false, true);
-            } else if (tX >= -3 || tX <= 3) {
+            } else if (tX >= -deadzone || tX <= deadzone) {
               amPID = armMovePID.calculate(armDegrees, 12); //PLACEHOLDER VALUE
               Arm.rotateVector(amPID);
               lPID = lateralPID.calculate(tX, 0);
@@ -328,7 +329,7 @@ public class APTBehaviors extends Command {
     }
   }
 
-    //IF WE KNOW THE BEST FOR WHEN WE'RE CLOSE AND THE BEST FOR WHEN WE'RE FAR AWAY, THEN WE KNOW THE IN-BETWEEN
+    //IF WE KNOW THE BEST ANGLE FOR WHEN WE'RE CLOSE AND THE BEST FOR WHEN WE'RE FAR AWAY, THEN WE KNOW THE IN-BETWEEN
   public static double calculateAngle(double distance) {
     //CONSTANTS for the two points
     double x1 = 0.0; //DISTANCE = 0 PLACEHOLDER
@@ -337,7 +338,7 @@ public class APTBehaviors extends Command {
     double x2 = 10.0; // distance = 10 PLACEHOLDER
     double y2 = 90.0; // arm angle = 90 degrees PLACEHOLDER
 
-    // Linear interpolation formula
+    //LINEAR INTERPOLATION FORMULA 
     double armAngle = y1 + ((distance - x1) / (x2 - x1)) * (y2 - y1);
 
     return armAngle;

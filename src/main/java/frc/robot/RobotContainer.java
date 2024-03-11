@@ -18,7 +18,6 @@ import frc.robot.arm.intake_shooter.intake_commands.IntakeRing;
 import frc.robot.arm.intake_shooter.intake_commands.PurgeRing;
 import frc.robot.arm.intake_shooter.shooter_commands.ScoreAmp;
 import frc.robot.arm.intake_shooter.shooter_commands.ScoreSpeaker;
-import frc.robot.arm.intake_shooter.shooter_commands.ShootRingIndiscriminately;
 import frc.robot.drivetrain.DriveSubsystem;
 import frc.robot.lights.commands.SetLightsColor;
 import frc.robot.utils.Constants.ControllerConstants;
@@ -68,19 +67,14 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     //DEFINE ALL OF THE BUTTON BINDINGS HERE PLEASE AND THANKS
-    primaryDriver.rightBumper()
-        .whileTrue(new RunCommand(
-            () -> drivetrain.setWheelsX(),
-            drivetrain));
-
-
+    primaryDriver.rightBumper().whileTrue(new RunCommand(() -> drivetrain.setWheelsX(), drivetrain));
     // primaryDriver.a().and(primaryDriver.b()).whileFalse(new PIDARM());
     primaryDriver.a().whileTrue(new MoveArm());
     primaryDriver.y().whileTrue(new AlignForAmp(drivetrain));
     primaryDriver.b().whileTrue(new MoveArmBackwards());
     primaryDriver.rightTrigger().whileTrue(new IntakeRing());
     // primaryDriver.rightBumper().whileTrue(new Climb());
-    primaryDriver.leftTrigger().whileTrue(new ShootRingIndiscriminately());
+    primaryDriver.leftTrigger().whileTrue(new ScoreSpeaker());
     primaryDriver.leftBumper().whileTrue(new PurgeRing());
     //primaryDriver.x().whileTrue(new two_silly(drivetrain));    
 
