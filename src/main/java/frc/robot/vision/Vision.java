@@ -54,6 +54,61 @@ public static double pipelineLatency = LimelightLib.getLatency_Pipeline(limeligh
 
 
 
+  /**
+   * DRIVE ROBOT USING JOYSTICK INPUT
+   *
+   * @param ty        THE CURRENT TY VALUE (USE A SUPPLIER)
+   * @param armAngle  THE CURRENT ARM ANGLE VALUE (USE A SUPPLIER)
+   * @param targetID  THE CURRENT TARGET ID (USE A SUPPLIER)
+   */
+//FUNCTION FOR CALCULATING APRILTAG DISTANCE
+public double calculateDistance(double ty, double armAngle, double targetID) {
+
+  //CONSTANTS
+  double armLength = 12; //PLACEHOLDER VALUE
+  double pivotOffset = 12; //PLACEHOLDER VALUE
+  double limelightCenter = 12;
+  double goalHeightInches;
+
+  //CALCULATIONS
+  double angleInRadians = Math.toRadians(armAngle); //CONVERT THE ANGLE TO RADIANS
+  double verticalComponent = armLength * Math.cos(angleInRadians); //CALCULATE VERTICAL COMPONENT OF TRIANGLE
+  double limelightLensHeightInches = verticalComponent + pivotOffset + limelightCenter; //FIND THE HEIGHT OF THE LIMELIGHT LENS FROM THE FLOOR
+
+  if (targetID == 3 || targetID == 4 || targetID == 7 || targetID == 8) {
+    
+    goalHeightInches = 12; //PLACEHOLDER VALUE
+
+  } else if (targetID == 5 || targetID == 6) {
+
+    goalHeightInches = 12; //PLACEHOLDER VALUE
+
+  } else {
+
+    goalHeightInches = 0; //PLACEHOLDER VALUE
+
+  }
+
+  double targetOffsetAngle_Vertical = ty;
+  double limelightMountAngleDegrees = armAngle + 12; //CHANGE THIS VALUE WHEN WE MEASURE LIMELIGHT ANGLE
+
+  double angleToGoalDegrees = limelightMountAngleDegrees + targetOffsetAngle_Vertical;
+  double angleToGoalRadians = Math.toRadians(angleToGoalDegrees);
+  double distanceInches = (goalHeightInches - limelightLensHeightInches) / Math.tan(angleToGoalRadians);
+
+  double distanceFeet = distanceInches/12;
+  // double distanceMeters = distanceFeet/3.281;
+  // double distanceYards = distanceFeet/3;
+
+  return distanceFeet;
+  //return distanceMeters;
+  //distanceYards;
+
+  
+}
+
+
+
 Vision() {
   
 }
