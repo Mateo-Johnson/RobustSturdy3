@@ -30,17 +30,14 @@ public class Climb extends Command {
   @Override
   public void execute() {
 
-      writeSolenoid.set(false);
-      wrongSolenoid.set(false);
+      writeSolenoid.set(true);
+      wrongSolenoid.set(true);
       
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-
-    writeSolenoid.set(true);
-    wrongSolenoid.set(true);
 
   }
 
