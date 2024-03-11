@@ -78,28 +78,39 @@ public class APTBehaviors extends Command {
     targetID = (int) Vision.targetID; //SET TARGET ID EQUAL TO THE INT VALUE FROM VISION.JAVA BUT CAST IT TO INT
     double tX = Vision.tX; //THE X OFFSET OF THE TARGET
     double tY = Vision.tY; //THE Y OFFSET OF THE TARGET
-    double tA = Vision.tA; //THE AREA THE TARGET TAKES UP ON THE SCREEN
     boolean tV = Vision.tV; //WHETHER THE LIMELIGHT HAS A TARGET OR NOT
 
 
 
     if (DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == Alliance.Blue) {
 
+      if (tV) {
+
       switch (targetID) {
         case 1:
             //CODE FOR CLOSE HP-STATION
-            //face the apriltag
-            //center yourself between the two apriltags
-            //move to a close distance
-            //center between the two apriltags
+            distance = Vision.calculateDistance(tY, armDegrees, targetID, "hp-station");
+
+            if (tX >= -3 || tX <= 3) {
+
+              lPID = lateralPID.calculate(tX, -5);
+              hPID = lateralPID.calculate(distance, 6);
+              driveSubsystem.drive(hPID, lPID, 0, false, true);
+              
+            }
 
             break;
         case 2:
             //CODE FOR FAR HP-STATION
-            //face the apriltag
-            //center yourself between the two apriltags
-            //move to a close distance
-            //center between the two apriltags
+            distance = Vision.calculateDistance(tY, armDegrees, targetID, "hp-station");
+
+            if (tX >= -3 || tX <= 3) {
+
+              lPID = lateralPID.calculate(tX, 5);
+              hPID = lateralPID.calculate(distance, 6);
+              driveSubsystem.drive(hPID, lPID, 0, false, true);
+              
+            }
 
             break;
         case 6:
@@ -131,8 +142,14 @@ public class APTBehaviors extends Command {
             break;
         case 8:
             //CODE FOR NON-CENTRAL BLUE SPEAKER
-            //pivot to find the central apriltag
-            //(or maybe just shoot using that one)
+            tPID = turningPID.calculate(tX, 5);
+
+            distance = Vision.calculateDistance(tY, armDegrees, targetID, "speaker");
+            targetAngle = calculateAngle(distance);
+            amPID = armMovePID.calculate(armDegrees, targetAngle);
+
+            driveSubsystem.drive(0, 0, tPID, false, true);
+            Arm.rotateVector(amPID);
 
             break;
         case 14:
@@ -192,16 +209,26 @@ public class APTBehaviors extends Command {
       switch (targetID) {
         case 3:
             //CODE FOR NON-CENTRAL RED SPEAKER
-            //pivot to find the central apriltag
-            //(or maybe just shoot using that one)
+            tPID = turningPID.calculate(tX, 5);
+
+            distance = Vision.calculateDistance(tY, armDegrees, targetID, "speaker");
+            targetAngle = calculateAngle(distance);
+            amPID = armMovePID.calculate(armDegrees, targetAngle);
+
+            driveSubsystem.drive(0, 0, tPID, false, true);
+            Arm.rotateVector(amPID);
 
             break;
         case 4:
             //CODE FOR CENTRAL RED SPEAKER
-            //face the robot towards speaker
-            //calculate distance
-            //move arm to right position
-            //shoot
+            tPID = turningPID.calculate(tX, 0);
+
+            distance = Vision.calculateDistance(tY, armDegrees, targetID, "speaker");
+            targetAngle = calculateAngle(distance);
+            amPID = armMovePID.calculate(armDegrees, targetAngle);
+
+            driveSubsystem.drive(0, 0, tPID, false, true);
+            Arm.rotateVector(amPID);
 
             break;
         case 5:
@@ -221,16 +248,28 @@ public class APTBehaviors extends Command {
             break;
         case 9:
             //CODE FOR FAR HP-STATION 
-            //face the apriltag
-            //move to a close distance
-            //center between the two apriltags
+            distance = Vision.calculateDistance(tY, armDegrees, targetID, "hp-station");
+
+            if (tX >= -3 || tX <= 3) {
+
+              lPID = lateralPID.calculate(tX, 5);
+              hPID = lateralPID.calculate(distance, 6);
+              driveSubsystem.drive(hPID, lPID, 0, false, true);
+
+            }
 
             break;
         case 10:
             //CODE FOR CLOSE HP-STATION
-            //face the apriltag
-            //move to a close distance
-            //center between the two apriltags
+            distance = Vision.calculateDistance(tY, armDegrees, targetID, "hp-station");
+
+            if (tX >= -3 || tX <= 3) {
+
+              lPID = lateralPID.calculate(tX, -5);
+              hPID = lateralPID.calculate(distance, 6);
+              driveSubsystem.drive(hPID, lPID, 0, false, true);
+              
+            }
 
             break;
         case 11:
@@ -284,7 +323,8 @@ public class APTBehaviors extends Command {
         default:
             //SPIN FOR APRILTAG
             driveSubsystem.drive(0, 0, 0.1, false, true);
-      } 
+        } 
+      }
     }
   }
 

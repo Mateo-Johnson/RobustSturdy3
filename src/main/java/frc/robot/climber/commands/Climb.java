@@ -20,13 +20,16 @@ public class Climb extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Solenoid writeSolenoid = new Solenoid(PneumaticsModuleType.REVPH, 2);
-    Solenoid wrongSolenoid = new Solenoid(PneumaticsModuleType.REVPH, 3);
+
+    writeSolenoid = new Solenoid(PneumaticsModuleType.REVPH, 2);
+    wrongSolenoid = new Solenoid(PneumaticsModuleType.REVPH, 3);
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
       writeSolenoid.set(false);
       wrongSolenoid.set(false);
       
@@ -35,8 +38,10 @@ public class Climb extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+
     writeSolenoid.set(true);
     wrongSolenoid.set(true);
+
   }
 
   // Returns true when the command should end.
