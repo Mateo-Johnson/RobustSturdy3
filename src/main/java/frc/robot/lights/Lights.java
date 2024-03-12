@@ -16,9 +16,9 @@ public class Lights {
         greenLED = new PWM(2);
         blueLED = new PWM(3);
 
-        redLED.setPosition(rgbValues[0] /  255.0);
-        greenLED.setPosition(rgbValues[1] /  255.0);
-        blueLED.setPosition(rgbValues[2] /  255.0);
+        redLED.setPosition(rgbValues[0] * (4096/255));
+        greenLED.setPosition(rgbValues[1] * (4096/255));
+        blueLED.setPosition(rgbValues[2] * (4096/255));
     }
 
     //SOLID COLOR

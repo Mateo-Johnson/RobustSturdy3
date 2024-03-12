@@ -4,6 +4,7 @@
 
 package frc.robot.lights.commands;
 
+import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.lights.ColorIndex;
 import frc.robot.lights.Lights;
@@ -23,6 +24,15 @@ public class SetLightsColor extends Command {
   @Override
   public void execute() {
     Lights.solidColor(ColorIndex.red); //SET THE LIGHTS TO RED
+    //EXAMPLE IMPLEMENTATIONS
+
+    // double[][] colorCycle = {ColorIndex.red, ColorIndex.blue, ColorIndex.limeGreen};
+    // Lights.colorCycle(colorCycle, 30);
+
+    // Lights.colorFlash(ColorIndex.red, ColorIndex.blue, 10);
+
+    Lights.colorPulse(ColorIndex.red, 15);
+
   }
 
   // Called once the command ends or is interrupted.
