@@ -31,8 +31,7 @@ public class SetLightsColor extends Command {
 
     // Lights.colorFlash(ColorIndex.red, ColorIndex.blue, 10);
 
-    Lights.colorPulse(ColorIndex.red, 15);
-
+    // Lights.colorPulse(ColorIndex.red, 15);
   }
 
   // Called once the command ends or is interrupted.
