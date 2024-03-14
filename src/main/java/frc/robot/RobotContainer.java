@@ -75,13 +75,13 @@ public class RobotContainer {
 
 
     // primaryDriver.a().and(primaryDriver.b()).whileFalse(new PIDARM());
-    primaryDriver.a().whileTrue(new MoveArm());
-    primaryDriver.y().whileTrue(new AlignForAmp(drivetrain));
-    primaryDriver.b().whileTrue(new MoveArmBackwards());
-    primaryDriver.rightTrigger().whileTrue(new IntakeRing());
-    // primaryDriver.rightBumper().whileTrue(new Climb());
-    primaryDriver.leftTrigger().whileTrue(new ShootRingIndiscriminately());
-    primaryDriver.leftBumper().whileTrue(new PurgeRing());
+    secondaryDriver.a().whileTrue(new MoveArm());
+    secondaryDriver.y().whileTrue(new AlignForAmp(drivetrain));
+    secondaryDriver.b().whileTrue(new MoveArmBackwards());
+    secondaryDriver.rightTrigger().whileTrue(new IntakeRing());
+    //primaryDriver.rightBumper().whileTrue(new Climb());
+    secondaryDriver.leftTrigger().whileTrue(new ShootRingIndiscriminately());
+    secondaryDriver.leftBumper().whileTrue(new PurgeRing());
     //primaryDriver.x().whileTrue(new two_silly(drivetrain));    
 
 }

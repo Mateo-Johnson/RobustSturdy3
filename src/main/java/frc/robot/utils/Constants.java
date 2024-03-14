@@ -106,28 +106,28 @@ public final class Constants {
      * 24 - RIGHT ARM OUTTAKE MOTOR
     */
     //FRONT LEFT MODULE
-    public static final int frontLeftDrivingCanId = 8;
-    public static final int frontLeftTurningCanId = 9;
+    public static final int frontLeftDrivingCanId = 9;
+    public static final int frontLeftTurningCanId = 8;
     //BACK LEFT MODULE
-    public static final int rearLeftDrivingCanId = 5;
-    public static final int rearLeftTurningCanId = 4;
+    public static final int rearLeftDrivingCanId = 7;
+    public static final int rearLeftTurningCanId = 6;
     //FRONT RIGHT MODULE
-    public static final int frontRightDrivingCanId = 7;
-    public static final int frontRightTurningCanId = 6; 
+    public static final int frontRightDrivingCanId = 3;
+    public static final int frontRightTurningCanId = 2; 
     //BACK RIGHT MODULE
-    public static final int rearRightDrivingCanId = 3;
-    public static final int rearRightTurningCanId = 2;
+    public static final int rearRightDrivingCanId = 5;
+    public static final int rearRightTurningCanId = 4;
     //IS THE GYRO REVERSED??????
     public static final boolean gyroReversed = false;
     //RIGHT AND LEFT NEO 55OS FOR INTAKE
-    public static final int rightIntakeCanId = 11;
-    public static final int leftIntakeCanId = 12;
+    public static final int rightIntakeCanId = 12;
+    public static final int leftIntakeCanId = 11;
     //RIGHT AND LEFT UNGEARBOXED NEOS FOR OUTTAKE
-    public static final int rightOuttakeCanId = 23;
-    public static final int leftOuttakeCanId = 24;
+    public static final int rightOuttakeCanId = 21;
+    public static final int leftOuttakeCanId = 22;
     //RIGHT AND LEFT TORQUE GEARBOXED NEOS FOR ARM MOVEMENT
-    public static final int leftArmMotorCanId = 35;
-    public static final int rightArmMotorCanId = 36;
+    public static final int leftArmMotorCanId = 31;
+    public static final int rightArmMotorCanId = 32;
 
 
     public static CANSparkMax rightIntake = new CANSparkMax(DriveConstants.rightIntakeCanId, MotorType.kBrushless);    

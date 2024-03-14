@@ -370,13 +370,13 @@ public class DriveSubsystem extends SubsystemBase {
    * @return THE ROBOT HEADING (-180 to 180)
    */
   public double getHeading() {
-    // return Rotation2d.fromDegrees(gyro.getAngle()).getDegrees();
-      double rawAngle = Rotation2d.fromDegrees(gyro.getAngle()).getRadians();
+    return Rotation2d.fromDegrees(gyro.getAngle()).getDegrees();
+      // double rawAngle = Rotation2d.fromDegrees(gyro.getAngle()).getRadians();
       
-      // Use angleModulus to wrap the angle between -180 and 180 degrees
-      double wrappedAngle = Math.toDegrees(MathUtil.angleModulus(Math.toRadians(rawAngle)));
+      // // Use angleModulus to wrap the angle between -180 and 180 degrees
+      // double wrappedAngle = Math.toDegrees(MathUtil.angleModulus(Math.toRadians(rawAngle)));
   
-      return wrappedAngle;
+      // return wrappedAngle;
   }
 
 
