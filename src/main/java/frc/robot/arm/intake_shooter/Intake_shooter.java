@@ -20,10 +20,10 @@ public class Intake_shooter {
         intake2.set(-speed);
     }
     public static void stopWheels(){
-        intake1.set(0);
-        intake2.set(0);
-        rightOuttake.set(0);
-        wrongOuttake.set(0);
+        intake1.stopMotor();
+        intake2.stopMotor();
+        rightOuttake.stopMotor();
+        wrongOuttake.stopMotor();
       }
     public static void runOuttake() {
         SmartDashboard.putNumber("silly", shooterEncoder.getVelocity());
