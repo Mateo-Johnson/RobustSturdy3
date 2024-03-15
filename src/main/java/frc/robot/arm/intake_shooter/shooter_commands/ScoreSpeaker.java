@@ -7,17 +7,22 @@ package frc.robot.arm.intake_shooter.shooter_commands;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.RobotContainer;
 import frc.robot.arm.intake_shooter.Intake_shooter;
 import frc.robot.utils.Constants.DriveConstants;
 
 public class ScoreSpeaker extends Command {
-      public static final CANSparkMax intake1 = DriveConstants.rightIntake;
+    public static final CANSparkMax intake1 = DriveConstants.rightIntake;
     public static final CANSparkMax intake2 = DriveConstants.leftIntake;
     public static final CANSparkMax rightOuttake = DriveConstants.rightOuttake;
     public static final CANSparkMax wrongOuttake = DriveConstants.leftOuttake;
     private static RelativeEncoder shooterEncoder = rightOuttake.getEncoder();
+
+    CommandXboxController controller =  RobotContainer.primaryDriver;
   /** Creates a new silly. */
   public ScoreSpeaker() {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -35,15 +40,16 @@ public class ScoreSpeaker extends Command {
     SmartDashboard.putNumber("silly", shooterEncoder.getVelocity());
     if (shooterEncoder.getVelocity() >= 17) { //IF THE MOTORS ARE SPINNING FAST ENOUGH 
       rightOuttake.set(5); //SET UP OUTTAKE MOTOR 1 FOR SHOOTING, RIGHT RUNS TOP, LEFT RUNS BOTTOM
-      wrongOuttake.set(3.76665); //SET UP OUTTAKE MOTOR 2 FOR SHOOTING
+      wrongOuttake.set(5); //SET UP OUTTAKE MOTOR 2 FOR SHOOTING
 
       intake1.set(0.5); //USE INTAKE MOTOR 1 TO FEED INTO OUTTAKE
       intake2.set(-0.5); //USE INTAKE MOTOR 2 TO FEED INTO OUTTAKE
       //ADD A METHOD MAKE THE BOTTOM LIGHTS GREEN TO SHOW THAT ITS READY TO SHOOT
- 
+      controller.getHID().setRumble(RumbleType.kBothRumble, 0.5); //RUMBLE THE CONTROLLER WHEN ITS AIMED
+       
     } else if (shooterEncoder.getVelocity() <= 17) { //IF THE MOTORS ARE NOT AT THE RIGHT SPEED
       rightOuttake.set(5); //MAKE OUTTAKE MOTOR 1 GO TO RIGHT SPEED
-      wrongOuttake.set(3.76665); //MAKE OUTTAKE MOTOR 1 GO TO RIGHT SPEED
+      wrongOuttake.set(5); //MAKE OUTTAKE MOTOR 1 GO TO RIGHT SPEED
       //ADD A METHOD MAKE THE BOTTOM LIGHTS RED TO SHOW THAT ITS NOT READY TO SHOOT
     }
   }

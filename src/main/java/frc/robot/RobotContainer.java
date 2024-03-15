@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.arm.commands.AlignForAmp;
 import frc.robot.arm.commands.MoveArm;
 import frc.robot.arm.commands.MoveArmBackwards;
+import frc.robot.arm.commands.setpoints.SpecifiedAngle;
 import frc.robot.arm.intake_shooter.intake_commands.IntakeRing;
 import frc.robot.arm.intake_shooter.intake_commands.PurgeRing;
 import frc.robot.arm.intake_shooter.shooter_commands.ScoreAmp;
@@ -75,6 +76,7 @@ public class RobotContainer {
     primaryDriver.rightTrigger().whileTrue(new IntakeRing());
     // primaryDriver.rightBumper().whileTrue(new Climb());
     primaryDriver.leftBumper().whileTrue(new PurgeRing());
+    primaryDriver.povLeft().whileTrue(new SpecifiedAngle(45));
     //primaryDriver.x().whileTrue(new two_silly(drivetrain));    
 
 }
