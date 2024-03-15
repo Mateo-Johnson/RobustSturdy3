@@ -19,6 +19,8 @@ import frc.robot.arm.intake_shooter.intake_commands.IntakeRing;
 import frc.robot.arm.intake_shooter.intake_commands.PurgeRing;
 import frc.robot.arm.intake_shooter.shooter_commands.ScoreAmp;
 import frc.robot.arm.intake_shooter.shooter_commands.ScoreSpeaker;
+import frc.robot.auto.APTBehaviors;
+import frc.robot.climber.commands.Climb;
 import frc.robot.drivetrain.DriveSubsystem;
 import frc.robot.lights.commands.SetLightsColor;
 import frc.robot.utils.Constants.ControllerConstants;
@@ -40,10 +42,10 @@ public class RobotContainer {
   public RobotContainer() {
 
     NamedCommands.registerCommand("IntakeRing", new IntakeRing());
-    NamedCommands.registerCommand("PurgeRing", new PurgeRing());
     NamedCommands.registerCommand("ScoreAmp", new ScoreAmp());
     NamedCommands.registerCommand("ScoreSpeaker", new ScoreSpeaker());
-    // NamedCommands.registerCommand("Climb", new Climb());
+    NamedCommands.registerCommand("APTBehaviors", new APTBehaviors(drivetrain));
+    NamedCommands.registerCommand("Climb", new Climb());
     NamedCommands.registerCommand("SetLightsColor", new SetLightsColor());
 
     configureButtonBindings(); //CONFIGURE BINDINGS
