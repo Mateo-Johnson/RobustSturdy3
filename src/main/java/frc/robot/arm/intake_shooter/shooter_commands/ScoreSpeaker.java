@@ -19,7 +19,6 @@ import frc.robot.vision.Vision;
 
 public class ScoreSpeaker extends Command {
 
-  private final int maxSpeed;
 
     public static final CANSparkMax intake1 = DriveConstants.rightIntake;
     public static final CANSparkMax intake2 = DriveConstants.leftIntake;
@@ -31,9 +30,8 @@ public class ScoreSpeaker extends Command {
 
     CommandXboxController controller =  RobotContainer.primaryDriver;
   /** Creates a new silly. */
-  public ScoreSpeaker(int maxSpeed) {
+  public ScoreSpeaker() {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.maxSpeed = maxSpeed;
   }
 
   // Called when the command is initially scheduled.
@@ -46,19 +44,37 @@ public class ScoreSpeaker extends Command {
   @Override
   public void execute() {
     SmartDashboard.putNumber("silly", shooterEncoder.getVelocity());
-    if (shooterEncoder.getVelocity() >= calculateVelocity(power)) { //IF THE MOTORS ARE SPINNING FAST ENOUGH 
-      rightOuttake.set(power); //SET UP OUTTAKE MOTOR 1 FOR SHOOTING, RIGHT RUNS TOP, LEFT RUNS BOTTOM
-      wrongOuttake.set(power); //SET UP OUTTAKE MOTOR 2 FOR SHOOTING
 
-      intake1.set(0.5); //USE INTAKE MOTOR 1 TO FEED INTO OUTTAKE
-      intake2.set(-0.5); //USE INTAKE MOTOR 2 TO FEED INTO OUTTAKE
-      //ADD A METHOD MAKE THE BOTTOM LIGHTS GREEN TO SHOW THAT ITS READY TO SHOOT
-      controller.getHID().setRumble(RumbleType.kBothRumble, 0.5); //RUMBLE THE CONTROLLER WHEN ITS AIMED
-       
-    } else if (shooterEncoder.getVelocity() <= calculateVelocity(power)) { //IF THE MOTORS ARE NOT AT THE RIGHT SPEED
-      rightOuttake.set(power); //MAKE OUTTAKE MOTOR 1 GO TO RIGHT SPEED
-      wrongOuttake.set(power); //MAKE OUTTAKE MOTOR 1 GO TO RIGHT SPEED
-      //ADD A METHOD MAKE THE BOTTOM LIGHTS RED TO SHOW THAT ITS NOT READY TO SHOOT
+    if (Vision.a_tV) {
+      if (shooterEncoder.getVelocity() >= calculateVelocity(power)) { //IF THE MOTORS ARE SPINNING FAST ENOUGH 
+        rightOuttake.set(power); //SET UP OUTTAKE MOTOR 1 FOR SHOOTING, RIGHT RUNS TOP, LEFT RUNS BOTTOM
+        wrongOuttake.set(power); //SET UP OUTTAKE MOTOR 2 FOR SHOOTING
+  
+        intake1.set(0.5); //USE INTAKE MOTOR 1 TO FEED INTO OUTTAKE
+        intake2.set(-0.5); //USE INTAKE MOTOR 2 TO FEED INTO OUTTAKE
+        //ADD A METHOD MAKE THE BOTTOM LIGHTS GREEN TO SHOW THAT ITS READY TO SHOOT
+        controller.getHID().setRumble(RumbleType.kBothRumble, 0.5); //RUMBLE THE CONTROLLER WHEN ITS AIMED
+         
+      } else if (shooterEncoder.getVelocity() <= calculateVelocity(power)) { //IF THE MOTORS ARE NOT AT THE RIGHT SPEED
+        rightOuttake.set(power); //MAKE OUTTAKE MOTOR 1 GO TO RIGHT SPEED
+        wrongOuttake.set(power); //MAKE OUTTAKE MOTOR 1 GO TO RIGHT SPEED
+        //ADD A METHOD MAKE THE BOTTOM LIGHTS RED TO SHOW THAT ITS NOT READY TO SHOOT
+      }
+    } else {
+      if (shooterEncoder.getVelocity() >= 17) { //IF THE MOTORS ARE SPINNING FAST ENOUGH 
+        rightOuttake.set(5); //SET UP OUTTAKE MOTOR 1 FOR SHOOTING, RIGHT RUNS TOP, LEFT RUNS BOTTOM
+        wrongOuttake.set(5); //SET UP OUTTAKE MOTOR 2 FOR SHOOTING
+  
+        intake1.set(0.5); //USE INTAKE MOTOR 1 TO FEED INTO OUTTAKE
+        intake2.set(-0.5); //USE INTAKE MOTOR 2 TO FEED INTO OUTTAKE
+        //ADD A METHOD MAKE THE BOTTOM LIGHTS GREEN TO SHOW THAT ITS READY TO SHOOT
+        controller.getHID().setRumble(RumbleType.kBothRumble, 0.5); //RUMBLE THE CONTROLLER WHEN ITS AIMED
+         
+      } else if (shooterEncoder.getVelocity() <= 17) { //IF THE MOTORS ARE NOT AT THE RIGHT SPEED
+        rightOuttake.set(5); //MAKE OUTTAKE MOTOR 1 GO TO RIGHT SPEED
+        wrongOuttake.set(5); //MAKE OUTTAKE MOTOR 1 GO TO RIGHT SPEED
+        //ADD A METHOD MAKE THE BOTTOM LIGHTS RED TO SHOW THAT ITS NOT READY TO SHOOT
+      }
     }
 
     dist = Vision.calculateDistance(Vision.a_tY, Arm.degrees, Vision.a_targetID, "speaker");

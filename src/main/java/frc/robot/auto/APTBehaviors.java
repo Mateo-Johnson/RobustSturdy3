@@ -14,7 +14,6 @@ import frc.robot.arm.Arm;
 import frc.robot.climber.commands.Climb;
 import frc.robot.drivetrain.DriveSubsystem;
 import frc.robot.vision.Vision;
-import frc.robot.vision.commands.ScoreSpeaker;
 
 public class APTBehaviors extends Command {
   /** Creates a new Amp. */
