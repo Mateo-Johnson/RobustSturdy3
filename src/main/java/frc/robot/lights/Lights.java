@@ -11,6 +11,10 @@ public class Lights {
     public static PWM blueLED;
     public static double[] rgbValues;
 
+  /**
+   * SET THE LIGHTS TO A SOLID COLOR VALUE
+   * @param rgbValues THE DOUBLE ARRAY OF THE RGB VALUES (RED, GREEN AND BLUE) 
+   */
     public static void makeLightsColors(double[] rgbValues) {
         redLED = new PWM(1); //THESE ARE PLACEHOLDER PORTS
         greenLED = new PWM(2);
@@ -26,7 +30,11 @@ public class Lights {
         makeLightsColors(rgbValues);
     }
 
-    //COLOR CYCLE
+      /**
+   * SET THE LIGHTS TO CYCLE THROUGH THREE COLORS WITH A CERTAIN DURATION
+   * @param colors           THE DOUBLE ARRAY COLORS (COLOR 1, COLOR 2 AND COLOR 3), ALL COMPOSED OF INDIVIDUAL RGB DOUBLE ARRAYS
+   * @param durationInMillis THE DURATION OF EACH COLOR
+   */
     public static void colorCycle(double[][] colors, int durationInMillis) {
         int numSteps = colors.length;
         for (int i = 0; i < numSteps; i++) {
@@ -35,7 +43,12 @@ public class Lights {
         }
     }
 
-    //COLOR FLASH
+      /**
+   * SET THE LIGHTS TO FLASH TWO DIFFERENT COLORS WITH A SET DURATION AND DELAY
+   * @param rgbValues1            THE FIRST RGB VALUE TO FLASH
+   * @param rgbValues2            THE SECOND RGB VALUE TO FLASH
+   * @param flashDurationInMillis THE DURATION OF THE FLASH (ALSO THE PERIOD IN BETWEEN FLASHES X2)
+   */
     public static void colorFlash(double[] rgbValues1, double[] rgbValues2, int flashDurationInMillis) {
         makeLightsColors(rgbValues1);
         delay(flashDurationInMillis / 2);
