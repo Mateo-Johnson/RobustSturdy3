@@ -16,6 +16,9 @@ import frc.robot.arm.intake_shooter.Intake_shooter;
 import frc.robot.utils.Constants.DriveConstants;
 
 public class ScoreSpeaker extends Command {
+
+  private final double maxSpeed;
+
     public static final CANSparkMax intake1 = DriveConstants.rightIntake;
     public static final CANSparkMax intake2 = DriveConstants.leftIntake;
     public static final CANSparkMax rightOuttake = DriveConstants.rightOuttake;
@@ -24,8 +27,9 @@ public class ScoreSpeaker extends Command {
 
     CommandXboxController controller =  RobotContainer.primaryDriver;
   /** Creates a new silly. */
-  public ScoreSpeaker() {
+  public ScoreSpeaker(double maxSpeed) {
     // Use addRequirements() here to declare subsystem dependencies.
+    this.maxSpeed = maxSpeed;
   }
 
   // Called when the command is initially scheduled.
@@ -39,8 +43,8 @@ public class ScoreSpeaker extends Command {
   public void execute() {
     SmartDashboard.putNumber("silly", shooterEncoder.getVelocity());
     if (shooterEncoder.getVelocity() >= 17) { //IF THE MOTORS ARE SPINNING FAST ENOUGH 
-      rightOuttake.set(5); //SET UP OUTTAKE MOTOR 1 FOR SHOOTING, RIGHT RUNS TOP, LEFT RUNS BOTTOM
-      wrongOuttake.set(5); //SET UP OUTTAKE MOTOR 2 FOR SHOOTING
+      rightOuttake.set(maxSpeed); //SET UP OUTTAKE MOTOR 1 FOR SHOOTING, RIGHT RUNS TOP, LEFT RUNS BOTTOM
+      wrongOuttake.set(maxSpeed); //SET UP OUTTAKE MOTOR 2 FOR SHOOTING
 
       intake1.set(0.5); //USE INTAKE MOTOR 1 TO FEED INTO OUTTAKE
       intake2.set(-0.5); //USE INTAKE MOTOR 2 TO FEED INTO OUTTAKE
@@ -48,8 +52,8 @@ public class ScoreSpeaker extends Command {
       controller.getHID().setRumble(RumbleType.kBothRumble, 0.5); //RUMBLE THE CONTROLLER WHEN ITS AIMED
        
     } else if (shooterEncoder.getVelocity() <= 17) { //IF THE MOTORS ARE NOT AT THE RIGHT SPEED
-      rightOuttake.set(5); //MAKE OUTTAKE MOTOR 1 GO TO RIGHT SPEED
-      wrongOuttake.set(5); //MAKE OUTTAKE MOTOR 1 GO TO RIGHT SPEED
+      rightOuttake.set(maxSpeed); //MAKE OUTTAKE MOTOR 1 GO TO RIGHT SPEED
+      wrongOuttake.set(maxSpeed); //MAKE OUTTAKE MOTOR 1 GO TO RIGHT SPEED
       //ADD A METHOD MAKE THE BOTTOM LIGHTS RED TO SHOW THAT ITS NOT READY TO SHOOT
     }
   }

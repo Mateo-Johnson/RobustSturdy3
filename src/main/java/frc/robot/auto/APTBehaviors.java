@@ -331,15 +331,15 @@ public class APTBehaviors extends Command {
 
     //IF WE KNOW THE BEST ANGLE FOR WHEN WE'RE CLOSE AND THE BEST FOR WHEN WE'RE FAR AWAY, THEN WE KNOW THE IN-BETWEEN
   public static double calculateAngle(double distance) {
-    //CONSTANTS for the two points
-    double x1 = 0.0; //DISTANCE = 0 PLACEHOLDER
-    double y1 = 0.0; //ARM ANGLE = 0 degrees PLACEHOLDER
+    //CONSTANTS FOR THE TWO POINTS
+    double dist1 = 0.0; //DISTANCE = 0 FEET PLACEHOLDER
+    double angle1 = 0.0; //ARM ANGLE = 0 DEGREES PLACEHOLDER
 
-    double x2 = 10.0; // distance = 10 PLACEHOLDER
-    double y2 = 90.0; // arm angle = 90 degrees PLACEHOLDER
+    double dist2 = 10.0; // DISTANCE = 10 FEET PLACEHOLDER 
+    double angle2 = 90.0; // DISTANCE DISTANCE = 90 DEGREES PLACEHOLDER
 
     //LINEAR INTERPOLATION FORMULA 
-    double armAngle = y1 + ((distance - x1) / (x2 - x1)) * (y2 - y1);
+    double armAngle = angle1 + ((distance - dist1) / (dist2 - dist1)) * (angle2 - angle1);
 
     return armAngle;
   }

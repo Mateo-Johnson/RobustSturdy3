@@ -42,7 +42,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("IntakeRing", new IntakeRing());
     NamedCommands.registerCommand("PurgeRing", new PurgeRing());
     NamedCommands.registerCommand("ScoreAmp", new ScoreAmp());
-    NamedCommands.registerCommand("ScoreSpeaker", new ScoreSpeaker());
+    NamedCommands.registerCommand("ScoreSpeaker", new ScoreSpeaker(5));
     // NamedCommands.registerCommand("Climb", new Climb());
     NamedCommands.registerCommand("SetLightsColor", new SetLightsColor());
 
