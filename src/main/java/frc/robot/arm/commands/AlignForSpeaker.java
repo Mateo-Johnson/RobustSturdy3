@@ -47,10 +47,10 @@ public class AlignForSpeaker extends Command {
   PIDController armMovePID = new PIDController(aMP, aMI, aMD);
 
   NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight"); 
-  double tX = Vision.tX;
-  double tY = Vision.tY;
-  double tA = Vision.tA;
-  boolean tV = Vision.tV;
+  double tX = Vision.a_tX;
+  double tY = Vision.a_tY;
+  double tA = Vision.a_tA;
+  boolean tV = Vision.a_tV;
 
 
   static AbsoluteEncoder armEncoder = Arm.armEncoder;

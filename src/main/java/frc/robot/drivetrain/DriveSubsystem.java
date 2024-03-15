@@ -166,7 +166,7 @@ public class DriveSubsystem extends SubsystemBase {
 
     getHeadingPose2d = Rotation2d.fromDegrees(getHeading());
 
-    double lmfaoooooo = Vision.tX;
+    double lmfaoooooo = Vision.a_tX;
     SmartDashboard.putNumber("blood alcohol content", lmfaoooooo);
 
     swerveDrivePoseEstimator.update(getHeadingPose2d, getModulePositions()); //THIS ONE UPDATES THE ESTIMATED POSE OF SWERVE

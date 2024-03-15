@@ -8,10 +8,10 @@ public class AutoTurretShoot {
 
     Point detectTarget() {
         //CHECK IF THE LIMELIGHT HAS A TARGET
-        if (Vision.tV == true ) {
+        if (Vision.a_tV == true ) {
             // Get target coordinates (x, y) in screen space
-            double targetX = Vision.tX;
-            double targetY = Vision.tY;
+            double targetX = Vision.a_tX;
+            double targetY = Vision.a_tY;
 
             // Return target coordinates
             return new Point(targetX, targetY);

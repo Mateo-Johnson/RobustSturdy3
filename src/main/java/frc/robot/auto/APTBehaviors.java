@@ -76,10 +76,10 @@ public class APTBehaviors extends Command {
   @Override
   public void execute() {
 
-    targetID = (int) Vision.targetID; //SET TARGET ID EQUAL TO THE INT VALUE FROM VISION.JAVA BUT CAST IT TO INT
-    double tX = Vision.tX; //THE X OFFSET OF THE TARGET
-    double tY = Vision.tY; //THE Y OFFSET OF THE TARGET
-    boolean tV = Vision.tV; //WHETHER THE LIMELIGHT HAS A TARGET OR NOT
+    targetID = (int) Vision.a_targetID; //SET TARGET ID EQUAL TO THE INT VALUE FROM VISION.JAVA BUT CAST IT TO INT
+    double tX = Vision.a_tX; //THE X OFFSET OF THE TARGET
+    double tY = Vision.a_tY; //THE Y OFFSET OF THE TARGET
+    boolean tV = Vision.a_tV; //WHETHER THE LIMELIGHT HAS A TARGET OR NOT
 
 
 
