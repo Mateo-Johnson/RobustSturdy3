@@ -4,21 +4,37 @@
 
 package frc.robot.arm.commands.setpoints;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.arm.Arm;
 
 public class Intake extends Command {
-  /** Creates a new Intake. */
+  /** Creates a new SpecifiedAngle. */
+  double currentArmPos;
+  double targetArmPos;
+  double armValue;
+
+  PIDController armPID = Arm.armPID;
+
   public Intake() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    currentArmPos = Arm.degrees;
+    targetArmPos = 0;
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    currentArmPos = Arm.degrees;
+
+    armValue = armPID.calculate(currentArmPos, targetArmPos);
+    Arm.rotateVector(armValue);
+  }
 
   // Called once the command ends or is interrupted.
   @Override
