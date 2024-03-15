@@ -117,6 +117,8 @@ public class DriveSubsystem extends SubsystemBase {
 
   //CREATES A NEW DRIVESUBSYSTEM.
   public DriveSubsystem() {
+
+    getHeadingPose2d = Rotation2d.fromDegrees(getHeading());
     
     swerveDrivePoseEstimator = new SwerveDrivePoseEstimator(
       DriveConstants.DriveKinematics, 
