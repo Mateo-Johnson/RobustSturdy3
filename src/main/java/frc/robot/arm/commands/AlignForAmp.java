@@ -4,6 +4,35 @@
 
 // JUST AS A NOTE, THE ARM RESTS AT ABOUT 0.422 ABS ENCODER READING
 
+
+
+
+
+
+
+
+//DEPRECATED//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 package frc.robot.arm.commands;
 
 import com.revrobotics.AbsoluteEncoder;
