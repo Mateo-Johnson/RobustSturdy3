@@ -11,6 +11,7 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.arm.Arm;
 import frc.robot.arm.commands.AlignForAmp;
 import frc.robot.arm.commands.MoveArm;
 import frc.robot.arm.commands.MoveArmBackwards;
@@ -25,12 +26,13 @@ import frc.robot.drivetrain.DriveSubsystem;
 import frc.robot.lights.commands.SetLightsColor;
 import frc.robot.utils.Constants.ControllerConstants;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 
 public class RobotContainer {
   //SUBSYSTEMS
   private final DriveSubsystem drivetrain = new DriveSubsystem();
-  
+  private final Arm arm = new Arm();
 
   //DRIVER CONTROLLERS
   public static CommandXboxController primaryDriver = new CommandXboxController(0);
@@ -40,6 +42,9 @@ public class RobotContainer {
   private SendableChooser<Command> autoChooser;
 
   public RobotContainer() {
+
+    CommandScheduler.getInstance().registerSubsystem(arm);
+    CommandScheduler.getInstance().registerSubsystem(drivetrain);
 
     NamedCommands.registerCommand("IntakeRing", new IntakeRing());
     NamedCommands.registerCommand("ScoreAmp", new ScoreAmp());
