@@ -8,8 +8,8 @@ import frc.robot.utils.LimelightLib;
 
 public class Vision extends SubsystemBase {
 
-public static String armLimelightName = "armLimelight";
-public static String frontLimelightName = "frontLimelight";
+public static String armLimelightName = "arm";
+public static String frontLimelightName = "front";
 
 //OK SO GUYS IF SOMETHING IS MARKED WITH AN A_ THAT MEANS THAT ITS FROM THE ARM LIMELIGHT
 //IF ITS FROM THE INTAKE/FROM LIMELIGHT IT IS MARKED WITH A F_
