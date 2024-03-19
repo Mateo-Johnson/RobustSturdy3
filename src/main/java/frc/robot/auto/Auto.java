@@ -35,6 +35,6 @@ public class Auto {
     //CLAMPS IT BETWEEN 0 AND 1 AS A PERCENT
     double t = (distanceToTarget - lowerBound[0]) / (upperBound[0] - lowerBound[0]);
 
-    return MathUtil.interpolate(lowerBound[1], upperBound[1], t); //IF THIS SHIT WORKS BENNY OWES ME A COFFEE
+    return MathUtil.clamp(MathUtil.interpolate(lowerBound[1], upperBound[1], t), 0, 90);
   }
 }
