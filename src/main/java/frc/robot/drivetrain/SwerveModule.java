@@ -51,6 +51,7 @@ public class SwerveModule {
     //FACTORY RESET SO WE GET THE SPARKMAXES TO A KNOWN STATE BEFORE CONFIGURING THEM
     drivingSparkMax.restoreFactoryDefaults();
     turningSparkMax.restoreFactoryDefaults();
+    drivingSparkMax.setInverted(true); 
 
 
     //SETUP ENCODERS AND PID CONTROLLERS FOR THE DRIVING AND TURNING SPARKS MAX
