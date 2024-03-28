@@ -7,7 +7,7 @@ package frc.robot.arm.intake_shooter.intake_commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.arm.intake_shooter.Intake_shooter;
 import frc.robot.arm.intake_shooter.shooter_commands.ScoreSpeaker;
-import frc.robot.drivetrain.DriveSubsystem;
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import com.revrobotics.ColorSensorV3;
@@ -17,7 +17,8 @@ import com.revrobotics.ColorMatch;
 
 public class IntakeRing extends Command {
   /** Creates a new silly. */
-  private final ColorSensorV3 colorSensor = DriveSubsystem.colorSensor;
+  public static final I2C.Port i2cPort = I2C.Port.kOnboard;
+  public static final ColorSensorV3 colorSensor = new ColorSensorV3(i2cPort);
   private final ColorMatch colorMatcher = new ColorMatch();
   private final Color BlueTarget = new Color(0.143, 0.427, 0.429); //CREATES A COLOR
   private final Color GreenTarget = new Color(0.197, 0.561, 0.240); //CREATES A COLOR
@@ -46,44 +47,44 @@ public class IntakeRing extends Command {
   @Override
   public void execute() {
 
-    // Color detectedColor = colorSensor.getColor();
-    // String colorString;
-    // ColorMatchResult match = colorMatcher.matchClosestColor(detectedColor);
+    Color detectedColor = colorSensor.getColor();
+    String colorString;
+    ColorMatchResult match = colorMatcher.matchClosestColor(detectedColor);
 
-    // if (match.color == BlueTarget) {
-    //   colorString = "blue";
-    //   ringInIntake(false); //FLAG TO MARK WHEN THERE ISN'T A RING IN INTAKE
+    if (match.color == BlueTarget) {
+      colorString = "blue";
+      ringInIntake(false); //FLAG TO MARK WHEN THERE ISN'T A RING IN INTAKE
 
-    // } else if (match.color == RedTarget) {
-    //   colorString = "red";
-    //   Intake_shooter.stopWheels();
-    //   ringInIntake(true); //FLAG TO MARK WHEN THERE IS A RING IN INTAKE - 
+    } else if (match.color == RedTarget) {
+      colorString = "red";
+      Intake_shooter.stopWheels();
+      ringInIntake(true); //FLAG TO MARK WHEN THERE IS A RING IN INTAKE - 
 
-    // } else if (match.color == GreenTarget) {
-    //   colorString = "green";
-    //   ringInIntake (false); //FLAG TO MARK WHEN THERE ISN'T A RING IN INTAKE
+    } else if (match.color == GreenTarget) {
+      colorString = "green";
+      ringInIntake (false); //FLAG TO MARK WHEN THERE ISN'T A RING IN INTAKE
 
-    // } else if (match.color == YellowTarget) {
-    //   colorString = "yellow";
-    //   Intake_shooter.runIntake(0.4);
-    //   ringInIntake(false); //FLAG TO MARK WHEN THERE ISN'T A RING IN INTAKE 
+    } else if (match.color == YellowTarget) {
+      colorString = "yellow";
+      Intake_shooter.runIntake(0.4);
+      ringInIntake(false); //FLAG TO MARK WHEN THERE ISN'T A RING IN INTAKE 
 
-    // } else if (match.color == OrangeTarget){
-    //   colorString = "orange";
-    //   Intake_shooter.stopWheels();
-    //   ringInIntake(true); //FLAG TO MARK WHEN THERE IS A RING IN INTAKE - 
+    } else if (match.color == OrangeTarget){
+      colorString = "orange";
+      Intake_shooter.stopWheels();
+      ringInIntake(true); //FLAG TO MARK WHEN THERE IS A RING IN INTAKE - 
 
-    // } else {
-    //   colorString = "we can't tell";
-    //   Intake_shooter.runIntake(0.4);
-    //   ringInIntake(false); //FLAG TO MARK WHEN THERE ISN'T A RING IN INTAKE
-    // }
+    } else {
+      colorString = "we can't tell";
+      Intake_shooter.runIntake(0.4);
+      ringInIntake(false); //FLAG TO MARK WHEN THERE ISN'T A RING IN INTAKE
+    }
 
-    // SmartDashboard.putNumber("red value", detectedColor.red);
-    // SmartDashboard.putNumber("green value", detectedColor.green);
-    // SmartDashboard.putNumber("blue value", detectedColor.blue);
-    // SmartDashboard.putNumber("confidence", match.confidence);
-    // SmartDashboard.putString("detected color", colorString);
+    SmartDashboard.putNumber("red value", detectedColor.red);
+    SmartDashboard.putNumber("green value", detectedColor.green);
+    SmartDashboard.putNumber("blue value", detectedColor.blue);
+    SmartDashboard.putNumber("confidence", match.confidence);
+    SmartDashboard.putString("detected color", colorString);
     ScoreSpeaker.intake1.set(-0.5);
     ScoreSpeaker.intake2.set(-0.5);
 

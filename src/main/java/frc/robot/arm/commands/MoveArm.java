@@ -4,10 +4,7 @@
 
 package frc.robot.arm.commands;
 
-import com.revrobotics.AbsoluteEncoder;
-
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.arm.Arm;
 
