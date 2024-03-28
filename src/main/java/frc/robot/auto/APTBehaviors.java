@@ -5,7 +5,6 @@
 package frc.robot.auto;
 
 import com.revrobotics.AbsoluteEncoder;
-
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
@@ -135,7 +134,7 @@ public class APTBehaviors extends Command {
             tPID = turningPID.calculate(tX, 0);
 
             distance = Vision.calculateDistance(tY, armDegrees, targetID, "speaker");
-            targetAngle = calculateAngle(distance);
+            targetAngle = Auto.calculateAngle(distance);
             amPID = armMovePID.calculate(armDegrees, targetAngle);
 
             driveSubsystem.drive(0, 0, tPID, false, true);
@@ -147,7 +146,7 @@ public class APTBehaviors extends Command {
             tPID = turningPID.calculate(tX, 5);
 
             distance = Vision.calculateDistance(tY, armDegrees, targetID, "speaker");
-            targetAngle = calculateAngle(distance);
+            targetAngle = Auto.calculateAngle(distance);
             amPID = armMovePID.calculate(armDegrees, targetAngle);
 
             driveSubsystem.drive(0, 0, tPID, false, true);
@@ -214,7 +213,7 @@ public class APTBehaviors extends Command {
             tPID = turningPID.calculate(tX, 5);
 
             distance = Vision.calculateDistance(tY, armDegrees, targetID, "speaker");
-            targetAngle = calculateAngle(distance);
+            targetAngle = Auto.calculateAngle(distance);
             amPID = armMovePID.calculate(armDegrees, targetAngle);
 
             driveSubsystem.drive(0, 0, tPID, false, true);
@@ -226,7 +225,7 @@ public class APTBehaviors extends Command {
             tPID = turningPID.calculate(tX, 0);
 
             distance = Vision.calculateDistance(tY, armDegrees, targetID, "speaker");
-            targetAngle = calculateAngle(distance);
+            targetAngle = Auto.calculateAngle(distance);
             amPID = armMovePID.calculate(armDegrees, targetAngle);
 
             driveSubsystem.drive(0, 0, tPID, false, true);
@@ -330,20 +329,6 @@ public class APTBehaviors extends Command {
     }
   }
 
-    //IF WE KNOW THE BEST ANGLE FOR WHEN WE'RE CLOSE AND THE BEST FOR WHEN WE'RE FAR AWAY, THEN WE KNOW THE IN-BETWEEN
-  public static double calculateAngle(double distance) {
-    //CONSTANTS FOR THE TWO POINTS
-    double dist1 = 0.0; //DISTANCE = 0 FEET PLACEHOLDER
-    double angle1 = 0.0; //ARM ANGLE = 0 DEGREES PLACEHOLDER
-
-    double dist2 = 10.0; // DISTANCE = 10 FEET PLACEHOLDER 
-    double angle2 = 90.0; // DISTANCE DISTANCE = 90 DEGREES PLACEHOLDER
-
-    //LINEAR INTERPOLATION FORMULA 
-    double armAngle = angle1 + ((distance - dist1) / (dist2 - dist1)) * (angle2 - angle1);
-
-    return armAngle;
-  }
 
 
   // Called once the command ends or is interrupted.
