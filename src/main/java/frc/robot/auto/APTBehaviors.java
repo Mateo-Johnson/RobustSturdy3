@@ -9,6 +9,7 @@ import com.revrobotics.AbsoluteEncoder;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.arm.Arm;
 import frc.robot.climber.commands.Climb;
@@ -35,7 +36,7 @@ public class APTBehaviors extends Command {
   private static final int cyclesPerRotation = 2048; //HOW MANY CYCLES PER ROTATION PER ROTATION OF THE ENCODER
   private static final int drivenGearTeeth = 60; //HOW MANY TEETH ON THE SHAFT GEAR
   private static final int driveGearTeeth = 15; //HOW MANY TEETH ON THE MOTOR GEAR
-  public static double armEncoderReading =  (armEncoder.getPosition() - 0.42638435959816) * -1; //ZERO THE ARM ENCODER READING 
+  public static double armEncoderReading =  (armEncoder.getPosition());
   public static double gearRatio = (double) drivenGearTeeth / driveGearTeeth; //CALCULATE THE GEAR RATION
   public static int encoderCyclesPerArmRevolution = (int) (cyclesPerRotation * gearRatio); //FIGURE OUT THE ENCODER CYCLES PER REVOLUTION OF THE ARM
   public static double degreesPerEncoderCycle = 360.0 / encoderCyclesPerArmRevolution; //CALCULATE HOW MANY DEGREES ARE IN A ARM REVOLUTION

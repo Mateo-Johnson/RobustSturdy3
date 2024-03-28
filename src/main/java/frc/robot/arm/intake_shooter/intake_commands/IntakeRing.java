@@ -6,6 +6,7 @@ package frc.robot.arm.intake_shooter.intake_commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.arm.intake_shooter.Intake_shooter;
+import frc.robot.arm.intake_shooter.shooter_commands.ScoreSpeaker;
 import frc.robot.drivetrain.DriveSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
@@ -45,52 +46,57 @@ public class IntakeRing extends Command {
   @Override
   public void execute() {
 
-    Color detectedColor = colorSensor.getColor();
-    String colorString;
-    ColorMatchResult match = colorMatcher.matchClosestColor(detectedColor);
+    // Color detectedColor = colorSensor.getColor();
+    // String colorString;
+    // ColorMatchResult match = colorMatcher.matchClosestColor(detectedColor);
 
-    if (match.color == BlueTarget) {
-      colorString = "blue";
-      ringInIntake(false); //FLAG TO MARK WHEN THERE ISN'T A RING IN INTAKE
+    // if (match.color == BlueTarget) {
+    //   colorString = "blue";
+    //   ringInIntake(false); //FLAG TO MARK WHEN THERE ISN'T A RING IN INTAKE
 
-    } else if (match.color == RedTarget) {
-      colorString = "red";
-      Intake_shooter.stopWheels();
-      ringInIntake(true); //FLAG TO MARK WHEN THERE IS A RING IN INTAKE - 
+    // } else if (match.color == RedTarget) {
+    //   colorString = "red";
+    //   Intake_shooter.stopWheels();
+    //   ringInIntake(true); //FLAG TO MARK WHEN THERE IS A RING IN INTAKE - 
 
-    } else if (match.color == GreenTarget) {
-      colorString = "green";
-      ringInIntake (false); //FLAG TO MARK WHEN THERE ISN'T A RING IN INTAKE
+    // } else if (match.color == GreenTarget) {
+    //   colorString = "green";
+    //   ringInIntake (false); //FLAG TO MARK WHEN THERE ISN'T A RING IN INTAKE
 
-    } else if (match.color == YellowTarget) {
-      colorString = "yellow";
-      Intake_shooter.runIntake(0.4);
-      ringInIntake(false); //FLAG TO MARK WHEN THERE ISN'T A RING IN INTAKE 
+    // } else if (match.color == YellowTarget) {
+    //   colorString = "yellow";
+    //   Intake_shooter.runIntake(0.4);
+    //   ringInIntake(false); //FLAG TO MARK WHEN THERE ISN'T A RING IN INTAKE 
 
-    } else if (match.color == OrangeTarget){
-      colorString = "orange";
-      Intake_shooter.stopWheels();
-      ringInIntake(true); //FLAG TO MARK WHEN THERE IS A RING IN INTAKE - 
+    // } else if (match.color == OrangeTarget){
+    //   colorString = "orange";
+    //   Intake_shooter.stopWheels();
+    //   ringInIntake(true); //FLAG TO MARK WHEN THERE IS A RING IN INTAKE - 
 
-    } else {
-      colorString = "we can't tell";
-      Intake_shooter.runIntake(0.4);
-      ringInIntake(false); //FLAG TO MARK WHEN THERE ISN'T A RING IN INTAKE
-    }
+    // } else {
+    //   colorString = "we can't tell";
+    //   Intake_shooter.runIntake(0.4);
+    //   ringInIntake(false); //FLAG TO MARK WHEN THERE ISN'T A RING IN INTAKE
+    // }
 
-    SmartDashboard.putNumber("red value", detectedColor.red);
-    SmartDashboard.putNumber("green value", detectedColor.green);
-    SmartDashboard.putNumber("blue value", detectedColor.blue);
-    SmartDashboard.putNumber("confidence", match.confidence);
-    SmartDashboard.putString("detected color", colorString);
+    // SmartDashboard.putNumber("red value", detectedColor.red);
+    // SmartDashboard.putNumber("green value", detectedColor.green);
+    // SmartDashboard.putNumber("blue value", detectedColor.blue);
+    // SmartDashboard.putNumber("confidence", match.confidence);
+    // SmartDashboard.putString("detected color", colorString);
+    ScoreSpeaker.intake1.set(-0.5);
+    ScoreSpeaker.intake2.set(-0.5);
 
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Intake_shooter.stopWheels();
-    hasRing = false;
+    // Intake_shooter.stopWheels();
+    // hasRing = false;
+    ScoreSpeaker.intake1.set(0);
+    ScoreSpeaker.intake2.set(0);
+
   }
 
 

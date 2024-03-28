@@ -6,11 +6,16 @@ package frc.robot.arm.commands;
 
 import com.revrobotics.AbsoluteEncoder;
 
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.arm.Arm;
 
 public class MoveArm extends Command {
   /** Creates a new MoveArm. */
+
+  PIDController armPID = new PIDController(0.015, 0.00, 0.00);
+
   public MoveArm() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -23,25 +28,9 @@ public class MoveArm extends Command {
 
   @Override
   public void execute() {
+    double move = armPID.calculate(Arm.degrees, 35);
 
-    final int cyclesPerRotation = 2048;
-    final int drivenGearTeeth = 60;
-    final int driveGearTeeth = 15;
-
-    AbsoluteEncoder armEncoder = Arm.armEncoder;
-    double armEncoderReading =  (armEncoder.getPosition() - 0.42638435959816) * -1;
-    double gearRatio = (double) drivenGearTeeth / driveGearTeeth;
-    int encoderCyclesPerArmRevolution = (int) (cyclesPerRotation * gearRatio);
-    double degreesPerEncoderCycle = 360.0 / encoderCyclesPerArmRevolution; // Corrected line
-    double degrees = armEncoderReading * encoderCyclesPerArmRevolution * degreesPerEncoderCycle;
-
-    if (degrees <= 90) {
-      Arm.rotateVector(-0.3);
-    } else if (degrees >= 60) {
-      Arm.rotateVector(-0.1);
-    } else if (degrees >= 90) {
-      Arm.rotateVector(0);
-    }
+    Arm.rotateVector(-move);
   }
 
   // Called once the command ends or is interrupted.

@@ -31,6 +31,7 @@ import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.arm.Arm;
+import frc.robot.arm.commands.MoveArm;
 import frc.robot.utils.SwerveUtils;
 import frc.robot.vision.Vision;
 import frc.robot.utils.Constants.DriveConstants;
@@ -165,6 +166,8 @@ public class DriveSubsystem extends SubsystemBase {
   public void periodic() {
 
     getHeadingPose2d = Rotation2d.fromDegrees(getHeading());
+
+    
 
     double lmfaoooooo = Vision.a_tX;
     SmartDashboard.putNumber("blood alcohol content", lmfaoooooo);

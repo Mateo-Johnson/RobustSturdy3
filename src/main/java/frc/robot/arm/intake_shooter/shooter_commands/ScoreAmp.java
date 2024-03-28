@@ -15,8 +15,8 @@ import frc.robot.utils.Constants.DriveConstants;
 public class ScoreAmp extends Command {
     public static final CANSparkMax intake1 = DriveConstants.rightIntake;
     public static final CANSparkMax intake2 = DriveConstants.leftIntake;
-    public static final CANSparkMax rightOuttake = DriveConstants.rightOuttake;
-    public static final CANSparkMax wrongOuttake = DriveConstants.leftOuttake;
+    public static final CANSparkMax rightOuttake = ScoreSpeaker.rightOuttake;
+    public static final CANSparkMax wrongOuttake = ScoreSpeaker.leftOuttake;
     private static RelativeEncoder shooterEncoder = rightOuttake.getEncoder();
   /** Creates a new silly. */
   public ScoreAmp() {

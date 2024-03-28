@@ -7,17 +7,14 @@ package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.arm.Arm;
-import frc.robot.arm.commands.AlignForAmp;
 import frc.robot.arm.commands.MoveArm;
-import frc.robot.arm.commands.MoveArmBackwards;
-import frc.robot.arm.commands.setpoints.SpecifiedAngle;
 import frc.robot.arm.intake_shooter.intake_commands.IntakeRing;
-import frc.robot.arm.intake_shooter.intake_commands.PurgeRing;
 import frc.robot.arm.intake_shooter.shooter_commands.ScoreAmp;
 import frc.robot.arm.intake_shooter.shooter_commands.ScoreSpeaker;
 import frc.robot.auto.APTBehaviors;
@@ -26,7 +23,6 @@ import frc.robot.drivetrain.DriveSubsystem;
 import frc.robot.lights.commands.SetLightsColor;
 import frc.robot.utils.Constants.ControllerConstants;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 
 public class RobotContainer {
@@ -38,13 +34,14 @@ public class RobotContainer {
   public static CommandXboxController primaryDriver = new CommandXboxController(0);
   public static CommandXboxController secondaryDriver = new CommandXboxController(1);
 
+  
+
   //SENDABLECHOOSER FOR AUTO
   private SendableChooser<Command> autoChooser;
 
   public RobotContainer() {
 
-    CommandScheduler.getInstance().registerSubsystem(arm);
-    CommandScheduler.getInstance().registerSubsystem(drivetrain);
+
 
     NamedCommands.registerCommand("IntakeRing", new IntakeRing());
     NamedCommands.registerCommand("ScoreAmp", new ScoreAmp());
@@ -75,16 +72,10 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     //DEFINE ALL OF THE BUTTON BINDINGS HERE PLEASE AND THANKS
-    primaryDriver.rightBumper().whileTrue(new RunCommand(() -> drivetrain.setWheelsX(), drivetrain));
-    // primaryDriver.a().and(primaryDriver.b()).whileFalse(new PIDARM());
     primaryDriver.a().whileTrue(new MoveArm());
-    primaryDriver.y().whileTrue(new AlignForAmp(drivetrain));
-    primaryDriver.b().whileTrue(new MoveArmBackwards());
-    primaryDriver.rightTrigger().whileTrue(new IntakeRing());
-    // primaryDriver.rightBumper().whileTrue(new Climb());
-    primaryDriver.leftBumper().whileTrue(new PurgeRing());
-    primaryDriver.povLeft().whileTrue(new SpecifiedAngle(45));
-    //primaryDriver.x().whileTrue(new two_silly(drivetrain));    
+    primaryDriver.rightTrigger().whileTrue(new ScoreSpeaker());
+    primaryDriver.leftTrigger().whileTrue(new IntakeRing());
+
 
 }
     

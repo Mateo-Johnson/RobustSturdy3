@@ -78,32 +78,16 @@ public final class Constants {
 
 
     //ANGULAR OFFSETS OF THE MODULES RELATIVES TO THE CHASSIS IN RADIANS
-    public static final double frontLeftChassisAngularOffset = 2.33; //GOOD OFFSET
-    public static final double frontRightChassisAngularOffset = 4.99; //GOOD OFFSET
-    public static final double backLeftChassisAngularOffset = 0.71; //GOOD OFFSET
-    public static final double backRightChassisAngularOffset = 2.65; //GOOD OFFSET
+    public static final double frontLeftChassisAngularOffset = 0; //GOOD OFFSET
+    public static final double frontRightChassisAngularOffset = 0; //GOOD OFFSET
+    public static final double backLeftChassisAngularOffset = 0; //GOOD OFFSET
+    public static final double backRightChassisAngularOffset = 0; //GOOD OFFSET
  
 
 
     //---------------------DECLARATIONS FOR PHYSICAL PLACEMENTS/WIRINGS OF THINGS-----------------------------//
     /*EYO THIS IS THE KEY FOR THE MOTOR SPARKMAXES IF YOU NEED THEM THEY SHOULD ALL BE RIGHT HERE
      * MOTORS
-     * 2 - REAR RIGHT SWERVE TURNING (NEEDS ENCODER)
-     * 3 - REAR RIGHT SWERVE DRIVING
-     * 4 - REAR LEFT SWERVE TURNING (NEEDS ENCODER)
-     * 5 - REAR LEFT SWERVE DRIVING
-     * 6 - FRONT RIGHT SWERVE TURNING (NEEDS ENCODER)
-     * 7 - FRONT RIGHT SWERVE DRIVING
-     * 8 - FRONT LEFT SWERVE DRIVING
-     * 9 - FRONT LEFT SWERVE TURNING (NEEDS ENCODER)
-     * 
-     * 11 - LEFT ARM ROTATION MOTOR 
-     * 12 - RIGHT ARM ROTATION MOTOR
-     * 
-     * 21 - LEFT ARM INTAKE MOTOR
-     * 22 - RIGHT ARM INTAKE MOTOR
-     * 23 - LEFT ARM OUTTAKE MOTOR
-     * 24 - RIGHT ARM OUTTAKE MOTOR
     */
     //FRONT LEFT MODULE
     public static final int frontLeftDrivingCanId = 9;
@@ -132,13 +116,11 @@ public final class Constants {
 
     public static CANSparkMax rightIntake = new CANSparkMax(DriveConstants.rightIntakeCanId, MotorType.kBrushless);    
     public static CANSparkMax leftIntake = new CANSparkMax(DriveConstants.leftIntakeCanId, MotorType.kBrushless); 
-    public static CANSparkMax rightOuttake = new CANSparkMax(DriveConstants.rightOuttakeCanId, MotorType.kBrushless);    
-    public static CANSparkMax leftOuttake = new CANSparkMax(DriveConstants.leftOuttakeCanId, MotorType.kBrushless); 
     public static CANSparkMax leftArm = new CANSparkMax(DriveConstants.leftArmMotorCanId, MotorType.kBrushless);    
     public static CANSparkMax rightArm = new CANSparkMax(DriveConstants.rightArmMotorCanId, MotorType.kBrushless); 
 
 
-    public static final AbsoluteEncoder armEncoder = rightArm.getAbsoluteEncoder(Type.kDutyCycle);
+    public static final AbsoluteEncoder armEncoder = leftArm.getAbsoluteEncoder(Type.kDutyCycle);
 
 
     
@@ -191,17 +173,17 @@ public final class Constants {
     public static final double turningEncoderPositionPIDMaxInput = turningEncoderPositionFactor; //RADIANS
 
 
-    public static final double drivingP = 0.8;
-    public static final double drivingI = 0.070568344;
+    public static final double drivingP = 0.04;
+    public static final double drivingI = 0.0;
     public static final double drivingD = 0.0;
     public static final double drivingFF = 1 / driveWheelFreeSpeedRps;
     public static final double drivingMinOutput = -1;
     public static final double drivingMaxOutput = 1;
 
 
-    public static final double turningP = 0.01145;
-    public static final double turningI = 0.0000176;
-    public static final double turningD = 0.00098;
+    public static final double turningP = 1;
+    public static final double turningI = 0.0;
+    public static final double turningD = 0.0;
     public static final double turningFF = 0;
     public static final double turningMinOutput = -1;
     public static final double turningMaxOutput = 1;
@@ -224,9 +206,8 @@ public final class Constants {
   
   public static final class AutoConstants {
     public static final double maxSpeedMetersPerSecond = 3;
-    public static final double maxAccelerationMetersPerSecondSquared = 3;
+    public static final double maxAngularSpeedRadiansPerSecondSquared = 3;
     public static final double maxAngularSpeedRadiansPerSecond = Math.PI;
-    public static final double maxAngularSpeedRadiansPerSecondSquared = Math.PI;
 
 
     public static final double PXController = 1;

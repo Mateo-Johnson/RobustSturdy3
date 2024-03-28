@@ -1,5 +1,6 @@
 package frc.robot.arm.intake_shooter;
 
+import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 
@@ -10,8 +11,8 @@ public class Intake_shooter {
       //INTAKE
     public static final CANSparkMax intake1 = DriveConstants.rightIntake;
     public static final CANSparkMax intake2 = DriveConstants.leftIntake;
-    public static final CANSparkMax rightOuttake = DriveConstants.rightOuttake;
-    public static final CANSparkMax wrongOuttake = DriveConstants.leftOuttake;
+    public static CANSparkMax wrongOuttake = new CANSparkMax(DriveConstants.leftOuttakeCanId, MotorType.kBrushless); 
+    public static CANSparkMax rightOuttake = new CANSparkMax(DriveConstants.leftOuttakeCanId, MotorType.kBrushless); 
     private static RelativeEncoder shooterEncoder = rightOuttake.getEncoder();
 
   
