@@ -12,7 +12,6 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import frc.robot.arm.Arm;
 import frc.robot.arm.commands.MoveArm;
 import frc.robot.arm.intake_shooter.intake_commands.IntakeRing;
 import frc.robot.arm.intake_shooter.shooter_commands.ScoreAmp;
@@ -28,7 +27,6 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 public class RobotContainer {
   //SUBSYSTEMS
   private final DriveSubsystem drivetrain = new DriveSubsystem();
-  private final Arm arm = new Arm();
 
   //DRIVER CONTROLLERS
   public static CommandXboxController primaryDriver = new CommandXboxController(0);

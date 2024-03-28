@@ -11,7 +11,6 @@ import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
 import com.pathplanner.lib.util.PIDConstants;
 import com.pathplanner.lib.util.ReplanningConfig;
 import com.revrobotics.AbsoluteEncoder;
-import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -27,11 +26,10 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.util.WPIUtilJNI;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.arm.Arm;
-import frc.robot.arm.commands.MoveArm;
+
 import frc.robot.utils.SwerveUtils;
 import frc.robot.vision.Vision;
 import frc.robot.utils.Constants.DriveConstants;
@@ -74,8 +72,6 @@ public class DriveSubsystem extends SubsystemBase {
 
   //GYRO THIS IS WHERE THE GYRO GOES (CURRENTLY THIS IS SAYING THAT IT IS A NAVX MOUNTED TO THE TOP PART OF THE RIO)
   public static final AHRS gyro = new AHRS(SPI.Port.kMXP);
-  public static final I2C.Port i2cPort = I2C.Port.kMXP;
-  public static final ColorSensorV3 colorSensor = new ColorSensorV3(i2cPort);
 
 
   //I DON'T EVEN KNOW WHAT SLEW RATE IS BUT THESE CONTROL SLEW RATE AND THE DOCS TOLD ME TO (LATERAL MOVEMENT MAYBE?)
@@ -169,8 +165,8 @@ public class DriveSubsystem extends SubsystemBase {
 
     
 
-    double lmfaoooooo = Vision.a_tX;
-    SmartDashboard.putNumber("blood alcohol content", lmfaoooooo);
+    double vTX = Vision.a_tX;
+    SmartDashboard.putNumber("blood alcohol content", vTX);
 
     swerveDrivePoseEstimator.update(getHeadingPose2d, getModulePositions()); //THIS ONE UPDATES THE ESTIMATED POSE OF SWERVE
 

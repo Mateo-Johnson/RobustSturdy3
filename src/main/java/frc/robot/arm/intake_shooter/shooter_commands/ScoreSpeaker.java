@@ -5,19 +5,12 @@
 package frc.robot.arm.intake_shooter.shooter_commands;
 
 import com.revrobotics.CANSparkLowLevel.MotorType;
-import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
-
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import frc.robot.RobotContainer;
-import frc.robot.arm.Arm;
-import frc.robot.arm.intake_shooter.Intake_shooter;
 import frc.robot.utils.Constants.DriveConstants;
-import frc.robot.vision.Vision;
+
 
 public class ScoreSpeaker extends Command {
 
