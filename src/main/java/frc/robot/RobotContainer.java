@@ -77,7 +77,7 @@ public class RobotContainer {
     //DEFINE ALL OF THE BUTTON BINDINGS HERE PLEASE AND THANKS
     secondaryDriver.rightTrigger().whileTrue(new ScoreSpeaker());
     secondaryDriver.leftTrigger().whileTrue(new IntakeRing());
-    secondaryDriver.b().whileTrue(new PurgeRing());
+    secondaryDriver.b().whileTrue(new PurgeRing(0.5));
 
     secondaryDriver.povUp().toggleOnTrue(new SpecifiedAngle(75));
     secondaryDriver.povDown().toggleOnTrue(new Intake());
