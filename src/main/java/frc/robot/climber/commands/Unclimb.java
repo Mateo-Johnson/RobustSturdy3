@@ -1,21 +1,19 @@
 package frc.robot.climber.commands;
 
-import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.arm.Arm;
 
-public class Climb extends Command {
+public class Unclimb extends Command {
   /** Creates a new IntakeRing. */
 
   public static Compressor compressor = new Compressor(PneumaticsModuleType.CTREPCM);
   public static DoubleSolenoid wrongSolenoid;
   public static boolean extended;
-  PIDController armPID = new PIDController(0.015, 0.00, 0.00);
 
-  public Climb() {
+  public Unclimb() {
     // Use addRequirements() here to declare subsystem dependencies.
 
     //BASICS OF SOLENOIDS: BASICALLY, THE COMPRESSOR TAKES IN  AIR AND COMPRESSES IT. THE SOLENOIDS ARE LIKE LITTLE GATES, 
@@ -26,13 +24,13 @@ public class Climb extends Command {
   @Override
   public void initialize() {
     compressor = new Compressor(PneumaticsModuleType.CTREPCM);
-    wrongSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1); 
+    wrongSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    wrongSolenoid.set(DoubleSolenoid.Value.kForward);
+    wrongSolenoid.set(DoubleSolenoid.Value.kReverse);
     Arm.rotateVector(0);
   }
 

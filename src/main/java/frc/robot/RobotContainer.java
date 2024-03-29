@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.arm.Arm;
+import frc.robot.arm.commands.MoveArm;
+import frc.robot.arm.commands.MoveArmBackwards;
 import frc.robot.arm.commands.setpoints.Intake;
 import frc.robot.arm.commands.setpoints.SpecifiedAngle;
 import frc.robot.arm.commands.setpoints.Store;
@@ -22,6 +24,7 @@ import frc.robot.arm.intake_shooter.shooter_commands.ScoreAmp;
 import frc.robot.arm.intake_shooter.shooter_commands.ScoreSpeaker;
 import frc.robot.auto.APTBehaviors;
 import frc.robot.climber.commands.Climb;
+import frc.robot.climber.commands.Unclimb;
 import frc.robot.drivetrain.DriveSubsystem;
 import frc.robot.lights.commands.SetLightsColor;
 import frc.robot.utils.Constants.ControllerConstants;
@@ -45,8 +48,6 @@ public class RobotContainer {
   private SendableChooser<Command> autoChooser;
 
   public RobotContainer() {
-
-
 
     NamedCommands.registerCommand("IntakeRing", new IntakeRing());
     NamedCommands.registerCommand("ScoreAmp", new ScoreAmp());
@@ -77,18 +78,26 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     //DEFINE ALL OF THE BUTTON BINDINGS HERE PLEASE AND THANKS
+
+    //SHOOTING AND INTAKING
     secondaryDriver.rightTrigger().whileTrue(new ScoreSpeaker());
     secondaryDriver.leftTrigger().whileTrue(new IntakeRing());
-    secondaryDriver.b().whileTrue(new PurgeRing(0.5));
+    secondaryDriver.leftBumper().whileTrue(new PurgeRing(0.5));
 
+    //ARM PRESETS
     secondaryDriver.povUp().toggleOnTrue(new SpecifiedAngle(75));
     secondaryDriver.povDown().toggleOnTrue(new Intake());
     secondaryDriver.povRight().toggleOnTrue(new Store());
-
     //THE BIG LONG COMMAND FOR KEEPING THE ARM SET WHEN WE AREN'T PRESSING ANYTHING
     secondaryDriver.povUp().and(secondaryDriver.povDown().and(secondaryDriver.povRight())).whileFalse(new SpecifiedAngle(45));
 
+    //ARM MANUAL MOVEMENT
+    secondaryDriver.a().whileTrue(new MoveArm());
+    secondaryDriver.b().whileTrue(new MoveArmBackwards());
 
+    //CLIMB
+    secondaryDriver.y().whileTrue(new Climb());
+    secondaryDriver.x().whileTrue(new Unclimb());
 
 
 
