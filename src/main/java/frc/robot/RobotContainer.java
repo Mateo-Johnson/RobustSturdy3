@@ -83,6 +83,9 @@ public class RobotContainer {
     secondaryDriver.povDown().toggleOnTrue(new Intake());
     secondaryDriver.povRight().toggleOnTrue(new Store());
 
+    //THE BIG LONG COMMAND FOR KEEPING THE ARM SET WHEN WE AREN'T PRESSING ANYTHING
+    secondaryDriver.povUp().and(secondaryDriver.povDown().and(secondaryDriver.povRight())).whileFalse(new SpecifiedAngle(45));
+
 
 
 
