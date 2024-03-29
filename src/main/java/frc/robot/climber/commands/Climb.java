@@ -21,6 +21,7 @@ public class Climb extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    
     compressor = new Compressor(PneumaticsModuleType.CTREPCM);
     wrongSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1); 
 
