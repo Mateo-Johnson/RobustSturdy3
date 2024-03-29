@@ -4,21 +4,31 @@
 
 package frc.robot.arm.intake_shooter.shooter_commands;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.RelativeEncoder;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.utils.Constants.DriveConstants;
+import frc.robot.arm.Arm;
+import frc.robot.drivetrain.DriveSubsystem;
+import frc.robot.vision.Vision;
 
 public class ScoreAmp extends Command {
-    public static final CANSparkMax intake1 = DriveConstants.rightIntake;
-    public static final CANSparkMax intake2 = DriveConstants.leftIntake;
-    public static final CANSparkMax rightOuttake = ScoreSpeaker.rightOuttake;
-    public static final CANSparkMax wrongOuttake = ScoreSpeaker.leftOuttake;
-    private static RelativeEncoder shooterEncoder = rightOuttake.getEncoder();
+    private final DriveSubsystem driveSubsystem;
+
+    double distance;
+    double tY;
+    double tX;
+    double targetID;
+    double deadzone = 3;
+    double arm;
+    double yPID;
+    double xPID;
+
+    PIDController armPID = new PIDController(0.015, 0.00, 0.00);
+    PIDController lateralPID = new PIDController(0.00, 0.00, 0.00);
   /** Creates a new silly. */
-  public ScoreAmp() {
+  public ScoreAmp(DriveSubsystem driveSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
+    this.driveSubsystem = driveSubsystem;
+    addRequirements(driveSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -30,20 +40,24 @@ public class ScoreAmp extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SmartDashboard.putNumber("velocity", shooterEncoder.getVelocity());
-    if (shooterEncoder.getVelocity() >= 5) { //IF THE MOTORS ARE SPINNING FAST ENOUGH 
-      rightOuttake.set(5); //SET UP OUTTAKE MOTOR 1 FOR SHOOTING, RIGHT RUNS TOP, LEFT RUNS BOTTOM
-      wrongOuttake.set(3.76665); //SET UP OUTTAKE MOTOR 2 FOR SHOOTING
+  tY = Vision.a_tY; //THE Y OFFSET OF THE TARGET
+  tX = Vision.a_tX; //THE Y OFFSET OF THE TARGET
+  targetID = (int) Vision.a_targetID; //SET TARGET ID EQUAL TO THE INT VALUE FROM VISION.JAVA BUT CAST IT TO INT
+  distance = Vision.calculateDistance(tY, Arm.degrees, targetID, "amp");
 
-      intake1.set(0.5); //USE INTAKE MOTOR 1 TO FEED INTO OUTTAKE
-      intake2.set(-0.5); //USE INTAKE MOTOR 2 TO FEED INTO OUTTAKE
-      //ADD A METHOD MAKE THE BOTTOM LIGHTS GREEN TO SHOW THAT ITS READY TO SHOOT
- 
-    } else if (shooterEncoder.getVelocity() <= 5) { //IF THE MOTORS ARE NOT AT THE RIGHT SPEED
-      rightOuttake.set(5); //MAKE OUTTAKE MOTOR 1 GO TO RIGHT SPEED
-      wrongOuttake.set(3.76665); //MAKE OUTTAKE MOTOR 1 GO TO RIGHT SPEED
-      //ADD A METHOD MAKE THE BOTTOM LIGHTS RED TO SHOW THAT ITS NOT READY TO SHOOT
-    }
+  if (tX <= -deadzone && tX >= deadzone) {
+
+    arm = armPID.calculate(Arm.degrees, 90);
+    driveSubsystem.drive(0.1, 0, 0, false, true);
+
+  } else if (tX >= -deadzone || tX <= deadzone) {
+
+    arm = armPID.calculate(Arm.degrees, 12); //PLACEHOLDER VALUE
+    Arm.rotateVector(arm);
+    yPID = lateralPID.calculate(tX, 0);
+    xPID = lateralPID.calculate(distance, 2);
+    driveSubsystem.drive(xPID, yPID, 0, false, true);
+  }
   }
 
   // Called once the command ends or is interrupted.

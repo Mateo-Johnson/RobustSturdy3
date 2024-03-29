@@ -50,7 +50,7 @@ public class RobotContainer {
   public RobotContainer() {
 
     NamedCommands.registerCommand("IntakeRing", new IntakeRing());
-    NamedCommands.registerCommand("ScoreAmp", new ScoreAmp());
+    NamedCommands.registerCommand("ScoreAmp", new ScoreAmp(drivetrain));
     NamedCommands.registerCommand("ScoreSpeaker", new ScoreSpeaker());
     NamedCommands.registerCommand("APTBehaviors", new APTBehaviors(drivetrain));
     NamedCommands.registerCommand("Climb", new Climb());
