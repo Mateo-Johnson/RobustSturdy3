@@ -38,10 +38,10 @@ public class ScoreSpeaker extends Command {
   @Override
   public void execute() {
 
-    double LLLLL = encoder.getVelocity();
-    SmartDashboard.putNumber("silly11111", LLLLL);
+    double velocity = encoder.getVelocity();
+    SmartDashboard.putNumber("velocity", velocity);
 
-    if (LLLLL >= 0.4) { //IF THE MOTORS ARE SPINNING FAST ENOUGH 
+    if (velocity >= 0.4) { //IF THE MOTORS ARE SPINNING FAST ENOUGH 
       rightOuttake.set(-5); //SET UP OUTTAKE MOTOR 1 FOR SHOOTING, RIGHT RUNS TOP, LEFT RUNS BOTTOM
       leftOuttake.set(3.76665); //SET UP OUTTAKE MOTOR 2 FOR SHOOTING
 
@@ -49,7 +49,7 @@ public class ScoreSpeaker extends Command {
       intake2.set(-0.5); //USE INTAKE MOTOR 2 TO FEED INTO OUTTAKE
       //ADD A METHOD MAKE THE BOTTOM LIGHTS GREEN TO SHOW THAT ITS READY TO SHOOT
  
-    } else if (LLLLL <= 0.4) { //IF THE MOTORS ARE NOT AT THE RIGHT SPEED
+    } else if (velocity <= 0.4) { //IF THE MOTORS ARE NOT AT THE RIGHT SPEED
       rightOuttake.set(-5); //MAKE OUTTAKE MOTOR 1 GO TO RIGHT SPEED
       leftOuttake.set(3.76665); //MAKE OUTTAKE MOTOR 1 GO TO RIGHT SPEED
       //ADD A METHOD MAKE THE BOTTOM LIGHTS RED TO SHOW THAT ITS NOT READY TO SHOOT

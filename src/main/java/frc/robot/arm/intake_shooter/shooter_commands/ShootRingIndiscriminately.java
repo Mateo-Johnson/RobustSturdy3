@@ -51,7 +51,6 @@ public class ShootRingIndiscriminately extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Intake_shooter.stopWheels();
   }
 
   // Returns true when the command should end.
