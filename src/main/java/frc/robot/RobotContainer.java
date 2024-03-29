@@ -14,6 +14,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.arm.Arm;
 import frc.robot.arm.commands.MoveArm;
+import frc.robot.arm.commands.setpoints.Intake;
+import frc.robot.arm.commands.setpoints.SpecifiedAngle;
+import frc.robot.arm.commands.setpoints.Store;
 import frc.robot.arm.intake_shooter.intake_commands.IntakeRing;
 import frc.robot.arm.intake_shooter.intake_commands.PurgeRing;
 import frc.robot.arm.intake_shooter.shooter_commands.ScoreAmp;
@@ -76,7 +79,14 @@ public class RobotContainer {
     secondaryDriver.rightTrigger().whileTrue(new ScoreSpeaker());
     secondaryDriver.leftTrigger().whileTrue(new IntakeRing());
     secondaryDriver.b().whileTrue(new PurgeRing());
-    secondaryDriver.a().whileFalse(new MoveArm());
+
+    secondaryDriver.povUp().toggleOnTrue(new SpecifiedAngle(75));
+    secondaryDriver.povDown().toggleOnTrue(new Intake());
+    secondaryDriver.povRight().toggleOnTrue(new Store());
+
+
+
+
 
 
 }
