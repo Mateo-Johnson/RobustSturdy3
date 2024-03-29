@@ -1,14 +1,15 @@
 package frc.robot.climber.commands;
 
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.Command;
 
 public class Climb extends Command {
   /** Creates a new IntakeRing. */
 
-  Solenoid writeSolenoid;
-  Solenoid wrongSolenoid;
+  public static Compressor compressor = new Compressor(PneumaticsModuleType.CTREPCM);
+  public static DoubleSolenoid wrongSolenoid;
 
   public Climb() {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -20,9 +21,9 @@ public class Climb extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    compressor = new Compressor(PneumaticsModuleType.CTREPCM);
+    wrongSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1); 
 
-    writeSolenoid = new Solenoid(PneumaticsModuleType.REVPH, 2);
-    wrongSolenoid = new Solenoid(PneumaticsModuleType.REVPH, 3);
     
   }
 
@@ -30,8 +31,7 @@ public class Climb extends Command {
   @Override
   public void execute() {
 
-      writeSolenoid.set(true);
-      wrongSolenoid.set(true);
+    wrongSolenoid.set(DoubleSolenoid.Value.kForward);
       
   }
 

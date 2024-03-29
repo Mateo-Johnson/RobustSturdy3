@@ -31,6 +31,8 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 public class RobotContainer {
   //SUBSYSTEMS
   private final DriveSubsystem drivetrain = new DriveSubsystem();
+  
+  @SuppressWarnings("unused")
   private final Arm arm = new Arm(); //THIS IS USED DONT DELETE IT
 
   //DRIVER CONTROLLERS
@@ -85,6 +87,7 @@ public class RobotContainer {
 
     //THE BIG LONG COMMAND FOR KEEPING THE ARM SET WHEN WE AREN'T PRESSING ANYTHING
     secondaryDriver.povUp().and(secondaryDriver.povDown().and(secondaryDriver.povRight())).whileFalse(new SpecifiedAngle(45));
+
 
 
 
