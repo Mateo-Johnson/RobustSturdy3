@@ -10,10 +10,10 @@ public class Auto {
     //CALCULATE DISTANCE (SETPOINT BASED)
     //MY DOUBLE ARRAY ARRAY
     double[][] aimingPoses = { //FIND NEW ONES THESE ARE PLACEHOLDERS
-        new double[] {1.485, 60.0}, 
-        new double[] {1.485, 60.0}, 
-        new double[] {1.485, 60.0}, 
-        new double[] {1.485, 60.0}, 
+        new double[] {4, 20}, 
+        new double[] {5, 28}, 
+        new double[] {7, 34.7}, 
+        new double[] {9, 37.4}, 
         new double[] {1.485, 60.0}, 
         new double[] {1.485, 60.0}, 
     };

@@ -42,7 +42,7 @@ public class ScoreSpeaker extends Command {
     SmartDashboard.putNumber("silly11111", LLLLL);
 
     if (LLLLL >= 0.4) { //IF THE MOTORS ARE SPINNING FAST ENOUGH 
-      rightOuttake.set(5); //SET UP OUTTAKE MOTOR 1 FOR SHOOTING, RIGHT RUNS TOP, LEFT RUNS BOTTOM
+      rightOuttake.set(-5); //SET UP OUTTAKE MOTOR 1 FOR SHOOTING, RIGHT RUNS TOP, LEFT RUNS BOTTOM
       leftOuttake.set(3.76665); //SET UP OUTTAKE MOTOR 2 FOR SHOOTING
 
       intake1.set(-0.5); //USE INTAKE MOTOR 1 TO FEED INTO OUTTAKE

@@ -12,8 +12,10 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.arm.Arm;
 import frc.robot.arm.commands.MoveArm;
 import frc.robot.arm.intake_shooter.intake_commands.IntakeRing;
+import frc.robot.arm.intake_shooter.intake_commands.PurgeRing;
 import frc.robot.arm.intake_shooter.shooter_commands.ScoreAmp;
 import frc.robot.arm.intake_shooter.shooter_commands.ScoreSpeaker;
 import frc.robot.auto.APTBehaviors;
@@ -27,6 +29,7 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 public class RobotContainer {
   //SUBSYSTEMS
   private final DriveSubsystem drivetrain = new DriveSubsystem();
+  private final Arm arm = new Arm();
 
   //DRIVER CONTROLLERS
   public static CommandXboxController primaryDriver = new CommandXboxController(0);
@@ -70,9 +73,10 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     //DEFINE ALL OF THE BUTTON BINDINGS HERE PLEASE AND THANKS
-    primaryDriver.a().whileTrue(new MoveArm());
-    primaryDriver.rightTrigger().whileTrue(new ScoreSpeaker());
-    primaryDriver.leftTrigger().whileTrue(new IntakeRing());
+    secondaryDriver.rightTrigger().whileTrue(new ScoreSpeaker());
+    secondaryDriver.leftTrigger().whileTrue(new IntakeRing());
+    secondaryDriver.b().whileTrue(new PurgeRing());
+    secondaryDriver.a().whileFalse(new MoveArm());
 
 
 }

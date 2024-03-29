@@ -6,6 +6,7 @@ package frc.robot.arm.intake_shooter.intake_commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.arm.intake_shooter.Intake_shooter;
+import frc.robot.arm.intake_shooter.shooter_commands.ScoreSpeaker;
 
 public class PurgeRing extends Command {
   /** Creates a new Purge. */
@@ -20,14 +21,20 @@ public class PurgeRing extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Intake_shooter.runIntakeAndOuttake(-0.8);
+    ScoreSpeaker.intake1.set(1);
+    ScoreSpeaker.intake2.set(1);
+    ScoreSpeaker.rightOuttake.set(1);
+    ScoreSpeaker.leftOuttake.set(-1);
   }
 
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Intake_shooter.runIntakeAndOuttake(0);
+    ScoreSpeaker.intake1.set(0);
+    ScoreSpeaker.intake2.set(0);
+    ScoreSpeaker.rightOuttake.set(0);
+    ScoreSpeaker.leftOuttake.set(0);
   }
 
   // Returns true when the command should end.

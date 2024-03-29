@@ -25,7 +25,7 @@ public class MoveArm extends Command {
 
   @Override
   public void execute() {
-    double move = armPID.calculate(Arm.degrees, 35);
+    double move = armPID.calculate(Arm.degrees, 32.7);
 
     Arm.rotateVector(-move);
   }
