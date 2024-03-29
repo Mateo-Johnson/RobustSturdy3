@@ -5,7 +5,6 @@
 package frc.robot.arm.intake_shooter.intake_commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.arm.intake_shooter.Intake_shooter;
 import frc.robot.arm.intake_shooter.shooter_commands.ScoreSpeaker;
 
 public class PurgeRing extends Command {

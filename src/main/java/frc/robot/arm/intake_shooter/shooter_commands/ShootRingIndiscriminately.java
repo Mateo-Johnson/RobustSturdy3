@@ -8,7 +8,6 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.arm.intake_shooter.Intake_shooter;
 import frc.robot.utils.Constants.DriveConstants;
 
 public class ShootRingIndiscriminately extends Command {

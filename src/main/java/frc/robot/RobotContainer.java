@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.arm.Arm;
-import frc.robot.arm.commands.MoveArm;
 import frc.robot.arm.commands.setpoints.Intake;
 import frc.robot.arm.commands.setpoints.SpecifiedAngle;
 import frc.robot.arm.commands.setpoints.Store;
@@ -32,7 +31,7 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 public class RobotContainer {
   //SUBSYSTEMS
   private final DriveSubsystem drivetrain = new DriveSubsystem();
-  private final Arm arm = new Arm();
+  private final Arm arm = new Arm(); //THIS IS USED DONT DELETE IT
 
   //DRIVER CONTROLLERS
   public static CommandXboxController primaryDriver = new CommandXboxController(0);
