@@ -10,7 +10,7 @@ import frc.robot.arm.Arm;
 import frc.robot.drivetrain.DriveSubsystem;
 import frc.robot.vision.Vision;
 
-public class ScoreAmp extends Command {
+public class Amp extends Command {
     private final DriveSubsystem driveSubsystem;
 
     double distance;
@@ -25,7 +25,7 @@ public class ScoreAmp extends Command {
     PIDController armPID = new PIDController(0.015, 0.00, 0.00);
     PIDController lateralPID = new PIDController(0.00, 0.00, 0.00);
   /** Creates a new silly. */
-  public ScoreAmp(DriveSubsystem driveSubsystem) {
+  public Amp(DriveSubsystem driveSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.driveSubsystem = driveSubsystem;
     addRequirements(driveSubsystem);

@@ -20,7 +20,7 @@ import frc.robot.arm.commands.setpoints.SpecifiedAngle;
 import frc.robot.arm.commands.setpoints.Store;
 import frc.robot.arm.intake_shooter.intake_commands.IntakeRing;
 import frc.robot.arm.intake_shooter.intake_commands.PurgeRing;
-import frc.robot.arm.intake_shooter.shooter_commands.ScoreAmp;
+import frc.robot.arm.intake_shooter.shooter_commands.Amp;
 import frc.robot.arm.intake_shooter.shooter_commands.ScoreSpeaker;
 import frc.robot.auto.APTBehaviors;
 import frc.robot.climber.commands.Climb;
@@ -50,7 +50,7 @@ public class RobotContainer {
   public RobotContainer() {
 
     NamedCommands.registerCommand("IntakeRing", new IntakeRing());
-    NamedCommands.registerCommand("ScoreAmp", new ScoreAmp(drivetrain));
+    NamedCommands.registerCommand("ScoreAmp", new Amp(drivetrain));
     NamedCommands.registerCommand("ScoreSpeaker", new ScoreSpeaker());
     NamedCommands.registerCommand("APTBehaviors", new APTBehaviors(drivetrain));
     NamedCommands.registerCommand("Climb", new Climb());
