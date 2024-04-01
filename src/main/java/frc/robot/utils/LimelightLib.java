@@ -491,6 +491,7 @@ public class LimelightLib {
         return getLimelightNTTableEntry(tableName, entryName).getString("");
     }
 
+    @SuppressWarnings("deprecation")
     public static URL getLimelightURLString(String tableName, String request) {
         String urlString = "http://" + sanitizeName(tableName) + ".local:5807/" + request;
         URL url;
@@ -502,8 +503,8 @@ public class LimelightLib {
         }
         return null;
     }
-    /////
-    /////
+
+    
 
     public static double getTX(String limelightName) {
         return getLimelightNTDouble(limelightName, "tx");

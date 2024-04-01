@@ -23,17 +23,13 @@ public class Intake extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    currentArmPos = Arm.degrees;
-    targetArmPos = 0;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    currentArmPos = Arm.degrees;
 
-    armValue = armPID.calculate(currentArmPos, targetArmPos);
-    Arm.rotateVector(armValue);
+    Arm.rotateVector(0);
   }
 
   // Called once the command ends or is interrupted.

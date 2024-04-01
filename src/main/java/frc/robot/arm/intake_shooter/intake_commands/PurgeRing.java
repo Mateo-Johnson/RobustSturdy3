@@ -5,13 +5,16 @@
 package frc.robot.arm.intake_shooter.intake_commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.arm.intake_shooter.Intake_shooter;
 import frc.robot.arm.intake_shooter.shooter_commands.ScoreSpeaker;
 
 public class PurgeRing extends Command {
   /** Creates a new Purge. */
-  public PurgeRing() {
+  private final double speed;
+
+  public PurgeRing(double speed) {
     // Use addRequirements() here to declare subsystem dependencies.
+    this.speed = speed;
+    
   }
 
   // Called when the command is initially scheduled.
@@ -21,10 +24,10 @@ public class PurgeRing extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    ScoreSpeaker.intake1.set(1);
-    ScoreSpeaker.intake2.set(1);
-    ScoreSpeaker.rightOuttake.set(1);
-    ScoreSpeaker.leftOuttake.set(-1);
+    ScoreSpeaker.intake1.set(speed);
+    ScoreSpeaker.intake2.set(speed);
+    ScoreSpeaker.rightOuttake.set(speed);
+    ScoreSpeaker.leftOuttake.set(-speed);
   }
 
 
