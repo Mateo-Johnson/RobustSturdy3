@@ -26,6 +26,7 @@ import frc.robot.arm.intake_shooter.shooter_commands.Speaker;
 import frc.robot.climber.commands.Climb;
 import frc.robot.climber.commands.Unclimb;
 import frc.robot.drivetrain.DriveSubsystem;
+import frc.robot.drivetrain.commands.TurnToAngle;
 import frc.robot.lights.commands.SetLightsColor;
 import frc.robot.utils.Constants.ControllerConstants;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -91,7 +92,7 @@ public class RobotContainer {
     secondaryDriver.povUp().and(secondaryDriver.povDown().and(secondaryDriver.povRight())).whileFalse(new SpecifiedAngle(45));
 
     //ARM MANUAL MOVEMENT
-    secondaryDriver.a().whileTrue(new MoveArm());
+    primaryDriver.a().whileTrue(new TurnToAngle(drivetrain));
     secondaryDriver.b().whileTrue(new MoveArmBackwards());
 
     //CLIMB

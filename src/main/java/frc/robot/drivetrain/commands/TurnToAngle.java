@@ -20,9 +20,9 @@ public class TurnToAngle extends Command {
     initialHeading = driveSubsystem.getHeading();
   }
 
-  double tP = 0.01145;
-  double tI = 0.0000176;
-  double tD = 0.00098;
+  double tP = 0.0159;
+  double tI = 0.0;
+  double tD = 0.004;
   PIDController turningPID = new PIDController(tP, tI, tD);
 
   // Called when the command is initially scheduled.
