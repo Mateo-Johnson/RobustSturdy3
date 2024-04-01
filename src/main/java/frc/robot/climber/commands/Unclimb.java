@@ -9,7 +9,7 @@ import frc.robot.arm.Arm;
 public class Unclimb extends Command {
   /** Creates a new IntakeRing. */
 
-  public static Compressor compressor = new Compressor(PneumaticsModuleType.CTREPCM);
+  
   public static DoubleSolenoid wrongSolenoid;
   public static boolean extended;
 
@@ -23,8 +23,8 @@ public class Unclimb extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    compressor = new Compressor(PneumaticsModuleType.CTREPCM);
-    wrongSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1);
+  
+    wrongSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 4, 7);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
