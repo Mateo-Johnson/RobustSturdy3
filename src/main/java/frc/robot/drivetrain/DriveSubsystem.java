@@ -130,8 +130,8 @@ public class DriveSubsystem extends SubsystemBase {
               frontLeft.getState(), frontRight.getState(), rearLeft.getState(), rearRight.getState()),
             (speeds) -> drive(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond, speeds.omegaRadiansPerSecond, true, false),
             new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your Constants class
-                    new PIDConstants(0.8, 0.070568344, 0.0), // Translation PID constants
-                    new PIDConstants(0.01145, 0.0000176, 0.00098), // Rotation PID constants
+                    new PIDConstants(0, 0, 0), // Translation PID constants
+                    new PIDConstants(0, 0, 0), // Rotation PID constants
                     4.5, // Max module speed, in m/s
                     0.4, // Drive base radius in meters. Distance from robot center to furthest module.
                     new ReplanningConfig() // Default path replanning config. See the API for the options here
