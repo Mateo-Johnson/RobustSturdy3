@@ -26,7 +26,6 @@ import edu.wpi.first.util.WPIUtilJNI;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.arm.Arm;
 import frc.robot.arm.intake_shooter.intake_commands.IntakeRing;
 import frc.robot.arm.intake_shooter.shooter_commands.Amp;
 import frc.robot.arm.intake_shooter.shooter_commands.Speaker;
