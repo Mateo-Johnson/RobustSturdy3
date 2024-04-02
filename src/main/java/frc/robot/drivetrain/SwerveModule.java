@@ -176,7 +176,7 @@ public class SwerveModule {
 
 
     this.desiredState = desiredState;
-    //DO NOT DELETE ITS NOT ACTUALLY USELESS MOTHERFUCKER
+    //DO NOT DELETE ITS NOT ACTUALLY USELESS SILLY
   }
 
 
