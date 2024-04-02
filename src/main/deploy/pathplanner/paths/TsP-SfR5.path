@@ -1,0 +1,65 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 1.929832288794042,
+        "y": 6.966682324361672
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 0.9047516048901146,
+        "y": 5.564076967067625
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 4.785376421571296,
+        "y": 4.125320004732272
+      },
+      "prevControl": {
+        "x": 5.682982025664824,
+        "y": 5.518225998472001
+      },
+      "nextControl": {
+        "x": 3.824859042947253,
+        "y": 2.6347874059215384
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 7.663515307499365,
+        "y": 0.7283671273071706
+      },
+      "prevControl": {
+        "x": 4.801000453005371,
+        "y": 0.7008207580403255
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 4.8,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "TsP",
+  "previewStartingState": null,
+  "useDefaultConstraints": false
+}

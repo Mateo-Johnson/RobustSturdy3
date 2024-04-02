@@ -1,0 +1,65 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 1.9117564862733893,
+        "y": 5.543982058946262
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.813190989105193,
+        "y": 5.365098917511823
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 4.925511965049228,
+        "y": 4.183729845324273
+      },
+      "prevControl": {
+        "x": 5.161634870323946,
+        "y": 4.856040580092783
+      },
+      "nextControl": {
+        "x": 4.356652999020284,
+        "y": 2.564022562010898
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 7.673130096074181,
+        "y": 0.7517791374868456
+      },
+      "prevControl": {
+        "x": 3.130382864188348,
+        "y": 1.205308714560881
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 4.8,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "MsP",
+  "previewStartingState": null,
+  "useDefaultConstraints": false
+}
