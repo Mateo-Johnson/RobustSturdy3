@@ -48,6 +48,8 @@ public final class Constants {
 
   public static final class DriveConstants {
 
+
+
     //TIME THINGS
     public static long currentTimeMillis = System.currentTimeMillis(); //THE TIME IN MILLISECONDS
     public static long currentTimeSeconds = currentTimeMillis / 1000; //THE TIME IN SECONDS
@@ -56,7 +58,7 @@ public final class Constants {
     public static final double turnToleranceDegrees = 2.0;
     public static double translationToleranceMeters = 2.0;
     //DRIVING PARAMS - MAX CAPABLE SPEEDS NOT MAX ALLOWED SPEEDS
-    public static final double maxSpeedMetersPerSecond = 6;
+    public static final double maxSpeedMetersPerSecond = 4.8;
     public static final double maxAngularSpeed = 2 * Math.PI; //RADIANS PER SECOND
 
 
@@ -71,7 +73,7 @@ public final class Constants {
     public static final HolonomicPathFollowerConfig holonomicPathFollowerConfig = new HolonomicPathFollowerConfig(
         new PIDConstants(5.0, 0, 0), // Translation PID constants
         new PIDConstants(5, 0, 0.0), // Rotation PID constants
-        4.5, // Max module speed, in m/s
+        4.8, // Max module speed, in m/s
         0.4, // Drive base radius in meters. Distance from robot center to furthest module.
         new ReplanningConfig() // Default path replanning config. See the API for the options here
     );

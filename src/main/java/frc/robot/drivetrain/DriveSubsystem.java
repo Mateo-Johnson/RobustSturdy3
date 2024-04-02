@@ -136,8 +136,8 @@ public class DriveSubsystem extends SubsystemBase {
       AutoBuilder.configureHolonomic(
         this::getPose, //POSE SUPPLIER
         this::resetOdometry, //METHOD TO RESET ODOMETRY (IF IT HAS A STARTING POS)
-        () -> DriveConstants.DriveKinematics.toChassisSpeeds(frontLeft.getState(), frontRight.getState(), rearLeft.getState(), rearRight.getState()), //METHOD TO GET CHASSIS SPEEDS FROM THE STATE OF EACH MODULE
-        (speeds) -> drive(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond, speeds.omegaRadiansPerSecond, false, true), //METHOD TO DRIVE THE ROBOT TO SPECIFIC CHASSIS SPEEDS
+        this::getRobotRelativeSpeeds, //METHOD TO GET CHASSIS SPEEDS FROM THE STATE OF EACH MODULE
+        this::driveRobotRelative, //METHOD TO DRIVE THE ROBOT TO SPECIFIC CHASSIS SPEEDS
         Constants.DriveConstants.holonomicPathFollowerConfig, //PATH FOLLOWER CONFIG
         () -> {
           //BOOL SUPPLIER CONTROLS WHEN THE PATH IS MIRRORED TO THE RED SIDE
@@ -215,6 +215,29 @@ public class DriveSubsystem extends SubsystemBase {
   public Pose2d getPose() {
     return odometry.getPoseMeters();
     // return swerveDrivePoseEstimator.getEstimatedPosition();
+  }
+
+  public ChassisSpeeds getRobotRelativeSpeeds() {
+    // Retrieve the current states of each swerve module
+    SwerveModuleState frontLeftState = frontLeft.getState();
+    SwerveModuleState frontRightState = frontRight.getState();
+    SwerveModuleState rearLeftState = rearLeft.getState();
+    SwerveModuleState rearRightState = rearRight.getState();
+
+    // Convert the swerve module states to chassis speeds
+    return Constants.DriveConstants.DriveKinematics.toChassisSpeeds(
+        frontLeftState, frontRightState, rearLeftState, rearRightState);
+  }
+
+  public void driveRobotRelative(ChassisSpeeds speeds) {
+    // Convert the robot-relative speeds to swerve module states
+    SwerveModuleState[] moduleStates = Constants.DriveConstants.DriveKinematics.toSwerveModuleStates(speeds);
+
+    // Desaturate the wheel speeds to ensure they are within the maximum speed
+    SwerveDriveKinematics.desaturateWheelSpeeds(moduleStates, Constants.DriveConstants.maxSpeedMetersPerSecond);
+
+    // Set the desired state for each swerve module
+    setModuleStates(moduleStates);
   }
 
 
