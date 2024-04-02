@@ -130,10 +130,10 @@ public class DriveSubsystem extends SubsystemBase {
         this::resetOdometry, // Method to reset odometry (will be called if your auto has a starting pose)
         () -> DriveConstants.DriveKinematics.toChassisSpeeds(
           frontLeft.getState(), frontRight.getState(), rearLeft.getState(), rearRight.getState()),
-        (speeds) -> drive(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond, speeds.omegaRadiansPerSecond, true, false),
+        (speeds) -> drive(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond, speeds.omegaRadiansPerSecond, false, true),
         new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your Constants class
                 new PIDConstants(5.0, 0, 0), // Translation PID constants
-                new PIDConstants(0.0159, 0, 0.004), // Rotation PID constants
+                new PIDConstants(5, 0, 0.0), // Rotation PID constants
                 4.5, // Max module speed, in m/s
                 0.4, // Drive base radius in meters. Distance from robot center to furthest module.
                 new ReplanningConfig() // Default path replanning config. See the API for the options here
