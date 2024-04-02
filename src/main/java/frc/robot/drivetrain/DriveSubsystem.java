@@ -7,11 +7,7 @@ package frc.robot.drivetrain;
 
 import com.kauailabs.navx.frc.AHRS;
 import com.pathplanner.lib.auto.AutoBuilder;
-import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
-import com.pathplanner.lib.util.PIDConstants;
-import com.pathplanner.lib.util.ReplanningConfig;
-import com.revrobotics.AbsoluteEncoder;
-
+import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.filter.SlewRateLimiter;
@@ -30,10 +26,14 @@ import edu.wpi.first.util.WPIUtilJNI;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.arm.Arm;
-
+import frc.robot.arm.intake_shooter.intake_commands.IntakeRing;
+import frc.robot.arm.intake_shooter.shooter_commands.Amp;
+import frc.robot.arm.intake_shooter.shooter_commands.Speaker;
+import frc.robot.climber.commands.Climb;
+import frc.robot.lights.commands.SetLightsColor;
 import frc.robot.utils.SwerveUtils;
 import frc.robot.vision.Vision;
+import frc.robot.utils.Constants;
 import frc.robot.utils.Constants.DriveConstants;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -116,6 +116,13 @@ public class DriveSubsystem extends SubsystemBase {
   public DriveSubsystem() {
 
     getHeadingPose2d = Rotation2d.fromDegrees(getHeading());
+
+    //REGISTER THE COMMANDS BEFORE CREATING THE POSE ESTIMATOR
+    NamedCommands.registerCommand("IntakeRing", new IntakeRing());
+    NamedCommands.registerCommand("Amp", new Amp(this));
+    NamedCommands.registerCommand("Speaker", new Speaker(this));
+    NamedCommands.registerCommand("Climb", new Climb());
+    NamedCommands.registerCommand("SetLightsColor", new SetLightsColor());
     
     swerveDrivePoseEstimator = new SwerveDrivePoseEstimator(
       DriveConstants.DriveKinematics, 
@@ -124,28 +131,20 @@ public class DriveSubsystem extends SubsystemBase {
       new Pose2d(new Translation2d(0, 0), 
       Rotation2d.fromDegrees(0))); 
 
-      // Configure AutoBuilder last
       AutoBuilder.configureHolonomic(
-        this::getPose, // Robot pose supplier
-        this::resetOdometry, // Method to reset odometry (will be called if your auto has a starting pose)
-        () -> DriveConstants.DriveKinematics.toChassisSpeeds(
-          frontLeft.getState(), frontRight.getState(), rearLeft.getState(), rearRight.getState()),
-        (speeds) -> drive(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond, speeds.omegaRadiansPerSecond, true, false),
-        new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your Constants class
-                new PIDConstants(5.0, 0, 0), // Translation PID constants
-                new PIDConstants(0.0159, 0, 0.004), // Rotation PID constants
-                4.5, // Max module speed, in m/s
-                0.4, // Drive base radius in meters. Distance from robot center to furthest module.
-                new ReplanningConfig() // Default path replanning config. See the API for the options here
-        ),
+        this::getPose, //POSE SUPPLIER
+        this::resetOdometry, //METHOD TO RESET ODOMETRY (IF IT HAS A STARTING POS)
+        this::getRobotRelativeSpeeds, //METHOD TO GET CHASSIS SPEEDS FROM THE STATE OF EACH MODULE
+        this::driveRobotRelative, //METHOD TO DRIVE THE ROBOT TO SPECIFIC CHASSIS SPEEDS
+        Constants.DriveConstants.holonomicPathFollowerConfig, //PATH FOLLOWER CONFIG
         () -> {
-          // Boolean supplier that controls when the path will be mirrored for the red alliance
-          // This will flip the path being followed to the red side of the field.
-          // THE ORIGIN WILL REMAIN ON THE BLUE SIDE
+          //BOOL SUPPLIER CONTROLS WHEN THE PATH IS MIRRORED TO THE RED SIDE
+          //THIS WILL FLIP THE PATH BEING FOLLOWED TO THE RED SIDE
+          //THE ORIGIN WILL REMAIN ON THE BLUE SIDE
           var alliance = DriverStation.getAlliance();
           return alliance.map(a -> a == DriverStation.Alliance.Red).orElse(false);
         },
-        this // Reference to this subsystem to set requirements
+        this
 );
         
 
@@ -193,16 +192,14 @@ public class DriveSubsystem extends SubsystemBase {
 
     //INSTRUCTIONS - PHYSICALLY TURN ALL OF THE WHEELS SO THAT THEY FACE FORWARD. THEN IN THE CONSTANT FILE SET ALL CHASSIS ANGULAR OFFSETS TO WHATEVER VALUE THE RESPECTIVE MODULE IS READING
 
-    SmartDashboard.putNumber("Ian Nash", swerveDrivePoseEstimator.getEstimatedPosition().getX());
-    x = swerveDrivePoseEstimator.getEstimatedPosition().getX();
-    lmao = swerveDrivePoseEstimator.getEstimatedPosition();
+    SmartDashboard.putNumber("xPos", swerveDrivePoseEstimator.getEstimatedPosition().getX());
+    SmartDashboard.putNumber("yPos", swerveDrivePoseEstimator.getEstimatedPosition().getY());
+
     SmartDashboard.putNumber("Front Left Module Angle:", frontLeft.getRawTurnEncoder());
     SmartDashboard.putNumber("Front Right Module Angle:", frontRight.getRawTurnEncoder());
     SmartDashboard.putNumber("Back Left Module Angle:", rearLeft.getRawTurnEncoder());
     SmartDashboard.putNumber("Back Right Module Angle:", rearRight.getRawTurnEncoder());
-    AbsoluteEncoder armEncoder = Arm.armEncoder;
-    final double armEncoderReading = armEncoder.getPosition();
-    SmartDashboard.putNumber("Arm Angle", armEncoderReading);
+
 
   }
 
@@ -216,6 +213,29 @@ public class DriveSubsystem extends SubsystemBase {
   public Pose2d getPose() {
     return odometry.getPoseMeters();
     // return swerveDrivePoseEstimator.getEstimatedPosition();
+  }
+
+  public ChassisSpeeds getRobotRelativeSpeeds() {
+    // Retrieve the current states of each swerve module
+    SwerveModuleState frontLeftState = frontLeft.getState();
+    SwerveModuleState frontRightState = frontRight.getState();
+    SwerveModuleState rearLeftState = rearLeft.getState();
+    SwerveModuleState rearRightState = rearRight.getState();
+
+    // Convert the swerve module states to chassis speeds
+    return Constants.DriveConstants.DriveKinematics.toChassisSpeeds(
+        frontLeftState, frontRightState, rearLeftState, rearRightState);
+  }
+
+  public void driveRobotRelative(ChassisSpeeds speeds) {
+    // Convert the robot-relative speeds to swerve module states
+    SwerveModuleState[] moduleStates = Constants.DriveConstants.DriveKinematics.toSwerveModuleStates(speeds);
+
+    // Desaturate the wheel speeds to ensure they are within the maximum speed
+    SwerveDriveKinematics.desaturateWheelSpeeds(moduleStates, Constants.DriveConstants.maxSpeedMetersPerSecond);
+
+    // Set the desired state for each swerve module
+    setModuleStates(moduleStates);
   }
 
 
@@ -372,6 +392,7 @@ public class DriveSubsystem extends SubsystemBase {
    */
   public double getHeading() {
     // return Rotation2d.fromDegrees(gyro.getAngle()).getDegrees();
+
       double rawAngle = Rotation2d.fromDegrees(gyro.getAngle()).getDegrees();
       
       // Use angleModulus to wrap the angle between -180 and 180 degrees
