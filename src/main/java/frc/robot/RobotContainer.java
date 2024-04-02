@@ -85,19 +85,19 @@ public class RobotContainer {
     secondaryDriver.leftBumper().whileTrue(new PurgeRing(0.5));
 
     //ARM PRESETS
-    secondaryDriver.povUp().toggleOnTrue(new SpecifiedAngle(75));
-    secondaryDriver.povDown().toggleOnTrue(new Intake());
-    secondaryDriver.povRight().toggleOnTrue(new Store());
-    //THE BIG LONG COMMAND FOR KEEPING THE ARM SET WHEN WE AREN'T PRESSING ANYTHING
-    secondaryDriver.povUp().and(secondaryDriver.povDown().and(secondaryDriver.povRight())).whileFalse(new SpecifiedAngle(45));
+    // secondaryDriver.povUp().toggleOnTrue(new SpecifiedAngle(75));
+    // secondaryDriver.povDown().toggleOnTrue(new Intake());
+    // secondaryDriver.povRight().toggleOnTrue(new Store());
+    // //THE BIG LONG COMMAND FOR KEEPING THE ARM SET WHEN WE AREN'T PRESSING ANYTHING
+    // secondaryDriver.povUp().and(secondaryDriver.povDown().and(secondaryDriver.povRight())).whileFalse(new SpecifiedAngle(45));
 
     //ARM MANUAL MOVEMENT
-    primaryDriver.a().whileTrue(new TurnToAngle(drivetrain));
+    secondaryDriver.a().whileTrue(new MoveArm());
     secondaryDriver.b().whileTrue(new MoveArmBackwards());
 
     //CLIMB
-    secondaryDriver.y().whileTrue(new Climb());
-    secondaryDriver.x().whileTrue(new Unclimb());
+    // secondaryDriver.y().whileTrue(new Climb());
+    // secondaryDriver.x().whileTrue(new Unclimb());
 
 }
     

@@ -4,12 +4,14 @@
 
 package frc.robot.arm.commands;
 
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.arm.Arm;
 
 public class MoveArm extends Command {
   /** Creates a new MoveArm. */
-
+  PIDController armPID = new PIDController(0.015, 0.00, 0.00);
   public MoveArm() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -23,11 +25,14 @@ public class MoveArm extends Command {
   @Override
   public void execute() {
 
-    if (Arm.degrees < 90) {
-      Arm.rotateVector(0.3);
-    } else {
-      Arm.rotateVector(0);
-    }
+  //   if (Arm.degrees < 90) {
+  //     Arm.rotateVector(0.3);
+  //   } else {
+  //     Arm.rotateVector(0);
+  //   }
+  SmartDashboard.putNumber("angl;e", Arm.degrees);
+  double move = armPID.calculate(Arm.degrees, 35);
+  Arm.rotateVector(-0.3);
   }
 
   // Called once the command ends or is interrupted.
