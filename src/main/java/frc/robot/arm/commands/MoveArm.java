@@ -32,7 +32,13 @@ public class MoveArm extends Command {
   //   }
   SmartDashboard.putNumber("angl;e", Arm.degrees);
   double move = armPID.calculate(Arm.degrees, 35);
-  Arm.rotateVector(-0.3);
+
+
+ if (Arm.degrees > 90) {
+    Arm.rotateVector(0.25);
+    } else {
+      Arm.rotateVector(0);
+    }
   }
 
   // Called once the command ends or is interrupted.

@@ -21,9 +21,11 @@ public class MoveArmBackwards extends Command {
   @Override
   public void execute() {
 
-
-    Arm.rotateVector(0.3);
-
+ if (Arm.degrees > 3) {
+    Arm.rotateVector(0.1);
+    } else {
+      Arm.rotateVector(0);
+    }
   }
 
   // Called once the command ends or is interrupted.
