@@ -7,7 +7,7 @@ package frc.robot.drivetrain;
 
 import com.kauailabs.navx.frc.AHRS;
 import com.pathplanner.lib.auto.AutoBuilder;
-import com.pathplanner.lib.auto.NamedCommands;
+
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.filter.SlewRateLimiter;
@@ -26,11 +26,6 @@ import edu.wpi.first.util.WPIUtilJNI;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.arm.intake_shooter.intake_commands.IntakeRing;
-import frc.robot.arm.intake_shooter.shooter_commands.Amp;
-import frc.robot.arm.intake_shooter.shooter_commands.Speaker;
-import frc.robot.climber.commands.Climb;
-import frc.robot.lights.commands.SetLightsColor;
 import frc.robot.utils.SwerveUtils;
 import frc.robot.vision.Vision;
 import frc.robot.utils.Constants;
@@ -117,12 +112,6 @@ public class DriveSubsystem extends SubsystemBase {
 
     getHeadingPose2d = Rotation2d.fromDegrees(getHeading());
 
-    //REGISTER THE COMMANDS BEFORE CREATING THE POSE ESTIMATOR
-    NamedCommands.registerCommand("IntakeRing", new IntakeRing());
-    NamedCommands.registerCommand("Amp", new Amp(this));
-    NamedCommands.registerCommand("Speaker", new Speaker(this));
-    NamedCommands.registerCommand("Climb", new Climb());
-    NamedCommands.registerCommand("SetLightsColor", new SetLightsColor());
     
     swerveDrivePoseEstimator = new SwerveDrivePoseEstimator(
       DriveConstants.DriveKinematics, 

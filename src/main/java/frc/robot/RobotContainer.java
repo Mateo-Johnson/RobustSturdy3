@@ -16,18 +16,25 @@ import frc.robot.arm.commands.MoveArm;
 import frc.robot.arm.commands.MoveArmBackwards;
 import frc.robot.arm.intake_shooter.intake_commands.IntakeRing;
 import frc.robot.arm.intake_shooter.intake_commands.PurgeRing;
+import frc.robot.arm.intake_shooter.shooter_commands.Amp;
 import frc.robot.arm.intake_shooter.shooter_commands.ScoreSpeaker;
+import frc.robot.arm.intake_shooter.shooter_commands.Speaker;
+import frc.robot.climber.commands.Climb;
 import frc.robot.drivetrain.DriveSubsystem;
+import frc.robot.lights.commands.SetLightsColor;
 import frc.robot.utils.Constants.ControllerConstants;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import com.pathplanner.lib.auto.NamedCommands;
+
 
 public class RobotContainer {
+
   //SUBSYSTEMS
   private final DriveSubsystem drivetrain = new DriveSubsystem();
-  
   @SuppressWarnings("unused")
   private final Arm arm = new Arm(); //THIS IS USED DONT DELETE IT
+
 
   //DRIVER CONTROLLERS
   public static CommandXboxController primaryDriver = new CommandXboxController(0);
@@ -39,6 +46,13 @@ public class RobotContainer {
   private SendableChooser<Command> autoChooser;
 
   public RobotContainer() {
+
+    //REGISTER THE COMMANDS BEFORE CREATING THE POSE ESTIMATOR
+    NamedCommands.registerCommand("IntakeRing", new IntakeRing());
+    NamedCommands.registerCommand("Amp", new Amp(drivetrain));
+    NamedCommands.registerCommand("Speaker", new Speaker(drivetrain));
+    NamedCommands.registerCommand("Climb", new Climb());
+    NamedCommands.registerCommand("SetLightsColor", new SetLightsColor());
 
     configureButtonBindings(); //CONFIGURE BINDINGS
 
