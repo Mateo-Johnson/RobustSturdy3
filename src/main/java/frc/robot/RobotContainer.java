@@ -49,12 +49,6 @@ public class RobotContainer {
 
   public RobotContainer() {
 
-    NamedCommands.registerCommand("IntakeRing", new IntakeRing());
-    NamedCommands.registerCommand("Amp", new Amp(drivetrain));
-    NamedCommands.registerCommand("Speaker", new Speaker(drivetrain));
-    NamedCommands.registerCommand("Climb", new Climb());
-    NamedCommands.registerCommand("SetLightsColor", new SetLightsColor());
-
     configureButtonBindings(); //CONFIGURE BINDINGS
 
     autoChooser = AutoBuilder.buildAutoChooser();

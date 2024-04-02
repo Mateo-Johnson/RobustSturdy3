@@ -7,6 +7,7 @@ package frc.robot.drivetrain;
 
 import com.kauailabs.navx.frc.AHRS;
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
 import com.revrobotics.AbsoluteEncoder;
 
 import edu.wpi.first.math.MathUtil;
@@ -28,7 +29,11 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.arm.Arm;
-
+import frc.robot.arm.intake_shooter.intake_commands.IntakeRing;
+import frc.robot.arm.intake_shooter.shooter_commands.Amp;
+import frc.robot.arm.intake_shooter.shooter_commands.Speaker;
+import frc.robot.climber.commands.Climb;
+import frc.robot.lights.commands.SetLightsColor;
 import frc.robot.utils.SwerveUtils;
 import frc.robot.vision.Vision;
 import frc.robot.utils.Constants;
@@ -114,6 +119,12 @@ public class DriveSubsystem extends SubsystemBase {
   public DriveSubsystem() {
 
     getHeadingPose2d = Rotation2d.fromDegrees(getHeading());
+
+    NamedCommands.registerCommand("IntakeRing", new IntakeRing());
+    NamedCommands.registerCommand("Amp", new Amp(this));
+    NamedCommands.registerCommand("Speaker", new Speaker(this));
+    NamedCommands.registerCommand("Climb", new Climb());
+    NamedCommands.registerCommand("SetLightsColor", new SetLightsColor());
     
     swerveDrivePoseEstimator = new SwerveDrivePoseEstimator(
       DriveConstants.DriveKinematics, 
@@ -183,16 +194,14 @@ public class DriveSubsystem extends SubsystemBase {
 
     //INSTRUCTIONS - PHYSICALLY TURN ALL OF THE WHEELS SO THAT THEY FACE FORWARD. THEN IN THE CONSTANT FILE SET ALL CHASSIS ANGULAR OFFSETS TO WHATEVER VALUE THE RESPECTIVE MODULE IS READING
 
-    SmartDashboard.putNumber("Ian Nash", swerveDrivePoseEstimator.getEstimatedPosition().getX());
-    x = swerveDrivePoseEstimator.getEstimatedPosition().getX();
-    lmao = swerveDrivePoseEstimator.getEstimatedPosition();
+    SmartDashboard.putNumber("xPos", swerveDrivePoseEstimator.getEstimatedPosition().getX());
+    SmartDashboard.putNumber("yPos", swerveDrivePoseEstimator.getEstimatedPosition().getY());
+
     SmartDashboard.putNumber("Front Left Module Angle:", frontLeft.getRawTurnEncoder());
     SmartDashboard.putNumber("Front Right Module Angle:", frontRight.getRawTurnEncoder());
     SmartDashboard.putNumber("Back Left Module Angle:", rearLeft.getRawTurnEncoder());
     SmartDashboard.putNumber("Back Right Module Angle:", rearRight.getRawTurnEncoder());
-    AbsoluteEncoder armEncoder = Arm.armEncoder;
-    final double armEncoderReading = armEncoder.getPosition();
-    SmartDashboard.putNumber("Arm Angle", armEncoderReading);
+
 
   }
 
@@ -362,6 +371,7 @@ public class DriveSubsystem extends SubsystemBase {
    */
   public double getHeading() {
     // return Rotation2d.fromDegrees(gyro.getAngle()).getDegrees();
+
       double rawAngle = Rotation2d.fromDegrees(gyro.getAngle()).getDegrees();
       
       // Use angleModulus to wrap the angle between -180 and 180 degrees
