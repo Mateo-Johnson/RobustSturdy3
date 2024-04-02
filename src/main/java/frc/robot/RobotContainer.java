@@ -6,9 +6,8 @@
 package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
-import com.pathplanner.lib.auto.NamedCommands;
-
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.net.PortForwarder;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -19,14 +18,11 @@ import frc.robot.arm.commands.setpoints.SpecifiedAngle;
 import frc.robot.arm.commands.setpoints.Store;
 import frc.robot.arm.intake_shooter.intake_commands.IntakeRing;
 import frc.robot.arm.intake_shooter.intake_commands.PurgeRing;
-import frc.robot.arm.intake_shooter.shooter_commands.Amp;
 import frc.robot.arm.intake_shooter.shooter_commands.ScoreSpeaker;
-import frc.robot.arm.intake_shooter.shooter_commands.Speaker;
 import frc.robot.climber.commands.Climb;
 import frc.robot.climber.commands.Unclimb;
 import frc.robot.drivetrain.DriveSubsystem;
 import frc.robot.drivetrain.commands.TurnToAngle;
-import frc.robot.lights.commands.SetLightsColor;
 import frc.robot.utils.Constants.ControllerConstants;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -53,6 +49,9 @@ public class RobotContainer {
 
     autoChooser = AutoBuilder.buildAutoChooser();
     SmartDashboard.putData("Auto Chooser", autoChooser);
+
+    PortForwarder.add(5800, "limelight-arm.local", 5800);
+    PortForwarder.add(5800, "limelight-front.local", 5800);
 
     ///CONFIGURE DEFAULT COMMANDS
     drivetrain.setDefaultCommand(

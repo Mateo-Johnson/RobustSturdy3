@@ -8,8 +8,6 @@ package frc.robot.drivetrain;
 import com.kauailabs.navx.frc.AHRS;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
-import com.revrobotics.AbsoluteEncoder;
-
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.filter.SlewRateLimiter;
@@ -120,6 +118,7 @@ public class DriveSubsystem extends SubsystemBase {
 
     getHeadingPose2d = Rotation2d.fromDegrees(getHeading());
 
+    //REGISTER THE COMMANDS BEFORE CREATING THE POSE ESTIMATOR
     NamedCommands.registerCommand("IntakeRing", new IntakeRing());
     NamedCommands.registerCommand("Amp", new Amp(this));
     NamedCommands.registerCommand("Speaker", new Speaker(this));
