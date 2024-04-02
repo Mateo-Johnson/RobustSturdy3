@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.arm.Arm;
-import frc.robot.arm.commands.MoveArm;
 import frc.robot.arm.commands.MoveArmBackwards;
 import frc.robot.arm.commands.setpoints.Intake;
 import frc.robot.arm.commands.setpoints.SpecifiedAngle;
