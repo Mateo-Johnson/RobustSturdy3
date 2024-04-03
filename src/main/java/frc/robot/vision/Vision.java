@@ -11,6 +11,8 @@ public class Vision extends SubsystemBase {
 public static String armLimelightName = "arm";
 public static String frontLimelightName = "front";
 
+//MATEO YOU NEED TO REMEMBER TO CHECK IF THE LIMELIGHT IS CHECKING FOR 36H11 APRILTAGS
+
 //OK SO GUYS IF SOMETHING IS MARKED WITH AN A_ THAT MEANS THAT ITS FROM THE ARM LIMELIGHT
 //IF ITS FROM THE INTAKE/FROM LIMELIGHT IT IS MARKED WITH A F_
 

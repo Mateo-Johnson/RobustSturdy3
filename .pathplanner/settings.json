@@ -5,9 +5,13 @@
   "pathFolders": [
     "BsP",
     "MsP",
+    "Scoring",
     "TsP"
   ],
-  "autoFolders": [],
+  "autoFolders": [
+    "Basic",
+    "Configurable"
+  ],
   "defaultMaxVel": 4.8,
   "defaultMaxAccel": 3.0,
   "defaultMaxAngVel": 540.0,

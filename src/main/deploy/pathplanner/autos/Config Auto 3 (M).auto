@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.9230538628487972,
-      "y": 4.126329557532627
+      "x": 1.9,
+      "y": 5.5
     },
     "rotation": 0
   },
@@ -14,54 +14,42 @@
         {
           "type": "path",
           "data": {
-            "pathName": "S1rS"
+            "pathName": "S1rSm"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "BsP-SBR "
+            "pathName": "MsP-SMR"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "S1rS"
+            "pathName": "S1rA"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "BsP-SMR"
+            "pathName": "MsP-STR"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "S1rS"
+            "pathName": "S1rA"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "BsP-STR"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "S1rS"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "MsP-tL"
+            "pathName": "TsP-tL"
           }
         }
       ]
     }
   },
-  "folder": null,
+  "folder": "Configurable",
   "choreoAuto": false
 }
