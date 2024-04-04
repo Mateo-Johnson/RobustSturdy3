@@ -3,13 +3,13 @@ package frc.robot.climber.commands;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.RobotContainer;
 import frc.robot.arm.Arm;
 
 public class Unclimb extends Command {
   /** Creates a new IntakeRing. */
+  DoubleSolenoid solenoid;
 
-  
-  public static DoubleSolenoid wrongSolenoid;
   public static boolean extended;
 
   public Unclimb() {
@@ -23,20 +23,20 @@ public class Unclimb extends Command {
   @Override
   public void initialize() {
   
-    wrongSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 4, 7);
+    solenoid = RobotContainer.wrongSolenoid;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    wrongSolenoid.set(DoubleSolenoid.Value.kReverse);
+    solenoid.set(DoubleSolenoid.Value.kReverse);
     Arm.rotateVector(0);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    wrongSolenoid.set(DoubleSolenoid.Value.kOff);
+    solenoid.set(DoubleSolenoid.Value.kOff);
   }
 
   // Returns true when the command should end.

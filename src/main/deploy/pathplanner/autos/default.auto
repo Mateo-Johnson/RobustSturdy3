@@ -2,7 +2,7 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 2.0,
+      "x": 1.9,
       "y": 7.0
     },
     "rotation": 0
@@ -10,16 +10,9 @@
   "command": {
     "type": "sequential",
     "data": {
-      "commands": [
-        {
-          "type": "path",
-          "data": {
-            "pathName": "boawndfaefh"
-          }
-        }
-      ]
+      "commands": []
     }
   },
-  "folder": null,
+  "folder": "Basic",
   "choreoAuto": false
 }

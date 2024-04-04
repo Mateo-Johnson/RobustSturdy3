@@ -1,0 +1,67 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 1.9230538628487972,
+      "y": 4.126329557532627
+    },
+    "rotation": 0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "S1rS"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "BsP-SBR "
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "S1rS"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "BsP-SMR"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "S1rS"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "BsP-STR"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "S1rS"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "MsP-tL"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}

@@ -2,6 +2,13 @@ package frc.robot.auto;
 
 import edu.wpi.first.math.MathUtil;
 
+//THE STARTING POSITIONS FOR AUTO: 
+//TOP / LEFT POSITION - 1.9/7.0
+//MIDDLE POSITION - 1.9/5.5
+//BOTTOM / RIGHT - 1.9/4.1
+//BASICALLY, ALIGN IT TO THE RING SPOT
+
+
 public class Auto {
       public static double calculateAngle(double distance) {
     // diffPose.getX() needs to be the distance from the robot to the speaker
