@@ -25,12 +25,8 @@ public class MoveArm extends Command {
   @Override
   public void execute() {
 
-  //   if (Arm.degrees < 90) {
-  //     Arm.rotateVector(0.3);
-  //   } else {
-  //     Arm.rotateVector(0);
-  //   }
   SmartDashboard.putNumber("angl;e", Arm.degrees);
+  @SuppressWarnings("unused")
   double move = armPID.calculate(Arm.degrees, 35);
 
 
