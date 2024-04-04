@@ -97,8 +97,8 @@ public class RobotContainer {
     secondaryDriver.b().whileTrue(new MoveArmBackwards());
 
     //CLIMB
-    // secondaryDriver.y().whileTrue(new Climb());
-    // secondaryDriver.x().whileTrue(new Unclimb());
+    // primaryDriver.y().whileTrue(new Climb());
+    // primaryDriver.x().whileTrue(new Unclimb());
 
 }
     
