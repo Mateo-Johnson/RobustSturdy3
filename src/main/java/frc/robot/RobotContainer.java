@@ -8,6 +8,8 @@ package frc.robot;
 import com.pathplanner.lib.auto.AutoBuilder;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.net.PortForwarder;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -39,6 +41,8 @@ public class RobotContainer {
   //DRIVER CONTROLLERS
   public static CommandXboxController primaryDriver = new CommandXboxController(0);
   public static CommandXboxController secondaryDriver = new CommandXboxController(1);
+
+  public static DoubleSolenoid  wrongSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 4, 7);
 
   
 
