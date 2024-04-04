@@ -35,7 +35,7 @@ public class MoveArm extends Command {
 
 
  if (Arm.degrees > 90) {
-    Arm.rotateVector(0.25);
+    Arm.rotateVector(0.1);
     } else {
       Arm.rotateVector(0);
     }
