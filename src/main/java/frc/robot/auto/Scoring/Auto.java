@@ -1,4 +1,4 @@
-package frc.robot.auto;
+package frc.robot.auto.Scoring;
 
 import edu.wpi.first.math.MathUtil;
 
