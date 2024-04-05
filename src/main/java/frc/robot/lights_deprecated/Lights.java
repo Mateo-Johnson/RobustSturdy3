@@ -1,7 +1,6 @@
 package frc.robot.lights_deprecated;
 
 import java.util.Arrays;
-
 import edu.wpi.first.wpilibj.PWM;
 
 public class Lights {
