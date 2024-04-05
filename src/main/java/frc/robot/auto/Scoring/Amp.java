@@ -23,7 +23,7 @@ public class Amp extends Command {
     double xPID;
 
     PIDController armPID = Arm.armPID;
-    PIDController lateralPID = new PIDController(0.0159, 0.00, 0.004);
+    PIDController lateralPID = new PIDController(0.0, 0.00, 0.0);
   /** Creates a new silly. */
   public Amp(DriveSubsystem driveSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.

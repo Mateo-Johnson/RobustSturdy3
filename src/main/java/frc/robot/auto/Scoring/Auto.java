@@ -1,6 +1,7 @@
 package frc.robot.auto.scoring;
 
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.controller.PIDController;
 
 //THE STARTING POSITIONS FOR AUTO: 
 //TOP / LEFT POSITION - 1.9/7.0
@@ -10,6 +11,9 @@ import edu.wpi.first.math.MathUtil;
 
 
 public class Auto {
+  public static PIDController turnPID = new PIDController(0.0159, 0.00, 0.004);
+  public static PIDController lateralPID = new PIDController(0.0, 0.00, 0.0);
+
       public static double calculateAngle(double distance) {
     // diffPose.getX() needs to be the distance from the robot to the speaker
     double distanceToTarget = distance;
