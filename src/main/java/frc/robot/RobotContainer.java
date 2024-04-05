@@ -20,7 +20,7 @@ import frc.robot.arm.intake_shooter.intake_commands.IntakeRing;
 import frc.robot.arm.intake_shooter.intake_commands.PurgeRing;
 import frc.robot.arm.intake_shooter.shooter_commands.ScoreSpeaker;
 import frc.robot.auto.Speaker;
-import frc.robot.auto.Scoring.Amp;
+import frc.robot.auto.scoring.Amp;
 import frc.robot.climber.commands.Climb;
 import frc.robot.drivetrain.DriveSubsystem;
 import frc.robot.lights_deprecated.commands.SetLightsColor;
