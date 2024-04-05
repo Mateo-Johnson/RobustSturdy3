@@ -1,4 +1,4 @@
-package frc.robot.lights;
+package frc.robot.lights_deprecated;
 
 import java.util.Arrays;
 

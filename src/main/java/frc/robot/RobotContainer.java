@@ -23,7 +23,7 @@ import frc.robot.auto.Amp;
 import frc.robot.auto.Speaker;
 import frc.robot.climber.commands.Climb;
 import frc.robot.drivetrain.DriveSubsystem;
-import frc.robot.lights.commands.SetLightsColor;
+import frc.robot.lights_deprecated.commands.SetLightsColor;
 import frc.robot.utils.Constants.ControllerConstants;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
