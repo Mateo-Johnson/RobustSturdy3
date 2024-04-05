@@ -16,12 +16,17 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.arm.Arm;
 import frc.robot.arm.commands.MoveArm;
 import frc.robot.arm.commands.MoveArmBackwards;
+import frc.robot.arm.commands.setpoints.Amp_Pos;
+import frc.robot.arm.commands.setpoints.Intake_Pos;
+import frc.robot.arm.commands.setpoints.SpecifiedAngle_Pos;
+import frc.robot.arm.commands.setpoints.Store_Pos;
 import frc.robot.arm.intake_shooter.intake_commands.IntakeRing;
 import frc.robot.arm.intake_shooter.intake_commands.PurgeRing;
 import frc.robot.arm.intake_shooter.shooter_commands.ScoreSpeaker;
 import frc.robot.auto.Speaker;
 import frc.robot.auto.scoring.Amp;
 import frc.robot.climber.commands.Climb;
+import frc.robot.climber.commands.Unclimb;
 import frc.robot.drivetrain.DriveSubsystem;
 import frc.robot.lights_deprecated.commands.SetLightsColor;
 import frc.robot.utils.Constants.ControllerConstants;
@@ -90,19 +95,18 @@ public class RobotContainer {
     secondaryDriver.leftBumper().whileTrue(new PurgeRing(0.5));
 
     //ARM PRESETS
-    // secondaryDriver.povUp().toggleOnTrue(new SpecifiedAngle(75));
-    // secondaryDriver.povDown().toggleOnTrue(new Intake());
-    // secondaryDriver.povRight().toggleOnTrue(new Store());
-    // //THE BIG LONG COMMAND FOR KEEPING THE ARM SET WHEN WE AREN'T PRESSING ANYTHING
-    // secondaryDriver.povUp().and(secondaryDriver.povDown().and(secondaryDriver.povRight())).whileFalse(new SpecifiedAngle(45));
+    secondaryDriver.povUp().toggleOnTrue(new SpecifiedAngle_Pos(75));
+    secondaryDriver.povDown().toggleOnTrue(new Intake_Pos());
+    secondaryDriver.povRight().toggleOnTrue(new Store_Pos());
+    secondaryDriver.povLeft().toggleOnTrue(new Amp_Pos());
 
     //ARM MANUAL MOVEMENT
     secondaryDriver.a().whileTrue(new MoveArm());
     secondaryDriver.b().whileTrue(new MoveArmBackwards());
 
     //CLIMB
-    // primaryDriver.y().whileTrue(new Climb());
-    // primaryDriver.x().whileTrue(new Unclimb());
+    primaryDriver.y().whileTrue(new Climb());
+    primaryDriver.x().whileTrue(new Unclimb());
 
 }
     
