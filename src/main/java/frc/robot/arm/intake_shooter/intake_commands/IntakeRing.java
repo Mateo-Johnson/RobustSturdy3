@@ -83,10 +83,10 @@ public class IntakeRing extends Command {
 
     }
 
-    SmartDashboard.putNumber("red value", detectedColor.red);
-    SmartDashboard.putNumber("green value", detectedColor.green);
-    SmartDashboard.putNumber("blue value", detectedColor.blue);
-    SmartDashboard.putString("detected color", colorString);
+    SmartDashboard.putNumber("Red", detectedColor.red);
+    SmartDashboard.putNumber("Green", detectedColor.green);
+    SmartDashboard.putNumber("Blue", detectedColor.blue);
+    SmartDashboard.putString("Detected", colorString);
   }
 
   // Called once the command ends or is interrupted.

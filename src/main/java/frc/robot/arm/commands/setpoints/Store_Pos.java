@@ -6,9 +6,9 @@ package frc.robot.arm.commands.setpoints;
 
 import edu.wpi.first.wpilibj2.command.Command;
 
-public class Store extends Command {
+public class Store_Pos extends Command {
   /** Creates a new Store. */
-  public Store() {
+  public Store_Pos() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 

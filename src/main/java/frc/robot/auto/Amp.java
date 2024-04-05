@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.arm.intake_shooter.shooter_commands;
+package frc.robot.auto;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -22,8 +22,8 @@ public class Amp extends Command {
     double yPID;
     double xPID;
 
-    PIDController armPID = new PIDController(0.015, 0.00, 0.00);
-    PIDController lateralPID = new PIDController(0.00, 0.00, 0.00);
+    PIDController armPID = Arm.armPID;
+    PIDController lateralPID = new PIDController(0.0159, 0.00, 0.004);
   /** Creates a new silly. */
   public Amp(DriveSubsystem driveSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.

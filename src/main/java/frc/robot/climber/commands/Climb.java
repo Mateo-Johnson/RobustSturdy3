@@ -11,7 +11,7 @@ public class Climb extends Command {
   /** Creates a new IntakeRing. */
   DoubleSolenoid solenoid;
   public static boolean extended;
-  PIDController armPID = new PIDController(0.015, 0.00, 0.00);
+  PIDController armPID = Arm.armPID;
 
   public Climb() {
     // Use addRequirements() here to declare subsystem dependencies.

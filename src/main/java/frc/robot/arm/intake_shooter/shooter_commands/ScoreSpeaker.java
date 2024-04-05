@@ -39,7 +39,7 @@ public class ScoreSpeaker extends Command {
   public void execute() {
 
     double velocity = encoder.getVelocity();
-    SmartDashboard.putNumber("velocity", velocity);
+    SmartDashboard.putNumber("Velocity", velocity);
 
     if (velocity >= 0.34) { //IF THE MOTORS ARE SPINNING FAST ENOUGH 
       rightOuttake.set(-5); //SET UP OUTTAKE MOTOR 1 FOR SHOOTING, RIGHT RUNS TOP, LEFT RUNS BOTTOM

@@ -7,7 +7,6 @@ package frc.robot.drivetrain;
 
 import com.kauailabs.navx.frc.AHRS;
 import com.pathplanner.lib.auto.AutoBuilder;
-
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.filter.SlewRateLimiter;
@@ -19,9 +18,6 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.util.WPIUtilJNI;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SPI;
@@ -156,14 +152,9 @@ public class DriveSubsystem extends SubsystemBase {
     
 
     double vTX = Vision.a_tX;
-    SmartDashboard.putNumber("blood alcohol content", vTX);
+    SmartDashboard.putNumber("tX", vTX);
 
     swerveDrivePoseEstimator.update(getHeadingPose2d, getModulePositions()); //THIS ONE UPDATES THE ESTIMATED POSE OF SWERVE
-
-    NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-    NetworkTableEntry tx = table.getEntry("tx");
-    double tX = tx.getDouble(0.0);
-    SmartDashboard.putNumber("tX", tX);
 
     double currentHeading = getHeading(); //SET HEADING ON SMARTDASHBOARD
     SmartDashboard.putNumber("Heading", currentHeading); 
@@ -184,10 +175,10 @@ public class DriveSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("xPos", swerveDrivePoseEstimator.getEstimatedPosition().getX());
     SmartDashboard.putNumber("yPos", swerveDrivePoseEstimator.getEstimatedPosition().getY());
 
-    SmartDashboard.putNumber("Front Left Module Angle:", frontLeft.getRawTurnEncoder());
-    SmartDashboard.putNumber("Front Right Module Angle:", frontRight.getRawTurnEncoder());
-    SmartDashboard.putNumber("Back Left Module Angle:", rearLeft.getRawTurnEncoder());
-    SmartDashboard.putNumber("Back Right Module Angle:", rearRight.getRawTurnEncoder());
+    // SmartDashboard.putNumber("Front Left Module Angle:", frontLeft.getRawTurnEncoder());
+    // SmartDashboard.putNumber("Front Right Module Angle:", frontRight.getRawTurnEncoder());
+    // SmartDashboard.putNumber("Back Left Module Angle:", rearLeft.getRawTurnEncoder());
+    // SmartDashboard.putNumber("Back Right Module Angle:", rearRight.getRawTurnEncoder());
 
 
   }

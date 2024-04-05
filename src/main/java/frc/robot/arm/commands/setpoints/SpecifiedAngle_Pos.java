@@ -8,7 +8,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.arm.Arm;
 
-public class SpecifiedAngle extends Command {
+public class SpecifiedAngle_Pos extends Command {
   /** Creates a new SpecifiedAngle. */
   private final double targetAngle;
   double currentArmPos;
@@ -17,7 +17,7 @@ public class SpecifiedAngle extends Command {
 
   PIDController armPID = Arm.armPID;
 
-  public SpecifiedAngle(double targetAngle) {
+  public SpecifiedAngle_Pos(double targetAngle) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.targetAngle = targetAngle;
   }

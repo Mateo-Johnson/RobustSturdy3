@@ -8,7 +8,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.arm.Arm;
 
-public class Looking extends Command {
+public class Amp_Pos extends Command {
   /** Creates a new SpecifiedAngle. */
   double currentArmPos;
   double targetArmPos;
@@ -16,7 +16,7 @@ public class Looking extends Command {
 
   PIDController armPID = Arm.armPID;
 
-  public Looking() {
+  public Amp_Pos() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -24,7 +24,7 @@ public class Looking extends Command {
   @Override
   public void initialize() {
     currentArmPos = Arm.degrees;
-    targetArmPos = 60;
+    targetArmPos = 90;
   }
 
   // Called every time the scheduler runs while the command is scheduled.

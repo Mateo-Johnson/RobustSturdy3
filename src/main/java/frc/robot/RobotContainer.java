@@ -18,9 +18,9 @@ import frc.robot.arm.commands.MoveArm;
 import frc.robot.arm.commands.MoveArmBackwards;
 import frc.robot.arm.intake_shooter.intake_commands.IntakeRing;
 import frc.robot.arm.intake_shooter.intake_commands.PurgeRing;
-import frc.robot.arm.intake_shooter.shooter_commands.Amp;
 import frc.robot.arm.intake_shooter.shooter_commands.ScoreSpeaker;
-import frc.robot.arm.intake_shooter.shooter_commands.Speaker;
+import frc.robot.auto.Amp;
+import frc.robot.auto.Speaker;
 import frc.robot.climber.commands.Climb;
 import frc.robot.drivetrain.DriveSubsystem;
 import frc.robot.lights.commands.SetLightsColor;
@@ -42,7 +42,7 @@ public class RobotContainer {
   public static CommandXboxController primaryDriver = new CommandXboxController(0);
   public static CommandXboxController secondaryDriver = new CommandXboxController(1);
 
-  public static DoubleSolenoid  wrongSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 4, 7);
+  public static DoubleSolenoid  wrongSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 5, 4);
 
   
 

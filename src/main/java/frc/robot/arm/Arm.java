@@ -26,17 +26,16 @@ public class Arm extends SubsystemBase{
     int encoderCyclesPerArmRevolution = (int) (cyclesPerRotation * gearRatio);
     double degreesPerEncoderCycle = 360.0 / encoderCyclesPerArmRevolution;
 
-    degrees = armEncoderReading * encoderCyclesPerArmRevolution * degreesPerEncoderCycle;
-    SmartDashboard.putNumber("brock knusten", degrees);
-    SmartDashboard.putNumber("brock knusten pt 2", armEncoderReading);
+    if (degrees <= 0) {
+      degrees = 1;
+    } else {
+      degrees = armEncoderReading * encoderCyclesPerArmRevolution * degreesPerEncoderCycle;
+    }
+
+    SmartDashboard.putNumber("Arm Angle", degrees);
   }
-  
-    public static double aMP = 0.8;
-    public static double aMI = 0.1;
-    public static double aMD = 0.51;
 
-    public static PIDController armPID = new PIDController(aMP, aMI, aMD);
-
+    public static PIDController armPID = new PIDController(0.015, 0, 0);
 
     public static void rotateVector(double speed) {
       leftArm.set(speed);
