@@ -6,7 +6,6 @@ package frc.robot.auto;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.auto.scoring.Auto;
 import frc.robot.vision.Vision;
 
 public class AlignFront extends Command {
